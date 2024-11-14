@@ -28,32 +28,24 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     try {
-      if (!credentials.email || !credentials.password) {
-        toast.error("All fields are required", { autoClose: 500, theme: 'colored' });
-      } else if (!emailRegex.test(credentials.email)) {
-        toast.error("Please enter a valid email", { autoClose: 500, theme: 'colored' });
-      } else if (credentials.password.length < 5) {
-        toast.error("Password must be at least 5 characters", { autoClose: 500, theme: 'colored' });
+      const response = await axios.post(`https://custom-shop-1.onrender.com/api/admin/admin-login`, {
+        email: credentials.email,
+        password: credentials.password,
+      });
+      const data = response.data;
+
+      if (data.token) {
+        toast.success("Login Successfully", { autoClose: 500, theme: 'colored' });
+        localStorage.setItem('Authorization', data.token); // Save the token in local storage
+        navigate('/admin/home'); // Redirect to the admin home page
       } else {
-        const response = await axios.post(`https://custom-shop-1.onrender.com/admin/admin-login`, {
-          email: credentials.email,
-          password: credentials.password,
-        });
-        const data = response.data;
-        if (data.success) {
-          toast.success("Login Successfully", { autoClose: 500, theme: 'colored' });
-          localStorage.setItem('Authorization', data.authToken);
-          navigate('/admin/home');
-        } else {
-          toast.error("Invalid Credentials", { autoClose: 500, theme: 'colored' });
-        }
+        toast.error(data.message || "Invalid Credentials", { autoClose: 500, theme: 'colored' });
       }
     } catch (error) {
-      toast.error("Invalid Credentials", { autoClose: 500, theme: 'colored' });
+      toast.error(error.response?.data?.message || "Invalid Credentials", { autoClose: 500, theme: 'colored' });
     }
-  };
+  };  
 
   return (
     <Container component="main" maxWidth="xs">

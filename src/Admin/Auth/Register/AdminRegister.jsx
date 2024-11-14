@@ -28,7 +28,7 @@ const AdminRegister = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const sendAuth = await axios.post(`https://custom-shop-1.onrender.com//api/admin/admin-register`, {
+      const sendAuth = await axios.post(`https://custom-shop-1.onrender.com/api/admin/admin-register`, {
         firstName: credentials.firstName,
         lastName: credentials.lastName,
         email: credentials.email,

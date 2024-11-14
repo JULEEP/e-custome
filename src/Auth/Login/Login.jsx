@@ -33,7 +33,7 @@ const Login = () => {
 
     try {
       const { email, password } = credentials;
-      const response = await axios.post('https://custom-shop-1.onrender.com//api/users/login', { email, password });
+      const response = await axios.post('https://custom-shop-1.onrender.com/api/users/login', { email, password });
       const { token, refreshToken } = response.data;
 
       if (token) {
