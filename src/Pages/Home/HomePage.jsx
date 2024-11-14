@@ -7,9 +7,12 @@ import { ContextFunction } from '../../Context/Context'
 import CategoryCard from '../../Components/Category_Card/CategoryCard'
 import BannerData from '../../Helpers/HomePageBanner'
 import Carousel from '../../Components/Carousel/Carousel'
-import SearchBar from '../../Components/SearchBar/SearchBar'
 import Footer from '../../Components/Footer/Footer'
 import BestSellers from '../BestSellerProducts/BestSellerProducts'
+import Banner from '../Banner'
+import FeaturesPage from '../FeaturesPage/FeaturesPage'
+import './HomePage.css' // Import the CSS file for styling
+import OurVision from '../OurVision/OurVision'
 
 const HomePage = () => {
     const { setCart } = useContext(ContextFunction)
@@ -37,33 +40,107 @@ const HomePage = () => {
                 <Box padding={1}>
                     <Carousel />
                 </Box>
-                <Container style={{ marginTop: 90, display: "flex", justifyContent: 'center' }}>
-                    <SearchBar />
+                <hr className="section-divider" />
+
+                <Container style={{ marginTop: 0, display: "flex", justifyContent: 'center' }}>
                 </Container>
-                <Typography variant='h3' sx={{ textAlign: 'center', marginTop: 10, color: '#1976d2', fontWeight: 'bold' }}>Categories</Typography>
-                <Container maxWidth='xl' style={{ marginTop: 90, display: "flex", justifyContent: 'center', flexGrow: 1, flexWrap: 'wrap', gap: 20 }}>
-                    {BannerData.map(data => (
-                        <CategoryCard data={data} key={data.img} />
-                    ))}
-                </Container>
+                <Typography
+                variant='h3'
+                sx={{
+                  textAlign: 'center',
+                  color: '#1976d2',
+                  fontWeight: 'bold'
+                }}
+              >
+                Categories
+              </Typography>
+        
+              <Container
+                maxWidth='xl'
+                style={{
+                  marginTop: 90,
+                  display: "flex",
+                  justifyContent: 'center',
+                  flexGrow: 1,
+                  flexWrap: 'wrap',
+                  gap: 20
+                }}
+              >
+                {BannerData.map((data) => (
+                  <Box
+                    key={data.img}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                      width: '150px',
+                      marginBottom: '20px',
+                    }}
+                  >
+                    <Box
+                      style={{
+                        width: '100px', // Set the width of the container
+                        height: '100px', // Set the height of the container
+                        borderRadius: '50%', // Make the container circular
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#f5f5f5', // Background color for better visibility
+                        boxShadow: '0 4px 10px rgba(0, 123, 255, 0.5)', // Add a blue shadow
+                        marginBottom: '10px',
+                      }}
+                    >
+                      <img
+                        src={data.img}
+                        alt={data.name}
+                        style={{
+                          width: '80px', // Image width
+                          height: '80px', // Image height
+                          borderRadius: '50%', // Make the image circular
+                          objectFit: 'cover', // Ensure the image fits within the circle
+                        }}
+                      />
+                    </Box>
+                    <Typography
+                      variant='h6'
+                      style={{
+                        marginTop: '10px',
+                        fontWeight: 'normal', // Removed bold font weight
+                      }}
+                    >
+                      {data.name}
+                    </Typography>
+                  </Box>
+                ))}
+              </Container>
+                <hr className="section-divider" />
             </Container>
-            
-            {/* Render Footer */}
-            <Typography
-            variant="h3"
-            sx={{
-              textAlign: 'center',
-              marginTop: 10,
-              color: '#1976d2',
-              fontWeight: 'bold',
-            }}
-          >
-            Best Sellers
-          </Typography>
-    
-          {/* Best Sellers Component */}
-          <BestSellers />
-          <br/>
+            <Container style={{ marginTop: 0, display: "flex", justifyContent: 'center' }}>
+                </Container>
+                <Typography
+                variant='h3'
+                sx={{
+                  textAlign: 'center',
+                  color: '#1976d2',
+                  fontWeight: 'bold'
+                }}
+              >
+                Best Sellers
+              </Typography>
+            <BestSellers />
+            <hr className="section-divider" />
+
+            <Banner />
+            <hr className="section-divider" />
+
+            <FeaturesPage />
+            <hr className="section-divider" />
+
+            <OurVision />
+            <hr className="section-divider" />
+
             <Footer />
         </>
     )

@@ -30,6 +30,11 @@ const DesktopNavigation = () => {
             <span >JaiswalOffset</span>
           </Link>
         </div>
+        <input
+      type="text"
+      className="search-input"
+      placeholder="Search..."
+    />
         <div className="nav-items">
           <ul className="nav-items">
             <li className="nav-links">

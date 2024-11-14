@@ -1,5 +1,5 @@
 import './login.css'
-import { Avatar, Button, Checkbox, CssBaseline, FormControlLabel, Grid, InputAdornment, TextField, Typography } from '@mui/material'
+import { Avatar, Button, CssBaseline, TextField, Typography, Grid, InputAdornment } from '@mui/material'
 import { Box, Container } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -22,7 +22,7 @@ const AdminLogin = () => {
   useEffect(() => {
     const auth = localStorage.getItem('Authorization');
     if (auth) {
-      navigate("/");
+      navigate("/admin/home");
     }
   }, [navigate]);
 
@@ -58,14 +58,29 @@ const AdminLogin = () => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Avatar sx={{ m: 1, bgcolor: '#1976d2' }}>
-          <MdLockOutline />
+      <Box sx={{
+        marginTop: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: '#f4f6f9',
+        borderRadius: '8px',
+        padding: '30px 25px',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      }}>
+        <Avatar sx={{
+          m: 1,
+          bgcolor: '#1976d2',
+          width: 60,
+          height: 60,
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        }}>
+          <MdLockOutline style={{ fontSize: '2.5rem', color: 'white' }} />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Typography component="h1" variant="h5" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
+          Admin Sign In
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
           <TextField
             margin="normal"
             required
@@ -76,6 +91,7 @@ const AdminLogin = () => {
             value={credentials.email}
             onChange={handleOnChange}
             autoFocus
+            sx={{ backgroundColor: 'white', borderRadius: '5px' }}
           />
           <TextField
             margin="normal"
@@ -94,19 +110,23 @@ const AdminLogin = () => {
                 </InputAdornment>
               ),
             }}
+            sx={{ backgroundColor: 'white', borderRadius: '5px' }}
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button type="submit" fullWidth variant="contained" sx={{
+            mt: 3, mb: 2, backgroundColor: 'black', padding: '2px',
+            borderRadius: '8px', fontSize: '16px', fontWeight: 'bold'
+          }}>
             Sign In
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="/forgotpassword" style={{ color: '#1976d2' }}>
+              <Link to="/forgotpassword" style={{ color: '#1976d2', fontSize: '14px' }}>
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link to="/admin/register" variant="body2">
-                Don't have an account?<span style={{ color: '#1976d2' }}> Sign Up</span>
+              <Link to="/admin/register" variant="body2" style={{ fontSize: '14px' }}>
+                Don't have an account? <span style={{ color: '#1976d2', fontWeight: 'bold' }}>Sign Up</span>
               </Link>
             </Grid>
           </Grid>

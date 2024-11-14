@@ -1,0 +1,21 @@
+/* Banner.css */
+.banner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.banner-image {
+  width: 150%;
+  height: auto;
+  max-width: 1200px; /* Optional: limit the max width */
+  border-radius: 15px; /* Adjust this value to change the roundness */
+  box-shadow: 0 8px 15px rgba(0, 0, 255, 0.3); /* Blue shadow for the banner image */
+  transition: box-shadow 0.3s ease-in-out; /* Smooth transition for the shadow */
+}
+
+/* Hover effect */
+.banner-image:hover {
+  box-shadow: 0 12px 25px rgba(0, 0, 255, 0.6); /* Darker, larger shadow on hover */
+}

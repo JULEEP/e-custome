@@ -1,131 +1,224 @@
-/* footer.css */
-footer {
-    background-color: #1f2937; /* Dark background for the footer */
-    color: white;
-    padding: 2rem 0;
-  }
-  
-  footer .container-xxl {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  
-  footer .row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  footer .col-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-  
-  footer .col-md-4, footer .col-md-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
-  }
-  
-  footer .col-md-7 {
-    flex: 0 0 60%;
-    max-width: 60%;
-  }
-  
-  footer h4 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    color: white;
-  }
-  
-  footer .input-group {
-    display: flex;
+/* Footer Styles */
+.footer-container {
+  background-color: black;      /* Set the background to black */
+  color: white;                 /* Set the text color to white */
+  padding: 40px 0;              /* Add padding around the footer */
+  border-radius: 15px;          /* Rounded corners for the footer */
+}
+
+.footer-content {
+  display: flex;                /* Use flexbox to layout the items */
+  justify-content: center;      /* Center the items horizontally */
+  align-items: center;          /* Vertically center the items */
+  flex-wrap: wrap;              /* Allow wrapping to make it responsive */
+}
+
+.footer-item {
+  text-align: center;           /* Center align the text in each item */
+  width: 30%;                   /* Make sure each item has equal width */
+  padding: 0 15px;              /* Add space between items */
+}
+
+.footer-item p {
+  font-size: 14px;              /* Set the font size for the text */
+  margin-top: 5px;              /* Add space between heading and text */
+}
+
+.footer-icon {
+  font-size: 36px;              /* Icon size */
+  color: white;                 /* White color for icons */
+}
+
+.footer-divider {
+  border-left: 2px solid rgb(102, 101, 101); /* Vertical divider line between items */
+  height: 60px;                 /* Set the height of the divider */
+  margin: 0 20px;               /* Space between items and divider */
+}
+
+.footer-divider1 {
+  border-left: 2px solid rgb(102, 101, 101);
+  height: 100px;
+  margin: 0 20px;
+}
+
+/* Footer Bottom Section with Follow Us and Support */
+.footer-bottom {
+  display: flex;               
+  justify-content: space-between;
+  margin-top: 40px;           
+  flex-wrap: wrap;            /* Allow wrapping for responsiveness */
+}
+
+.follow-us, .support-section {
+  text-align: center;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.follow-us p, .support-section p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.social-icons, .support-icons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  align-items: center;
+}
+
+.social-item, .support-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-icon, .support-icon {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.footer-line {
+  border: none;
+  height: 2px;
+  background-color: gray; /* Light blue color */
+  margin: 30px 0; /* Space around the divider */
+  width: 80%; /* Optional: control the width of the divider */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* 100% SECURE PAYMENTS Section */
+.secure-payments {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.secure-payments p {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Flex container for payment icons */
+.payment-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-icon {
+  font-size: 30px;
+  margin: 0 15px;
+  color: white;
+}
+
+/* Optional: Add hover effect for payment icons */
+.payment-icon:hover {
+  color: #FFD700;
+  cursor: pointer;
+}
+
+.footer-links {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  color: black;
+  height: 250px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-link-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-link-column p {
+  margin-bottom: 10px;
+  color: black;
+}
+
+.footer-link-column ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.footer-link-column ul li {
+  margin: 15px 0;
+  color: black;
+}
+
+.footer-line {
+  border: none;
+    height: 2px;
+    background-color: gray; /* Light blue color */
+    margin: 30px 0; /* Space around the divider */
+    width: 80%; /* Optional: control the width of the divider */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-copyright {
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;    /* Stack items vertically */
     align-items: center;
   }
-  
-  footer .input-group input {
-    padding: 0.75rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-right: 0.5rem;
+
+  .footer-item {
+    width: 100%;               /* Full width for each item */
+    margin-bottom: 20px;
   }
-  
-  footer .input-group span {
-    padding: 0.75rem 1rem;
-    background-color: #1e40af; /* Blue color for Subscribe button */
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  footer .footer-link a {
-    color: white;
-    padding: 0.5rem 0;
-    display: block;
-    text-decoration: none;
-    margin-bottom: 0.5rem;
-    transition: color 0.3s ease;
-  }
-  
-  footer .footer-link a:hover {
-    color: #1e40af; /* Blue color on hover */
-  }
-  
-  footer .social_icons a {
-    color: white;
-    font-size: 1.5rem;
-    margin-right: 1rem;
-    transition: color 0.3s ease;
-  }
-  
-  footer .social_icons a:hover {
-    color: #1e40af; /* Blue color on hover */
-  }
-  
-  footer .footer-bottom {
+
+  .follow-us, .support-section {
+    width: 100%;
     text-align: center;
-    margin-top: 2rem;
+    margin-bottom: 20px;
   }
-  
-  footer .footer-bottom p {
-    margin-bottom: 0;
+
+  .footer-icon, .social-icon, .support-icon, .payment-icon {
+    font-size: 24px;           /* Smaller icon size on smaller screens */
   }
-  
-  footer .footer-bottom a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s ease;
+
+  .follow-us p, .support-section p, .secure-payments p {
+    font-size: 16px;           /* Reduce text size for titles */
   }
-  
-  footer .footer-bottom a:hover {
-    color: #1e40af; /* Blue color on hover */
+
+  .footer-links {
+    grid-template-columns: 1fr 1fr;  /* Two columns on smaller screens */
+    gap: 20px;
+    height: auto;               /* Adjust height */
+    width: 90%;                 /* Center-align by reducing width */
   }
-  
-  /* Media Queries for responsiveness */
-  @media (max-width: 768px) {
-    footer .col-md-4, footer .col-md-3 {
-      flex: 0 0 50%;
-      max-width: 50%;
-    }
-  
-    footer .col-md-7 {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  
-    footer .input-group {
-      flex-direction: column;
-    }
-  
-    footer .input-group input {
-      margin-bottom: 1rem;
-    }
+
+  .footer-link-column {
+    margin-left: 0;             /* Remove left margin for smaller screens */
   }
-  
-  @media (max-width: 576px) {
-    footer .col-md-4, footer .col-md-3 {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  }
-  
+}

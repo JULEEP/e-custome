@@ -55,8 +55,8 @@ const AdminRegister = () => {
         <Avatar sx={{ m: 1, bgcolor: '#1976d2' }}>
           <MdLockOutline />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
+        <Typography component="h1" variant="h5" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
+          Admin Sign up
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
@@ -117,7 +117,10 @@ const AdminRegister = () => {
               />
             </Grid>
           </Grid>
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button type="submit" fullWidth variant="contained" sx={{
+            mt: 3, mb: 2, backgroundColor: 'black', padding: '2px',
+            borderRadius: '8px', fontSize: '16px', fontWeight: 'bold'
+          }}>
             Sign Up
           </Button>
           <Grid container justifyContent="flex-end">

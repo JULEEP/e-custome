@@ -1,0 +1,35 @@
+/* Features.css */
+.features-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 0;
+  }
+  
+  .features-row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+  }
+  
+  .feature-icon {
+    color: #1976d2;
+    font-size: 5rem;
+    background-color: #e0f7fa; /* Light circle background */
+    padding: 20px;
+    border-radius: 100%; /* Make the icon background circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

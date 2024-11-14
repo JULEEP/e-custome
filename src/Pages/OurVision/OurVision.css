@@ -1,0 +1,61 @@
+/* OurVision.css */
+
+.our-vision-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.vision-box {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(25, 118, 210, 0.5); /* Shadow for the entire container */
+  padding: 20px;
+  width: 100%;
+}
+
+.text-content {
+  flex: 1;
+  max-width: 60%;
+  padding: 20px;
+}
+
+.image-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.vision-image {
+  width: 100%;
+  max-width: 500px; /* Limit max width to make it equal to text size */
+  max-height: 500px; /* Equal height to make the image square */
+  object-fit: cover; /* Ensure the image is properly contained within the box */
+  border-radius: 8px;
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+  .vision-box {
+    flex-direction: column; /* Stack content vertically on smaller screens */
+  }
+
+  .text-content {
+    max-width: 100%; /* Full width on small screens */
+    padding: 20px;
+    margin-bottom: 20px; /* Space between text and image */
+  }
+
+  .image-content {
+    max-width: 100%; /* Full width on small screens */
+    margin-top: 20px; /* Space between text and image */
+  }
+
+  .vision-image {
+    width: 100%; /* Ensures the image fits within the container */
+    height: auto; /* Let the image scale proportionally */
+  }
+}
