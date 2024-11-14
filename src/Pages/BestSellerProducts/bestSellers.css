@@ -1,0 +1,50 @@
+/* BestSellers.css */
+
+/* Container for BestSellers section */
+.best-sellers-container {
+    margin-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 3rem;
+  }
+  
+  /* Heading Style */
+  .best-sellers-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Product Grid Styles */
+  .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  /* Individual Product Style */
+  .product-item {
+    text-align: center;
+  }
+  
+  /* Product Image Style */
+  .product-image {
+    border-radius: 1.5rem;
+    width: 15rem;
+    height: 15rem;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  /* Product Title */
+  .product-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  /* Product Price */
+  .product-price {
+    color: #4a5568; /* Equivalent to text-gray-700 in Tailwind */
+  }
+  

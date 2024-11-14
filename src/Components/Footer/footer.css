@@ -1,0 +1,131 @@
+/* footer.css */
+footer {
+    background-color: #1f2937; /* Dark background for the footer */
+    color: white;
+    padding: 2rem 0;
+  }
+  
+  footer .container-xxl {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  footer .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  footer .col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  footer .col-md-4, footer .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  
+  footer .col-md-7 {
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+  
+  footer h4 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+  
+  footer .input-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  footer .input-group input {
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 0.5rem;
+  }
+  
+  footer .input-group span {
+    padding: 0.75rem 1rem;
+    background-color: #1e40af; /* Blue color for Subscribe button */
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  footer .footer-link a {
+    color: white;
+    padding: 0.5rem 0;
+    display: block;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+  }
+  
+  footer .footer-link a:hover {
+    color: #1e40af; /* Blue color on hover */
+  }
+  
+  footer .social_icons a {
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  footer .social_icons a:hover {
+    color: #1e40af; /* Blue color on hover */
+  }
+  
+  footer .footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  footer .footer-bottom p {
+    margin-bottom: 0;
+  }
+  
+  footer .footer-bottom a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  footer .footer-bottom a:hover {
+    color: #1e40af; /* Blue color on hover */
+  }
+  
+  /* Media Queries for responsiveness */
+  @media (max-width: 768px) {
+    footer .col-md-4, footer .col-md-3 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  
+    footer .col-md-7 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  
+    footer .input-group {
+      flex-direction: column;
+    }
+  
+    footer .input-group input {
+      margin-bottom: 1rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    footer .col-md-4, footer .col-md-3 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  

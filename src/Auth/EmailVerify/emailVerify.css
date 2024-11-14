@@ -1,0 +1,19 @@
+.otp-container .MuiGrid-item {
+    text-align: center;
+  }
+  
+  .otp-container input {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 0 5px;
+  }
+  
+  .otp-container input:focus {
+    border-color: #1976d2;
+    outline: none;
+  }
+  
