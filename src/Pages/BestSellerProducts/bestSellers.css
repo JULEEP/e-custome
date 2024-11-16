@@ -93,7 +93,7 @@
 /* For screens smaller than 480px (Small Mobile Devices) */
 @media (max-width: 480px) {
   .product-item {
-    width: 30%; /* One item per row */
+    width: 40%; /* One item per row */
   }
 
   .product-image {
