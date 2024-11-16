@@ -10,12 +10,17 @@ const OurVision = () => {
         
         {/* Left side: Vision text */}
         <Box className="text-content">
-          <Typography
-            variant="h4"
-            style={{ fontWeight: 'bold', color: '#1976d2', marginBottom: '20px' }}
-          >
-            Our Vision
-          </Typography>
+        <Typography
+        variant="h4"
+        style={{
+          fontWeight: 'bold',
+          color: '#1976d2',
+          marginBottom: '20px',
+          boxShadow: '6px 20px 20px rgba(0, 0, 0, 0.5)', // Add a blue shadow
+        }}
+      >
+        Our Vision
+      </Typography>      
           <Typography variant="body1">
             In line with our vision, we wish to be recognized as an organization renowned for its
             creative solutions, innovation, and quality.

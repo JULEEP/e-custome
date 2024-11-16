@@ -14,6 +14,8 @@
   box-shadow: 0px 4px 12px rgba(25, 118, 210, 0.5); /* Shadow for the entire container */
   padding: 20px;
   width: 100%;
+  max-width: 1200px; /* Optional: restrict maximum width */
+  margin: 0 auto; /* Center the container */
 }
 
 .text-content {
@@ -37,10 +39,11 @@
   border-radius: 8px;
 }
 
-/* Media Query for Mobile Screens */
+/* Media Query for Tablets and Small Screens (max-width: 768px) */
 @media (max-width: 768px) {
   .vision-box {
     flex-direction: column; /* Stack content vertically on smaller screens */
+    gap: 20px; /* Reduce space between text and image */
   }
 
   .text-content {
@@ -56,6 +59,65 @@
 
   .vision-image {
     width: 100%; /* Ensures the image fits within the container */
+    max-width: 100%; /* No maximum width limit on mobile */
     height: auto; /* Let the image scale proportionally */
+    border-radius: 8px;
+  }
+}
+
+/* Media Query for Smaller Phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .vision-box {
+    padding: 15px; /* Reduce padding for smaller screens */
+    gap: 15px; /* Decrease space between text and image */
+  }
+
+  .text-content {
+    padding: 15px; /* Reduce padding for smaller screens */
+    margin-bottom: 15px; /* Slight space between text and image */
+  }
+
+  .vision-image {
+    max-width: 100%; /* Full width */
+    height: auto; /* Scale proportionally */
+    max-height: 300px; /* Optional: Limit the height on mobile */
+  }
+}
+
+/* Media Query for very small phones (max-width: 375px or smaller) */
+@media (max-width: 375px) {
+  .vision-box {
+    padding: 10px; /* Further reduce padding for smaller screens */
+    gap: 10px; /* Even smaller space between text and image */
+  }
+
+  .text-content {
+    padding: 10px; /* Reduce padding for very small screens */
+    margin-bottom: 10px; /* Space between text and image */
+  }
+
+  .vision-image {
+    max-width: 100%; /* Full width */
+    height: auto; /* Ensure image scales proportionally */
+    max-height: 250px; /* Optional: Further limit height for very small screens */
+  }
+}
+
+/* Media Query for extremely small phones (max-width: 320px) */
+@media (max-width: 320px) {
+  .vision-box {
+    padding: 2px; /* Minimal padding for tiny screens */
+    gap: 2px; /* Minimized space between text and image */
+  }
+
+  .text-content {
+    padding: 2px; /* Further reduced padding */
+    margin-bottom: 2px; /* Less space between text and image */
+  }
+
+  .vision-image {
+    max-width: 100%; /* Full width */
+    height: auto; /* Ensure image scales proportionally */
+    max-height: 200px; /* Limit height even more for extremely small screens */
   }
 }

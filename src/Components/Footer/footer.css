@@ -3,7 +3,7 @@
   background-color: black;      /* Set the background to black */
   color: white;                 /* Set the text color to white */
   padding: 40px 0;              /* Add padding around the footer */
-  border-radius: 15px;          /* Rounded corners for the footer */
+  border-radius: 40px;          /* Rounded corners for the footer */
 }
 
 .footer-content {
@@ -67,7 +67,7 @@
 .social-icons, .support-icons {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 50px;
   align-items: center;
 }
 
@@ -112,6 +112,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 50px;
 }
 
 .payment-icon {
@@ -139,15 +140,17 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  box-shadow: 6px 6px 6px rgba(0, 255, 0, 0.3);
 }
 
 .footer-link-column {
   display: flex;
   flex-direction: column;
+  padding-left: 90px;
 }
 
 .footer-link-column p {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   color: black;
 }
 
@@ -219,6 +222,91 @@
   }
 
   .footer-link-column {
-    margin-left: 0;             /* Remove left margin for smaller screens */
+    text-align: center;             /* Remove left margin for smaller screens */
+    padding-left: 20px;
+
+  }
+}
+
+/* Responsive Design for very small screens and mobile phones */
+@media (max-width: 480px) {
+  .footer-content {
+    flex-direction: column;    /* Stack items vertically on very small screens */
+    align-items: center;
+    padding: 10px;
+  }
+
+  .footer-item {
+    width: 100%;               /* Full width for each item */
+    margin-bottom: 15px;
+    padding: 10px;
+  }
+
+  .footer-icon {
+    font-size: 28px;           /* Smaller icon size on very small screens */
+  }
+
+  .footer-divider, .footer-divider1 {
+    display: none;             /* Remove divider on small screens */
+  }
+
+  .footer-bottom {
+    flex-direction: column;    /* Stack bottom section items vertically */
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .follow-us p, .support-section p {
+    font-size: 14px;           /* Reduce text size for smaller phones */
+  }
+
+  .social-icons, .support-icons {
+    gap: 20px;                 /* Reduce space between icons */
+  }
+
+  .social-icon, .support-icon, .payment-icon {
+    font-size: 22px;           /* Smaller icon size for smaller screens */
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr; /* Single column layout for very small screens */
+    gap: 15px;
+    width: 100%;
+    height: auto;
+  }
+
+  .footer-link-column {
+    text-align: center; /* Remove left padding */
+    padding-left: 20px;
+
+  }
+
+  .secure-payments {
+    margin-bottom: 15px;       /* Adjust spacing */
+  }
+}
+
+@media (max-width: 375px) {
+  .footer-icon {
+    font-size: 24px;           /* Further reduce icon size for ultra-small screens */
+  }
+
+  .footer-item p {
+    font-size: 12px;           /* Further reduce text size */
+  }
+
+  .footer-bottom {
+    margin-top: 20px;
+    gap: 15px;                 /* Reduce gap between sections */
+  }
+
+  .social-icon, .support-icon, .payment-icon {
+    font-size: 20px;           /* Further reduce icon size */
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr;  /* Single column layout */
+    gap: 10px;                   /* Further reduce gap */
   }
 }

@@ -1,35 +1,91 @@
-/* Features.css */
+/* Features container */
 .features-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 40px 0;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 0;
+}
+
+.features-row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 20px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+}
+
+.feature-icon {
+  color: #1976d2;
+  font-size: 5rem;
+  background-color: #e0f7fa; /* Light circle background */
+  padding: 20px;
+  border-radius: 100%; /* Make the icon background circular */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
+  /* Add black shadow */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Black shadow with 50% opacity */
+}
+
+/* Media Query for Tablets and Small Screens (max-width: 768px) */
+@media (max-width: 768px) {
   .features-row {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    gap: 20px;
+    flex-direction: column; /* Stack the icons vertically on smaller screens */
+    gap: 15px; /* Reduce gap between icons */
   }
-  
+
   .feature {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 15px;
+    padding: 12px; /* Reduce padding for smaller screens */
+    gap: 8px; /* Reduce gap between icon and text */
   }
-  
+
   .feature-icon {
-    color: #1976d2;
-    font-size: 5rem;
-    background-color: #e0f7fa; /* Light circle background */
-    padding: 20px;
-    border-radius: 100%; /* Make the icon background circular */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 4rem; /* Make the icons slightly smaller on mobile */
+    padding: 15px; /* Reduce padding around icons */
   }
-  
+}
+
+/* Media Query for Very Small Phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .features-row {
+    flex-direction: column; /* Stack the icons vertically on very small screens */
+    gap: 10px; /* Further reduce the gap */
+  }
+
+  .feature {
+    padding: 10px; /* Further reduce padding for very small screens */
+    gap: 6px; /* Further reduce gap between icon and text */
+  }
+
+  .feature-icon {
+    font-size: 3.5rem; /* Reduce icon size for very small screens */
+    padding: 12px; /* Reduce padding around icons */
+  }
+}
+
+/* Media Query for Extremely Small Phones (max-width: 375px) */
+@media (max-width: 375px) {
+  .features-row {
+    flex-direction: column; /* Stack icons vertically on extremely small screens */
+    gap: 8px; /* Minimal gap between icons */
+  }
+
+  .feature {
+    padding: 8px; /* Minimal padding for very small screens */
+    gap: 4px; /* Minimized gap between icon and text */
+  }
+
+  .feature-icon {
+    font-size: 3rem; /* Smaller icon size for very small phones */
+    padding: 10px; /* Reduced padding around icons */
+  }
+}

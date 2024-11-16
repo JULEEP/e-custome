@@ -13,6 +13,22 @@ import Banner from '../Banner'
 import FeaturesPage from '../FeaturesPage/FeaturesPage'
 import './HomePage.css' // Import the CSS file for styling
 import OurVision from '../OurVision/OurVision'
+import { keyframes } from '@emotion/react';
+
+const jumpAnimation = keyframes`
+  0% {
+    transform: translateY(500px); /* Start from below the container */
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-10px); /* Mid-jump position */
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0); /* Final position */
+    opacity: 1;
+  }
+`;
 
 const HomePage = () => {
     const { setCart } = useContext(ContextFunction)
@@ -43,17 +59,20 @@ const HomePage = () => {
                 <hr className="section-divider" />
 
                 <Container style={{ marginTop: 0, display: "flex", justifyContent: 'center' }}>
-                </Container>
                 <Typography
-                variant='h3'
+                variant="h3"
                 sx={{
                   textAlign: 'center',
                   color: '#1976d2',
-                  fontWeight: 'bold'
+                  fontWeight: 'bold',
+                  fontSize: '2rem', // Reduced size
+                  animation: `${jumpAnimation} 1s ease-out`, // Animation added
+                  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Corrected box shadow syntax
                 }}
               >
-                Categories
-              </Typography>
+                  Top Categories
+                </Typography>
+              </Container>
         
               <Container
                 maxWidth='xl'
@@ -115,26 +134,44 @@ const HomePage = () => {
                   </Box>
                 ))}
               </Container>
-                <hr className="section-divider" />
             </Container>
+            <hr className="section-divider" />
             <Container style={{ marginTop: 0, display: "flex", justifyContent: 'center' }}>
-                </Container>
-                <Typography
-                variant='h3'
-                sx={{
-                  textAlign: 'center',
-                  color: '#1976d2',
-                  fontWeight: 'bold'
-                }}
-              >
-                Best Sellers
-              </Typography>
+            <Typography
+            variant="h3"
+            sx={{
+              textAlign: 'center',
+              color: '#1976d2',
+              fontWeight: 'bold',
+              fontSize: '2rem', // Reduced size
+              animation: `${jumpAnimation} 1s ease-out`, // Animation added
+              boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Corrected box shadow syntax
+            }}
+          >
+          Best Sellers
+            </Typography>
+          </Container>
             <BestSellers />
             <hr className="section-divider" />
 
             <Banner />
             <hr className="section-divider" />
 
+            <Container style={{ marginTop: 0, display: "flex", justifyContent: 'center' }}>
+            <Typography
+            variant="h3"
+            sx={{
+              textAlign: 'center',
+              color: '#1976d2',
+              fontWeight: 'bold',
+              fontSize: '2rem', // Reduced size
+              animation: `${jumpAnimation} 1s ease-out`, // Animation added
+              boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Corrected box shadow syntax
+            }}
+          >
+          Our Services
+            </Typography>
+          </Container>
             <FeaturesPage />
             <hr className="section-divider" />
 

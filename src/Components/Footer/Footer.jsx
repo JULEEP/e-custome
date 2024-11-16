@@ -36,23 +36,19 @@ const Footer = () => {
           <div className="footer-bottom">
             {/* Follow Us Section */}
             <div className="follow-us">
-              <p>Follow Us</p>
+              <p>FOLLOW US</p>
               <div className="social-icons">
                 <div className="social-item">
                   <BsFacebook className="social-icon" />
-                  <p>Facebook</p>
                 </div>
                 <div className="social-item">
                   <BsInstagram className="social-icon" />
-                  <p>Instagram</p>
                 </div>
                 <div className="social-item">
                   <BsTwitter className="social-icon" />
-                  <p>Twitter</p>
                 </div>
                 <div className="social-item">
                   <BsYoutube className="social-icon" />
-                  <p>YouTube</p>
                 </div>
               </div>
             </div>
@@ -63,15 +59,12 @@ const Footer = () => {
               <div className="support-icons">
                 <div className="support-item">
                   <BsFillTelephoneInboundFill className="support-icon" />
-                  <p>Phone</p>
                 </div>
                 <div className="support-item">
                   <BsFillEnvelopeFill className="support-icon" />
-                  <p>Email</p>
                 </div>
                 <div className="support-item">
                   <BsWhatsapp className="support-icon" />
-                  <p>WhatsApp</p>
                 </div>
               </div>
             </div>
@@ -97,8 +90,8 @@ const Footer = () => {
           {/* Add footer section with links organized into columns */}
           <div className="footer-links">
             <div className="footer-link-column">
-              <p>COMPANY</p>
-              <ul>
+            <p style={{ color: '#1976d2', fontWeight: 'bold' }}>COMPANY</p>
+            <ul>
                 <li>About Us</li>
                 <li>Privacy Policy</li>
                 <li>T&C's</li>
@@ -106,7 +99,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="footer-link-column">
-              <p>BEST SELLERS</p>
+              <p style={{ color: '#1976d2', fontWeight: 'bold' }}>BEST SELLERS</p>
               <ul>
                 <li>Wall Photo Frames</li>
                 <li>Photo Stands</li>
@@ -115,7 +108,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="footer-link-column">
-              <p>SUPPORT</p>
+              <p style={{ color: '#1976d2', fontWeight: 'bold' }}>SUPPORT</p>
               <ul>
                 <li>Contact Us</li>
                 <li>Track Order</li>
@@ -124,7 +117,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="footer-link-column">
-              <p>MORE INFO</p>
+              <p style={{ color: '#1976d2', fontWeight: 'bold' }}>MORE INFO</p>
               <ul>
                 <li>My Account</li>
                 <li>Order History</li>

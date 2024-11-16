@@ -7,7 +7,7 @@
 }
 
 .banner-image {
-  width: 150%;
+  width: 150%; /* Default size for larger screens */
   height: auto;
   max-width: 1200px; /* Optional: limit the max width */
   border-radius: 15px; /* Adjust this value to change the roundness */
@@ -18,4 +18,21 @@
 /* Hover effect */
 .banner-image:hover {
   box-shadow: 0 12px 25px rgba(0, 0, 255, 0.6); /* Darker, larger shadow on hover */
+}
+
+/* Responsive styles for smaller screens (phones, tablets) */
+@media (max-width: 768px) {
+  .banner-image {
+    width: 100%; /* Make the image take up the full width of the screen */
+    max-width: 100%; /* Ensure it doesn't exceed the screen size */
+  }
+}
+
+/* For even smaller screens (e.g. mobile devices in portrait mode) */
+@media (max-width: 480px) {
+  .banner-image {
+    width: 100%; /* Image takes full width */
+    max-width: 100%; /* Ensures responsiveness */
+    border-radius: 10px; /* Optionally make border-radius smaller on mobile */
+  }
 }

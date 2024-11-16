@@ -1,16 +1,68 @@
+/* Container styles */
 .container {
-    margin-top: 100px;
-    height: 500px;
+    margin-top: 50px;  /* Reduced margin for smaller screens */
+    height: auto;      /* Allow container to adjust height based on content */
     border: 2px solid black;
-}
-
-.form-box {
+    padding: 20px;     /* Padding for better spacing */
+    border-radius: 8px;  /* Rounded corners for aesthetic appeal */
+  }
+  
+  /* Form box styling */
+  .form-box {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 100px;
-    border: 2px solid black;
+    gap: 20px;         /* Increased gap for better spacing between elements */
+    width: 100%;       /* Ensure form takes full width inside container */
     padding: 10px;
-    gap: 10px;
-}
+  }
+  
+  /* Make the form input fields more responsive */
+  .text-field {
+    width: 100%;  /* Ensure the input fields take the full width */
+    max-width: 400px; /* Max width of 400px to avoid stretching too much on large screens */
+    margin: 10px 0;    /* Space between form elements */
+  }
+  
+  /* Button styling */
+  button {
+    width: 100%;      /* Button should take full width */
+    max-width: 400px; /* Same max-width as input fields */
+    margin-top: 20px;
+    padding: 10px;
+  }
+  
+  /* Media Query for smaller screens */
+  @media (max-width: 600px) {
+    .container {
+      margin-top: 20px; /* Reduced margin */
+      padding: 15px;    /* Reduced padding on smaller screens */
+    }
+  
+    .form-box {
+      gap: 15px;        /* Reduced gap between elements on smaller screens */
+    }
+  
+    .text-field,
+    button {
+      max-width: 100%;  /* Allow the form to take full width on mobile */
+    }
+  
+    .container {
+      height: auto;      /* Allow container to resize based on content */
+    }
+  }
+  
+  /* For very small screens like mobile in portrait mode */
+  @media (max-width: 400px) {
+    .form-box {
+      gap: 10px;        /* Even smaller gap on very small screens */
+    }
+  
+    .text-field,
+    button {
+      padding: 8px;     /* Reduced padding for mobile screens */
+    }
+  }
+  

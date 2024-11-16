@@ -20,10 +20,11 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
+  width: 100%;
 }
 
 .product-item {
-  width: 220px;
+  width: 220px; /* Default width for large screens (4 items per row) */
   text-align: center;
   margin-bottom: 30px;
 }
@@ -51,4 +52,39 @@
   font-size: 1rem;
   color: #555;
   margin-top: 5px;
+}
+
+/* Media Queries for responsiveness */
+
+/* For screens smaller than 1200px (Tablets and smaller screens) */
+@media (max-width: 1200px) {
+  .product-item {
+    width: 45%; /* Two items per row for tablets */
+  }
+}
+
+/* For screens smaller than 768px (Mobile Devices) */
+@media (max-width: 768px) {
+  .product-item {
+    width: 45%; /* Two items per row for smaller tablets and phones */
+  }
+
+  .best-sellers-heading {
+    font-size: 1.5rem; /* Adjust heading font size for smaller screens */
+  }
+}
+
+/* For screens smaller than 480px (Very Small Mobile Devices) */
+@media (max-width: 480px) {
+  .product-item {
+    width: 48%; /* Two items per row for very small mobile devices */
+  }
+
+  .product-image {
+    height: 150px; /* Adjust image height for small screens */
+  }
+
+  .best-sellers-heading {
+    font-size: 1.25rem; /* Further reduce the heading font size */
+  }
 }

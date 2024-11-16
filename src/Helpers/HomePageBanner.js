@@ -1,32 +1,32 @@
-import { GroupCloth, Shoes, Electronics, FemaleCloth, MaleCloth, Books, Jewelry } from '../Assets/Images/Image';
+import { Hoarding, Flier, Acrylic, Canvas, Bank, Bill, Cards } from '../Assets/Images/Image';
 const data = [
     {
-        img: GroupCloth,
-        name: "Cloths"
+        img: Hoarding,
+        name: "Hoardings"
     },
     {
-        img: Shoes,
-        name: "Shoe"
+        img: Flier,
+        name: "Fliers"
     },
     {
-        img: FemaleCloth,
-        name: "Cloths"
+        img: Canvas,
+        name: "Canvas Printing"
     },
     {
-        img: Electronics,
-        name: "Electronics"
+        img: Acrylic,
+        name: "Acrylic Printing"
     },
     {
-        img: MaleCloth,
-        name: "Cloths"
+        img: Bank,
+        name: "Banks"
     },
     {
-        img: Books,
-        name: "Book"
+        img: Bill,
+        name: "Bill Books"
     },
     {
-        img: Jewelry,
-        name: "Jewelry"
+        img: Cards,
+        name: "Cards"
     },
 ]
 export default data

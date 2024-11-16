@@ -1,7 +1,7 @@
 /* HomePage.css */
 .section-divider {
     border: none;
-    height: 2px;
+    height: 1px;
     background-color: gray; /* Light blue color */
     margin: 30px 0; /* Space around the divider */
     width: 80%; /* Optional: control the width of the divider */
