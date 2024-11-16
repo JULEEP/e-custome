@@ -14,6 +14,7 @@ import FeaturesPage from '../FeaturesPage/FeaturesPage'
 import './HomePage.css' // Import the CSS file for styling
 import OurVision from '../OurVision/OurVision'
 import { keyframes } from '@emotion/react';
+import NewBanner from '../../NewBanner'
 
 const jumpAnimation = keyframes`
   0% {
@@ -31,156 +32,186 @@ const jumpAnimation = keyframes`
 `;
 
 const HomePage = () => {
-    const { setCart } = useContext(ContextFunction)
-    let authToken = localStorage.getItem('Authorization')
-    
-    useEffect(() => {
-        getCart()
-        window.scroll(0, 0)
-    }, [])
-    
-    const getCart = async () => {
-        if (authToken !== null) {
-            const { data } = await axios.get(`${process.env.REACT_APP_GET_CART}`, {
-                headers: {
-                    'Authorization': authToken
-                }
-            })
-            setCart(data)
+  const { setCart } = useContext(ContextFunction)
+  let authToken = localStorage.getItem('Authorization')
+
+  useEffect(() => {
+    getCart()
+    window.scroll(0, 0)
+  }, [])
+
+  const getCart = async () => {
+    if (authToken !== null) {
+      const { data } = await axios.get(`${process.env.REACT_APP_GET_CART}`, {
+        headers: {
+          'Authorization': authToken
         }
+      })
+      setCart(data)
     }
+  }
 
-    return (
-        <>
-            <Container maxWidth='xl' style={{ display: 'flex', justifyContent: "center", padding: 0, flexDirection: "column", marginBottom: 70 }}>
-                <Box padding={1}>
-                    <Carousel />
-                </Box>
-                <hr className="section-divider" />
+  return (
+    <>
+      <Container maxWidth='xl' style={{ display: 'flex', justifyContent: "center", padding: 0, flexDirection: "column", marginBottom: 70 }}>
+        <Box padding={1}>
+          <Carousel />
+        </Box>
+        <hr className="section-divider" />
+        <Container
+        style={{
+          marginTop: 0,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Typography
+          variant="h3"
+          sx={{
+            textAlign: "center",
+            color: "#1976d2",
+            fontWeight: "bold",
+            fontSize: "2rem", // Reduced size
+            animation: `${jumpAnimation} 1s ease-out`, // Animation added
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)", // Corrected box shadow syntax
+            padding: "10px", // Added padding to create space around the text
+            borderRadius: "20px", // Optional: if you want the text box to have rounded corners too
+            backgroundColor: "#f5f5f5", // Added background color
+          }}
+        >
+          Top Categories
+        </Typography>
+      </Container>      
 
-                <Container style={{ marginTop: 0, display: "flex", justifyContent: 'center' }}>
-                <Typography
-                variant="h3"
-                sx={{
-                  textAlign: 'center',
-                  color: '#1976d2',
-                  fontWeight: 'bold',
-                  fontSize: '2rem', // Reduced size
-                  animation: `${jumpAnimation} 1s ease-out`, // Animation added
-                  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Corrected box shadow syntax
-                }}
-              >
-                  Top Categories
-                </Typography>
-              </Container>
-        
-              <Container
-                maxWidth='xl'
+        <Container
+          maxWidth='xl'
+          style={{
+            marginTop: 90,
+            display: "flex",
+            justifyContent: 'center',
+            flexGrow: 1,
+            flexWrap: 'wrap',
+            gap: 20
+          }}
+        >
+          {BannerData.map((data) => (
+            <Box
+              key={data.img}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                width: '150px',
+                marginBottom: '20px',
+              }}
+            >
+              <Box
                 style={{
-                  marginTop: 90,
-                  display: "flex",
+                  width: '100px', // Set the width of the container
+                  height: '100px', // Set the height of the container
+                  borderRadius: '50%', // Make the container circular
+                  display: 'flex',
+                  alignItems: 'center',
                   justifyContent: 'center',
-                  flexGrow: 1,
-                  flexWrap: 'wrap',
-                  gap: 20
+                  backgroundColor: '#f5f5f5', // Background color for better visibility
+                  boxShadow: '0 4px 10px rgba(0, 123, 255, 0.5)', // Add a blue shadow
+                  marginBottom: '10px',
                 }}
               >
-                {BannerData.map((data) => (
-                  <Box
-                    key={data.img}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      textAlign: 'center',
-                      width: '150px',
-                      marginBottom: '20px',
-                    }}
-                  >
-                    <Box
-                      style={{
-                        width: '100px', // Set the width of the container
-                        height: '100px', // Set the height of the container
-                        borderRadius: '50%', // Make the container circular
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#f5f5f5', // Background color for better visibility
-                        boxShadow: '0 4px 10px rgba(0, 123, 255, 0.5)', // Add a blue shadow
-                        marginBottom: '10px',
-                      }}
-                    >
-                      <img
-                        src={data.img}
-                        alt={data.name}
-                        style={{
-                          width: '80px', // Image width
-                          height: '80px', // Image height
-                          borderRadius: '50%', // Make the image circular
-                          objectFit: 'cover', // Ensure the image fits within the circle
-                        }}
-                      />
-                    </Box>
-                    <Typography
-                      variant='h6'
-                      style={{
-                        marginTop: '10px',
-                        fontWeight: 'normal', // Removed bold font weight
-                      }}
-                    >
-                      {data.name}
-                    </Typography>
-                  </Box>
-                ))}
-              </Container>
-            </Container>
-            <hr className="section-divider" />
-            <Container style={{ marginTop: 0, display: "flex", justifyContent: 'center' }}>
-            <Typography
-            variant="h3"
-            sx={{
-              textAlign: 'center',
-              color: '#1976d2',
-              fontWeight: 'bold',
-              fontSize: '2rem', // Reduced size
-              animation: `${jumpAnimation} 1s ease-out`, // Animation added
-              boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Corrected box shadow syntax
-            }}
-          >
+                <img
+                  src={data.img}
+                  alt={data.name}
+                  style={{
+                    width: '80px', // Image width
+                    height: '80px', // Image height
+                    borderRadius: '50%', // Make the image circular
+                    objectFit: 'cover', // Ensure the image fits within the circle
+                  }}
+                />
+              </Box>
+              <Typography
+                variant='h6'
+                style={{
+                  marginTop: '10px',
+                  fontWeight: 'normal', // Removed bold font weight
+                }}
+              >
+                {data.name}
+              </Typography>
+            </Box>
+          ))}
+        </Container>
+      </Container>
+      <hr className="section-divider" />
+      <NewBanner/>
+      <hr className="section-divider" />
+
+      <Container
+        style={{
+          marginTop: 0,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+      <Typography
+      variant="h3"
+      sx={{
+        textAlign: "center",
+        color: "#1976d2",
+        fontWeight: "bold",
+        fontSize: "2rem", // Reduced size
+        animation: `${jumpAnimation} 1s ease-out`, // Animation added
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)", // Corrected box shadow syntax
+        padding: "10px", // Added padding to create space around the text
+        borderRadius: "20px", // Optional: if you want the text box to have rounded corners too
+        backgroundColor: "#f5f5f5", // Added background color
+      }}
+    >
           Best Sellers
-            </Typography>
-          </Container>
-            <BestSellers />
-            <hr className="section-divider" />
+        </Typography>
+      </Container>
+      <BestSellers />
 
-            <Banner />
-            <hr className="section-divider" />
+      <hr className="section-divider" />
 
-            <Container style={{ marginTop: 0, display: "flex", justifyContent: 'center' }}>
-            <Typography
-            variant="h3"
-            sx={{
-              textAlign: 'center',
-              color: '#1976d2',
-              fontWeight: 'bold',
-              fontSize: '2rem', // Reduced size
-              animation: `${jumpAnimation} 1s ease-out`, // Animation added
-              boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Corrected box shadow syntax
-            }}
-          >
+      <Banner />
+      <hr className="section-divider" />
+
+      <Container
+      style={{
+        marginTop: 0,
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+    <Typography
+    variant="h3"
+    sx={{
+      textAlign: "center",
+      color: "#1976d2",
+      fontWeight: "bold",
+      fontSize: "2rem", // Reduced size
+      animation: `${jumpAnimation} 1s ease-out`, // Animation added
+      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)", // Corrected box shadow syntax
+      padding: "10px", // Added padding to create space around the text
+      borderRadius: "20px", // Optional: if you want the text box to have rounded corners too
+      backgroundColor: "#f5f5f5", // Added background color
+    }}
+  >
           Our Services
-            </Typography>
-          </Container>
-            <FeaturesPage />
-            <hr className="section-divider" />
+        </Typography>
+      </Container>
+      <FeaturesPage />
+      <hr className="section-divider" />
 
-            <OurVision />
-            <hr className="section-divider" />
+      <OurVision />
+      <hr className="section-divider" />
 
-            <Footer />
-        </>
-    )
+      <Footer />
+    </>
+  )
 }
 
 export default HomePage

@@ -1,25 +1,135 @@
+/* Hide .showMobile by default */
 .showMobile {
     display: none;
 }
 
-@media screen and (max-width: 900px) {
+/* Mobile View (up to 480px) */
+@media screen and (max-width: 480px) {
     .showMobile {
         display: block;
-        /* border: 2px solid Red; */
-        
+        /* You can add some styling if needed */
+    }
+
+    /* For links section on mobile */
+    .links {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        justify-content: center;
+        align-items: center;
+        padding: 10px; /* Add some padding for spacing */
+        width: 100%; /* Use full width */
+    }
+
+    .links a {
+        padding: 8px;
+        font-size: 1rem; /* Font size adjusted for small screens */
+        text-align: center;
+    }
+}
+
+/* Small Mobile View (481px - 599px) */
+@media screen and (min-width: 481px) and (max-width: 599px) {
+    .showMobile {
+        display: block;
     }
 
     .links {
         display: flex;
-        flex-direction: column;
+        flex-direction: column; /* Stack items vertically */
         justify-content: center;
         align-items: center;
-        padding: 5px;
-        width: 70px;
+        padding: 10px;
+        width: 100%;
     }
 
+    .links a {
+        padding: 10px;
+        font-size: 1.1rem; /* Slightly larger font for readability */
+    }
 }
 
-@media (min-width: 768px) and (max-width:1023px) {
-    
+/* Small Tablet View (600px - 768px) */
+@media screen and (min-width: 600px) and (max-width: 768px) {
+    .showMobile {
+        display: block;
+        /* You can add additional styling for small tablets if needed */
+    }
+
+    .links {
+        display: flex;
+        flex-direction: column; /* Stack links vertically */
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        width: 80%; /* Use most of the width, but leave some margins */
+    }
+
+    .links a {
+        padding: 12px;
+        font-size: 1.2rem; /* Bigger font for small tablets */
+        text-align: center;
+    }
+}
+
+/* Medium Screen View (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .showMobile {
+        display: none; /* Hide mobile version on tablets */
+    }
+
+    .links {
+        display: flex;
+        flex-direction: row; /* Show links horizontally */
+        justify-content: space-evenly; /* Even spacing between links */
+        align-items: center;
+        padding: 15px;
+        width: 100%;
+    }
+
+    .links a {
+        padding: 15px;
+        font-size: 1.25rem; /* Slightly smaller font for medium screens */
+    }
+}
+
+/* Large Tablet / Small Desktop (1024px - 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .showMobile {
+        display: none; /* Keep mobile hidden on larger screens */
+    }
+
+    .links {
+        display: flex;
+        flex-direction: row; /* Keep horizontal layout */
+        justify-content: space-evenly; /* Spread out the links */
+        align-items: center;
+        padding: 20px;
+        width: 100%;
+    }
+
+    .links a {
+        padding: 15px;
+        font-size: 1.5rem; /* Slightly larger font for better readability on tablets */
+    }
+}
+
+/* Large Screen / Desktop (1440px and above) */
+@media (min-width: 1440px) {
+    .showMobile {
+        display: none; /* Keep mobile version hidden on desktop */
+    }
+
+    .links {
+        display: flex;
+        flex-direction: row; /* Horizontal layout */
+        justify-content: space-evenly; /* Evenly space links */
+        align-items: center;
+        padding: 25px;
+        width: 100%;
+    }
+
+    .links a {
+        padding: 20px;
+        font-size: 1.75rem; /* Larger font size for desktop */
+    }
 }

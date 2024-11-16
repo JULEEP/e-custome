@@ -183,7 +183,7 @@
   margin-top: 20px;
 }
 
-/* Responsive Design for smaller screens */
+/* Responsive Design for smaller screens (max-width: 768px) */
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;    /* Stack items vertically */
@@ -210,6 +210,12 @@
     font-size: 24px;           /* Smaller icon size on smaller screens */
   }
 
+  .payment-icon {
+    width: 20px;    /* Set width */
+    height: 20px;   /* Set height */
+    margin: 0;      /* Remove any margin (default gap between icons) */
+  }
+
   .follow-us p, .support-section p, .secure-payments p {
     font-size: 16px;           /* Reduce text size for titles */
   }
@@ -224,11 +230,10 @@
   .footer-link-column {
     text-align: center;             /* Remove left margin for smaller screens */
     padding-left: 20px;
-
   }
 }
 
-/* Responsive Design for very small screens and mobile phones */
+/* Responsive Design for very small screens and mobile phones (max-width: 480px) */
 @media (max-width: 480px) {
   .footer-content {
     flex-direction: column;    /* Stack items vertically on very small screens */
@@ -269,6 +274,12 @@
     font-size: 22px;           /* Smaller icon size for smaller screens */
   }
 
+  .payment-icon {
+    width: 20px;    /* Set width */
+    height: 20px;   /* Set height */
+    margin: 0;      /* Remove any margin (default gap between icons) */
+  }
+
   .footer-links {
     grid-template-columns: 1fr; /* Single column layout for very small screens */
     gap: 15px;
@@ -279,7 +290,6 @@
   .footer-link-column {
     text-align: center; /* Remove left padding */
     padding-left: 20px;
-
   }
 
   .secure-payments {
@@ -287,6 +297,7 @@
   }
 }
 
+/* Further reduce icon size and adjust layout for ultra-small screens (max-width: 375px) */
 @media (max-width: 375px) {
   .footer-icon {
     font-size: 24px;           /* Further reduce icon size for ultra-small screens */
@@ -303,6 +314,12 @@
 
   .social-icon, .support-icon, .payment-icon {
     font-size: 20px;           /* Further reduce icon size */
+  }
+
+  .payment-icon {
+    width: 20px;    /* Set width */
+    height: 20px;   /* Set height */
+    margin: 0;      /* Remove any margin (default gap between icons) */
   }
 
   .footer-links {

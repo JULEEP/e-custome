@@ -8,5 +8,6 @@ export let VisitingCard = 'https://th.bing.com/th/id/OIP.27x1cZh1tm08JdHCLUPuvQH
 export let Cards = 'https://th.bing.com/th/id/OIP.IX2QrIV7T8lQXt_ShdfeaAHaHa?w=171&h=180&c=7&r=0&o=5&pid=1.7';
 export let Books = 'https://res.cloudinary.com/dxguqzge7/image/upload/v1682838761/Book_lc6ikb.jpg';
 export let EmptyCart = 'https://res.cloudinary.com/dxguqzge7/image/upload/v1682838909/Cart_bk4xgl.jpg';
+export let EmptyWishlist = 'https://img.freepik.com/premium-vector/wishlist-smartphone-app-gift-shopping-list-tiny-woman-writing-down-wishes_501813-875.jpg?w=2000';
 export let customerReview = "https://res.cloudinary.com/dxguqzge7/image/upload/v1682838911/Review_bm6chw.jpg";
 export let MaleCloth = 'https://th.bing.com/th/id/OIP.DxUvq9UM7fZksY-OuGTz6QAAAA?w=209&h=180&c=7&r=0&o=5&pid=1.7'

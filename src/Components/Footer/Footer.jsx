@@ -74,17 +74,15 @@ const Footer = () => {
           <div className="footer-line" />
 
           {/* 100% SECURE PAYMENTS Section */}
-          <div className="secure-payments">
-            <p>100% SECURE PAYMENTS</p>
-            <div className="payment-icons">
-            <img src={mastroV1} alt="Mastro Payment" className="payment-icon" />
-            <img src={bhimUpiV1} alt="BHIM UPI Payment" className="payment-icon" />
-            <img src={paytmV1} alt="paytm Payment" className="payment-icon" />
-            <img src={gpayV1} alt="Gpay UPI Payment" className="payment-icon" />
-            <img src={phonePeyV1} alt="Phone Pay Payment" className="payment-icon" />
-            <img src={bhimUpiV1} alt="BHIM UPI Payment" className="payment-icon" />                      
-            </div>
-          </div>
+<div className="secure-payments">
+<p>100% SECURE PAYMENTS</p>
+<div className="payment-icons">
+  <img src={mastroV1} alt="Mastro Payment" className="payment-icon" />
+  <img src={bhimUpiV1} alt="BHIM UPI Payment" className="payment-icon" />
+  <img src={gpayV1} alt="Gpay UPI Payment" className="payment-icon" />
+  <img src={phonePeyV1} alt="Phone Pay Payment" className="payment-icon" />
+</div>
+</div>
           <div className="footer-line" />
 
           {/* Add footer section with links organized into columns */}
@@ -92,8 +90,8 @@ const Footer = () => {
             <div className="footer-link-column">
             <p style={{ color: '#1976d2', fontWeight: 'bold' }}>COMPANY</p>
             <ul>
-                <li>About Us</li>
-                <li>Privacy Policy</li>
+            <li onClick={() => window.location.href = '/aboutUs'} style={{ cursor: 'pointer' }}>About Us</li>
+            <li>Privacy Policy</li>
                 <li>T&C's</li>
                 <li>Refer & Earn</li>
               </ul>
@@ -110,7 +108,7 @@ const Footer = () => {
             <div className="footer-link-column">
               <p style={{ color: '#1976d2', fontWeight: 'bold' }}>SUPPORT</p>
               <ul>
-                <li>Contact Us</li>
+                <li onClick={() => window.location.href = '/contactUs'} style={{ cursor: 'pointer' }}>Contact Us</li>
                 <li>Track Order</li>
                 <li>Return Order</li>
                 <li>FAQ's</li>
@@ -119,7 +117,7 @@ const Footer = () => {
             <div className="footer-link-column">
               <p style={{ color: '#1976d2', fontWeight: 'bold' }}>MORE INFO</p>
               <ul>
-                <li>My Account</li>
+                <li onClick={() => window.location.href = '/login'} style={{ cursor: 'pointer' }}>My Account</li>
                 <li>Order History</li>
                 <li>Your Credits</li>
               </ul>

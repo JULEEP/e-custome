@@ -16,6 +16,7 @@ import AdminRegister from './Admin/Auth/Register/AdminRegister';
 import VerifyEmail from './Auth/EmailVerify/EmailVerify';
 import AboutUs from './Pages/AboutUs/AboutUs';
 import ContactUs from './Pages/ContactUs/ContactUs';
+import WishList from './Pages/WishList/WishList';
 
 
 
@@ -36,6 +37,7 @@ function App() {
             <Route path='/verify-email' element={<VerifyEmail />} />
             <Route path='product/type/:cat' element={<SingleCategory />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='/wishlist' element={<WishList />} />
             <Route path='/forgotpassword' element={<ForgotPasswordForm />} />
             <Route path='/user/reset/:id/:token' element={<AddNewPassword />} />
             <Route path='/aboutUs' element={<AboutUs />} />

@@ -1,0 +1,213 @@
+/* Styling for the button-like "About Us" heading */
+.contact-button h2 {
+    background-color: #1976d2; /* Blue background */
+    color: white; /* White text */
+    padding: 8px 15px; /* Reduced padding for a more compact button */
+    border-radius: 20px; /* Slightly smaller rounded corners */
+    text-align: center; /* Center the text */
+    font-size: 1.3rem; /* Smaller font size for better proportion */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Reduced shadow for a subtler effect */
+    cursor: pointer; /* Make it look clickable */
+    transition: all 0.3s ease; /* Smooth transition on hover */
+    width: auto; /* Adjust width based on content */
+    max-width: 250px; /* Set a max-width to avoid stretching on larger screens */
+    margin: 10px 0; /* Add margin for spacing */
+}
+
+/* Hover effect for the "About Us" button */
+.contact-button h2:hover {
+    transform: translateY(-3px); /* Slightly lift the element on hover */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+/* Rest of your existing styling */
+.about-us {
+    display: flex;
+    flex-direction: row; /* Default side-by-side layout */
+    align-items: center;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.text {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.image {
+    flex: 1;
+}
+
+.image img {
+    width: 80%; /* Reduce the image width slightly */
+    object-fit: contain; /* Ensure the image maintains its aspect ratio */
+    max-width: 80%; /* Prevent image from stretching too much */
+    height: auto; /* Ensure the height adjusts automatically */
+}
+
+/* Large Desktop: 1440px and above */
+@media (min-width: 1440px) {
+    .about-us {
+        padding: 30px; /* Slightly reduced padding for larger screens */
+    }
+
+    .text h2 {
+        font-size: 2.5rem; /* Larger heading on larger screens */
+    }
+
+    .text p {
+        font-size: 1.25rem; /* Larger text on large screens */
+    }
+
+    .image img {
+        width: 110%; /* Slightly increased width */
+    }
+}
+
+/* Desktop: 1025px - 1439px */
+@media (max-width: 1439px) and (min-width: 1025px) {
+    .about-us {
+        flex-direction: row; /* Side-by-side layout for desktop */
+        padding: 25px;
+    }
+
+    .text h2 {
+        font-size: 2rem; /* Medium heading size */
+    }
+
+    .text p {
+        font-size: 1.125rem; /* Medium text size */
+    }
+
+    .image img {
+        width: 85%; /* Adjust image width for desktop */
+    }
+}
+
+/* Tablet: 768px - 1024px */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .about-us {
+        flex-direction: column; /* Stack the text and image vertically */
+        padding: 15px;
+    }
+
+    .text h2 {
+        font-size: 1.8rem; /* Adjust heading size for tablets */
+    }
+
+    .text p {
+        font-size: 1.1rem; /* Adjust paragraph text for tablets */
+    }
+
+    .image img {
+        width: 100%; /* Keep image size at 100% */
+        margin-top: 15px; /* Add space between text and image */
+    }
+}
+
+/* Small Tablet: 600px - 767px */
+@media (max-width: 767px) and (min-width: 600px) {
+    .about-us {
+        flex-direction: column; /* Stack the text and image vertically */
+        align-items: center; /* Center the elements */
+        padding: 10px;
+    }
+
+    .text {
+        margin-right: 0;
+        text-align: center; /* Center text on small tablets */
+    }
+
+    .image {
+        margin-top: 15px; /* Add space between text and image */
+    }
+
+    .text h2 {
+        font-size: 1.6rem; /* Adjust heading for smaller tablet screens */
+    }
+
+    .text p {
+        font-size: 1rem; /* Adjust paragraph text */
+    }
+
+    .image img {
+        width: 90%; /* Ensure image stays within bounds */
+    }
+}
+
+/* Mobile: 480px - 599px */
+@media (max-width: 599px) and (min-width: 480px) {
+    .about-us {
+        flex-direction: column; /* Stack elements vertically on mobile */
+        padding: 10px;
+    }
+
+    .text {
+        margin-right: 0;
+        text-align: center; /* Center text on mobile */
+    }
+
+    .image {
+        margin-top: 15px; /* Add space between text and image */
+    }
+
+    .text h2 {
+        font-size: 1.4rem; /* Adjust heading for mobile screens */
+    }
+
+    .text p {
+        font-size: 0.95rem; /* Adjust paragraph text */
+    }
+
+    .image img {
+        width: 100%; /* Keep the image at 100% of the container */
+    }
+}
+
+/* Small Mobile: 320px - 479px */
+@media (max-width: 479px) and (min-width: 320px) {
+    .about-us {
+        flex-direction: column; /* Stack elements vertically on mobile */
+        padding: 10px;
+    }
+
+    .text h2 {
+        margin-right: 0;
+        text-align: center; /* Center text on mobile */    }
+
+    .text p {
+        font-size: 0.5rem; /* Adjust paragraph text */
+    }
+
+    .image {
+        max-width: 100%; /* Ensure image fits small screens */
+    }
+
+    .image img {
+        width: 100%; /* Keep image at 100% */
+    }
+}
+
+/* Ultra-Small Mobile: Below 320px */
+@media (max-width: 319px) {
+    .about-us {
+        flex-direction: column; /* Stack elements vertically on mobile */
+        padding: 10px;
+    }
+
+    .text h2 {
+        margin-right: 0;
+        text-align: center; /* Center text on mobile */    }
+
+    .text p {
+        font-size: 0.5rem; /* Adjust paragraph text */
+    }
+
+    .image {
+        max-width: 100%; /* Ensure image fits small screens */
+    }
+
+    .image img {
+        width: 100%; /* Keep image at 100% */
+    }
+}

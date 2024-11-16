@@ -38,7 +38,7 @@ const DesktopNavigation = () => {
         <div className="logo-search-container">
           <div className="logo">
             <Link to='/'>
-              <h5>JaiswalOffset</h5>
+            <h4><span class="jaiswal">Jaiswal</span><span class="offset">Offset</span></h4>
             </Link>
           </div>
           <input

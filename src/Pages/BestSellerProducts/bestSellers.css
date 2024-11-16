@@ -15,11 +15,12 @@
   margin-top: 60px;
 }
 
+/* Base styles */
 .product-grid {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 20px; /* Space between items */
   width: 100%;
 }
 
@@ -56,17 +57,17 @@
 
 /* Media Queries for responsiveness */
 
-/* For screens smaller than 1200px (Tablets and smaller screens) */
+/* For screens up to 1200px (Large Tablets and Smaller Screens) */
 @media (max-width: 1200px) {
   .product-item {
-    width: 45%; /* Two items per row for tablets */
+    width: 40%; /* Two items per row on tablets */
   }
 }
 
-/* For screens smaller than 768px (Mobile Devices) */
+/* For screens smaller than 768px (Mobile Devices and Tablets) */
 @media (max-width: 768px) {
   .product-item {
-    width: 45%; /* Two items per row for smaller tablets and phones */
+    width: 40%; /* Two items per row for smaller tablets and large phones */
   }
 
   .best-sellers-heading {
@@ -74,17 +75,62 @@
   }
 }
 
-/* For screens smaller than 480px (Very Small Mobile Devices) */
-@media (max-width: 480px) {
+/* For screens smaller than 520px (Smaller Mobile Devices) */
+@media (max-width: 520px) {
   .product-item {
-    width: 48%; /* Two items per row for very small mobile devices */
+    width: 40%; /* One item per row */
   }
 
   .product-image {
-    height: 150px; /* Adjust image height for small screens */
+    height: 150px; /* Adjust image height */
   }
 
   .best-sellers-heading {
-    font-size: 1.25rem; /* Further reduce the heading font size */
+    font-size: 1rem; /* Adjust heading font size for small screens */
+  }
+}
+
+/* For screens smaller than 480px (Small Mobile Devices) */
+@media (max-width: 480px) {
+  .product-item {
+    width: 30%; /* One item per row */
+  }
+
+  .product-image {
+    height: 100px; /* Adjust image height for small screens */
+  }
+
+  .best-sellers-heading {
+    font-size: 1rem; /* Slightly reduce font size for smaller screens */
+  }
+}
+
+/* For screens smaller than 360px (Very Small Mobile Devices) */
+@media (max-width: 360px) {
+  .product-item {
+    width: 40%; /* One item per row */
+  }
+
+  .product-image {
+    height: 100px; /* Further reduce image height */
+  }
+
+  .best-sellers-heading {
+    font-size: 1rem; /* Further reduce font size */
+  }
+}
+
+/* For screens smaller than 320px (Tiny Mobile Devices) */
+@media (max-width: 320px) {
+  .product-item {
+    width: 40%; /* One item per row */
+  }
+
+  .product-image {
+    height: 100px; /* Further reduce image height */
+  }
+
+  .best-sellers-heading {
+    font-size: 0.9rem; /* Reduce heading size even more */
   }
 }

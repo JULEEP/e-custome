@@ -4,8 +4,8 @@ import './bestSellers.css';
 // Create an array of product objects
 const products = [
   {
-    imageUrl: 'https://lp2.hm.com/hmgoepprod?set=format%5Bwebp%5D%2Cquality%5B79%5D%2Csource%5B%2F74%2F45%2F74459df176afa42ab24575b8315721cd5c837e11.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url%5Bfile%3A%2Fproduct%2Fmain%5D',
-    title: 'Women T-Shirt',
+    imageUrl: 'https://th.bing.com/th/id/OIP.Z_YWXCf0AmWWcTzuk-R-QAHaHa?pid=ImgDet&w=191&h=191&c=7',
+    title: 'Hodings',
     price: 400
   },
   {
