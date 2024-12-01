@@ -1,0 +1,137 @@
+/* General styles for sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    height: calc(100vh - 160px); /* Adjusted height after adding both top and bottom margins */
+    position: fixed; /* Keep it fixed */
+    top: 120px; /* Top margin */
+    bottom: 80px; /* Bottom margin */
+    left: 0;
+    transform: translateX(0); /* Default position for large screens */
+    transition: transform 0.3s ease; /* Smooth transition for toggling */
+    z-index: 1000; /* Ensure it stays on top */
+  }
+  
+  /* Hide sidebar on smaller screens */
+  .sidebar.hidden {
+    transform: translateX(-100%);
+  }
+  
+  /* Sidebar menu styles */
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-item {
+    margin-bottom: 15px;
+  }
+  
+  .sidebar-item a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar-item a:hover,
+  .sidebar-item a:focus {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Menu Icon */
+  .menu-icon {
+    display: none; /* Hidden by default */
+    font-size: 24px;
+    color: #007bff;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100; /* Above sidebar */
+    cursor: pointer;
+  }
+  
+ /* Responsive styles for tablets and smaller screens */
+@media (max-width: 768px) {
+    .menu-icon {
+      display: block; /* Show menu icon on small screens */
+    }
+  
+    .sidebar {
+      transform: translateX(-100%); /* Initially hide sidebar */
+    }
+  
+    .sidebar.visible {
+      transform: translateX(0); /* Show sidebar when toggled */
+    }
+  
+    .sidebar {
+      height: calc(100vh - 160px); /* Adjusted height for smaller screens (top + bottom margins) */
+      top: 60px; /* Adjust top margin for smaller screens */
+      bottom: 80px; /* Bottom margin for smaller screens */
+    }
+  }
+  
+ /* Additional styles for very small screens (mobile phones) */
+@media (max-width: 480px) {
+    .menu-icon {
+      display: block; /* Show menu icon on small screens */
+      font-size: 20px; /* Adjust font size */
+      top: 10px; /* Adjust icon position */
+      left: 10px;
+    }
+  
+    .sidebar {
+      transform: translateX(-100%); /* Initially hide sidebar */
+    }
+  
+    .sidebar.visible {
+      transform: translateX(0); /* Show sidebar when toggled */
+    }
+  
+    .sidebar {
+      width: 200px; /* Narrower sidebar for smaller screens */
+      padding: 15px; /* Adjust padding */
+      position: fixed;
+      top: 100px; /* Adjust top margin */
+      bottom: 150px; /* Added bottom margin for spacing */
+      height: auto; /* Sidebar adjusts based on top and bottom margins */
+      overflow-y: auto; /* Enable scrolling if content overflows */
+    }
+  
+    .sidebar-item a {
+      font-size: 14px; /* Slightly smaller text */
+      padding: 8px 10px; /* Adjust padding for links */
+    }
+  }
+  
+  /* Extremely small screens (if needed, e.g., max-width: 320px) */
+  @media (max-width: 320px) {
+    .menu-icon {
+      font-size: 18px; /* Even smaller menu icon */
+      top: 5px;
+      left: 5px;
+    }
+  
+    .sidebar {
+      width: 180px; /* Reduce sidebar width further */
+      padding: 10px; /* Compact padding */
+      height: calc(100vh - 120px); /* Further reduced height */
+      top: 40px; /* Reduced top margin */
+      bottom: 40px; /* Reduced bottom margin */
+    }
+  
+    .sidebar-item a {
+      font-size: 12px; /* Smaller text */
+      padding: 6px 8px; /* Adjust padding */
+    }
+  }
+  
+  

@@ -1,0 +1,30 @@
+.order-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    text-align: center;
+    background-color: #f9f9f9; /* Light background */
+  }
+  
+  .empty-order {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .empty-order-image {
+    max-width: 300px;
+    width: 100%;
+    margin-bottom: 20px;
+    opacity: 0.8; /* Slight transparency for the image */
+  }
+  
+  .empty-order-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+  }
+  

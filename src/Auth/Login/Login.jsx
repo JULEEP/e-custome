@@ -30,16 +30,17 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const { email, password } = credentials;
       const response = await axios.post('https://custom-shop-1.onrender.com/api/users/login', { email, password });
-      const { token, refreshToken } = response.data;
-
+      const { token, refreshToken, userId } = response.data;  // Capture userId from response
+  
       if (token) {
         toast.success('Login Successfully', { autoClose: 500, theme: 'colored' });
-        localStorage.setItem('Authorization', token); // Store the access token
-        navigate('/');
+        localStorage.setItem('Authorization', token);  // Store the access token
+        localStorage.setItem('userId', userId);  // Store the userId
+        navigate('/');  // Navigate to homepage
       } else {
         toast.error('Something went wrong, Please try again', { autoClose: 500, theme: 'colored' });
       }
@@ -51,7 +52,7 @@ const Login = () => {
         toast.error('Network Error', { autoClose: 500, theme: 'colored' });
       }
     }
-  };
+  };  
 
   return (
     <Container component="main" maxWidth="xs">

@@ -9,12 +9,14 @@ import BannerData from '../../Helpers/HomePageBanner'
 import Carousel from '../../Components/Carousel/Carousel'
 import Footer from '../../Components/Footer/Footer'
 import BestSellers from '../BestSellerProducts/BestSellerProducts'
+import AllCarts from '../AllCarts/AllCarts'
 import Banner from '../Banner'
 import FeaturesPage from '../FeaturesPage/FeaturesPage'
 import './HomePage.css' // Import the CSS file for styling
 import OurVision from '../OurVision/OurVision'
 import { keyframes } from '@emotion/react';
 import NewBanner from '../../NewBanner'
+import AllProducts from '../AllProdutcs/AllProducts'
 
 const jumpAnimation = keyframes`
   0% {
@@ -173,6 +175,34 @@ const HomePage = () => {
         </Typography>
       </Container>
       <BestSellers />
+
+      <hr className="section-divider" />
+
+      <Container
+        style={{
+          marginTop: 0,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+      <Typography
+      variant="h3"
+      sx={{
+        textAlign: "center",
+        color: "#1976d2",
+        fontWeight: "bold",
+        fontSize: "2rem", // Reduced size
+        animation: `${jumpAnimation} 1s ease-out`, // Animation added
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)", // Corrected box shadow syntax
+        padding: "10px", // Added padding to create space around the text
+        borderRadius: "20px", // Optional: if you want the text box to have rounded corners too
+        backgroundColor: "#f5f5f5", // Added background color
+      }}
+    >
+          All Products
+        </Typography>
+      </Container>
+      <AllCarts />
 
       <hr className="section-divider" />
 

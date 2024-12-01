@@ -1,0 +1,106 @@
+/* General Container Styling */
+.create-order-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Heading Styling */
+  .create-order-container h2,
+  .create-order-container h3 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Input Fields Styling */
+  .create-order-container label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .create-order-container input,
+  .create-order-container select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  
+  /* Button Styling */
+  .create-order-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .create-order-container button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Payment Method & Shipping Section Styling */
+  .payment-method-container,
+  .shipping-address-container {
+    margin-bottom: 20px;
+  }
+  
+  .payment-method-container select {
+    width: 50%;
+    margin: 10px 0;
+    display: inline-block;
+  }
+  
+  .shipping-address-container input {
+    width: calc(50% - 20px);
+    display: inline-block;
+  }
+  
+  .shipping-address-container div {
+    margin-bottom: 16px;
+  }
+  
+  /* Mobile Responsive Styling */
+  @media screen and (max-width: 768px) {
+    .create-order-container {
+      width: 95%;
+    }
+  
+    .create-order-container h2 {
+      font-size: 20px;
+    }
+  
+    .create-order-container h3 {
+      font-size: 18px;
+    }
+  
+    .shipping-address-container input {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+  
+    .payment-method-container select {
+      width: 100%;
+    }
+  
+    .create-order-container button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  

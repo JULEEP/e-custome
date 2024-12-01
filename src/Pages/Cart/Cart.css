@@ -2,7 +2,7 @@
 .main-card {
     width: 100%;
     max-width: 500px;
-    margin: 30px 10px 40px 10px;
+    margin: 30px 10px 40px 10px; /* Adjust the margins */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,37 +14,155 @@
 .empty-cart-img {
     width: 100%;
     height: auto;
-    object-fit: contain;
-    max-height: 300px;
+    object-fit: contain; /* Ensures the image maintains its aspect ratio */
+    max-height: 300px; /* Limits the maximum height of the image */
 }
 
 /* Responsive Media Queries */
+
+/* For screens smaller than 960px */
 @media screen and (max-width: 960px) {
     .main-card {
-        max-width: 300px;
+        max-width: 300px; /* Reduces the max width for smaller screens */
         height: auto;
     }
 
     .empty-cart-img {
-        max-height: 250px;
+        max-height: 250px; /* Reduces the image size for smaller screens */
     }
 }
 
+/* For screens smaller than 768px */
 @media (max-width: 768px) {
     .main-card {
-        max-width: 90%;
-        padding: 20px;
+        max-width: 90%; /* Increases width for smaller devices */
+        padding: 20px; /* Increases padding for better readability */
     }
 
     .empty-cart-img {
-        max-height: 200px;
+        max-height: 200px; /* Further reduces image size */
     }
 }
 
 /* Flexbox Layout for larger screens */
 @media (min-width: 1024px) {
     .main-card {
-        max-width: 500px;
-        margin-top: 50px;
+        max-width: 500px; /* Ensures that the max width stays constant on larger screens */
+        margin-top: 50px; /* Adds top margin to position the card properly */
+    }
+}
+
+/* Additional Styling for the Cart Page */
+.cart-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px;
+}
+
+/* Responsive Layout for Cart Items */
+@media (max-width: 600px) {
+    .cart-container {
+        flex-direction: column; /* Stacks the cart items vertically on small screens */
+    }
+}
+
+/* Cart Item Card */
+.cart-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 350px; /* Limit card size */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: box-shadow 0.3s ease;
+}
+
+.cart-item:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Adds hover effect for the card */
+}
+
+/* Order Form */
+.order-form {
+    margin-top: 20px;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.order-form .form-field {
+    margin-bottom: 15px;
+}
+
+.order-form .form-field label {
+    font-weight: bold;
+    color: #1976d2;
+}
+
+.order-form .form-field input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.order-form .form-field input:focus {
+    border-color: #1976d2;
+}
+
+/* Grid for Order Form */
+@media (min-width: 768px) {
+    .order-form .form-field {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .order-form .form-field input {
+        width: 48%; /* Two fields per row */
+    }
+}
+
+/* For very small screens (300px and above) */
+@media screen and (max-width: 400px) {
+    .cart-container {
+        max-height: 500px; /* Limit the maximum height of the cart */
+        overflow-y: auto; /* Make the cart scrollable if the content exceeds the height */
+    }
+
+    /* Adjust the height of the main card if necessary */
+    .main-card {
+        padding: 15px;
+        height: auto;
+    }
+
+    .empty-cart-img {
+        max-height: 150px; /* Reduce the image size for smaller screens */
+    }
+}
+
+/* For screens 300px and above */
+@media screen and (max-width: 500px) {
+    .main-card {
+        max-width: 100%; /* Ensure the main card takes the full width of smaller screens */
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .cart-container {
+        max-height: 500px; /* Reduce height for smaller screens */
+        overflow-y: auto; /* Add scrolling */
+    }
+
+    .checkout-section {
+        position: sticky;
+        bottom: 0; /* Keep checkout button at the bottom of the screen */
+        background-color: white; /* Add background to prevent overlap with content */
+        padding: 20px;
+        width: 100%;
     }
 }

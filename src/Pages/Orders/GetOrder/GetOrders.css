@@ -1,0 +1,160 @@
+.orders-container {
+    padding: 20px;
+  }
+  
+  .order-card {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    align-items: center;
+    flex-wrap: wrap; /* Ensure elements wrap for smaller screens */
+  }
+  
+  .order-image {
+    flex: 0 0 100px;
+    margin-right: 15px;
+  }
+  
+  .order-image img {
+    max-width: 100%;
+    border-radius: 4px;
+  }
+  
+  .order-details {
+    flex: 1;
+  }
+  
+  .order-status {
+    margin-top: 20px;
+  }
+  
+  .stepper-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Allow stepper steps to wrap on small screens */
+  }
+  
+  .stepper-line {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    width: 84%;
+    height: 2px;
+    background-color: #ddd;
+    z-index: 0;
+  }
+  
+  .stepper-step {
+    text-align: center;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    margin: 0 10px; /* Adjust spacing between steps */
+  }
+  
+  .stepper-step .step-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: #ddd;
+    color: white;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+  .stepper-step.completed .step-icon {
+    background-color: #1976d2;
+  }
+  
+  .stepper-step.completed .step-label {
+    color: #1976d2;
+  }
+  
+  .step-label {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #777;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .order-card {
+      flex-direction: column;
+      align-items: flex-start; /* Stack the image and details on small screens */
+    }
+  
+    .order-image {
+      flex: 0 0 80px;
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+  
+    .stepper-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .stepper-line {
+      position: relative;
+      width: 100%;
+      top: auto;
+      left: auto;
+      height: 2px;
+      background-color: #ddd;
+    }
+  
+    .stepper-step {
+      margin: 10px 0; /* Adjust vertical spacing for smaller screens */
+    }
+  
+    .stepper-step .step-icon {
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+    }
+  
+    .step-label {
+      font-size: 12px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .orders-container {
+      padding: 10px;
+    }
+  
+    .order-card {
+      padding: 10px;
+    }
+  
+    .order-image {
+      flex: 0 0 70px;
+      margin-bottom: 10px;
+    }
+  
+    .order-details {
+      font-size: 14px; /* Make text smaller on mobile */
+    }
+  
+    .stepper-step .step-icon {
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+    }
+  
+    .step-label {
+      font-size: 10px;
+    }
+  }
+  

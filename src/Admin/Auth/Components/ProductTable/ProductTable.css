@@ -1,0 +1,138 @@
+/* Container for the table and page title */
+.products-table-container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Heading styling */
+  .products-table-container h4 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Table Styling */
+  .MuiTable-root {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .MuiTableCell-root {
+    padding: 12px; /* Reduced padding for a smaller row height */
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .MuiTableHead-root {
+    background-color: #1976d2; /* Blue background for headers */
+  }
+  
+  .MuiTableHead-root .MuiTableCell-root {
+    font-weight: bold;
+    color: #fff; /* White text color for header */
+  }
+  
+  /* Compact Table Rows */
+  .MuiTableBody-root .MuiTableRow-root {
+    transition: background-color 0.2s ease;
+    font-size: 0.9rem; /* Slightly smaller font size for compactness */
+  }
+  
+  .MuiTableBody-root .MuiTableRow-root:hover {
+    background-color: #f2f2f2;
+  }
+  
+  /* Action buttons inside the table (smaller and aligned horizontally) */
+  .MuiTableCell-root .MuiIconButton-root {
+    padding: 5px; /* Smaller padding for a smaller icon */
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+    font-size: 1rem; /* Smaller icon size */
+  }
+  
+  .MuiTableCell-root .MuiIconButton-root:hover {
+    background-color: #eee;
+  }
+  
+  .MuiTableCell-root .MuiIconButton-root:focus {
+    background-color: #ddd;
+  }
+  
+  .MuiIconButton-root.MuiIconButton-colorPrimary {
+    color: #3f51b5; /* Blue for View */
+  }
+  
+  .MuiIconButton-root.MuiIconButton-colorSecondary {
+    color: #f44336; /* Red for Delete */
+  }
+  
+  .MuiIconButton-root.MuiIconButton-colorDefault {
+    color: #ffa500; /* Orange for Update */
+  }
+  
+  /* Ensuring that icons appear horizontally in one row */
+  .MuiTableCell-root .icon-group {
+    display: flex; /* Ensures icons are in a row */
+    justify-content: flex-start; /* Align icons to the left */
+    gap: 10px; /* Space between icons */
+    align-items: center; /* Vertically align icons in the center */
+  }
+  
+  /* Pagination */
+  .MuiTablePagination-root {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .MuiTablePagination-selectRoot {
+    font-size: 0.9rem;
+  }
+  
+  .MuiTablePagination-toolbar {
+    padding: 10px 0;
+  }
+  
+  .MuiTablePagination-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  /* Spinner */
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .products-table-container {
+      width: 95%;
+    }
+  
+    .MuiTable-root {
+      font-size: 14px;
+    }
+  
+    .MuiTableCell-root {
+      padding: 10px; /* Reduced padding on small screens */
+    }
+  
+    .MuiTablePagination-root {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    /* Make icons smaller on mobile */
+    .MuiIconButton-root {
+      font-size: 0.8rem; /* Even smaller icons on mobile */
+    }
+  }
+  

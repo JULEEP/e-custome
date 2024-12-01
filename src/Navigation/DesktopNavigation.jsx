@@ -98,8 +98,8 @@ const DesktopNavigation = () => {
             {setProceed ? (
               <>
                 <li className="nav-links">
-                  <Tooltip title='Profile'>
-                    <NavLink to='/update'>
+                  <Tooltip title='dashboard'>
+                    <NavLink to='/dashboard'>
                       <span className='nav-icon-span'>
                         <CgProfile style={{ fontSize: 29, marginTop: 7, marginRight: 10 }} />
                       </span>

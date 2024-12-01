@@ -1,0 +1,92 @@
+/* General Dashboard styles */
+.dashboard-container {
+    display: flex;
+    position: relative;
+    left: 120px; /* This will leave space for the sidebar */
+    width: 100%;
+  }
+  
+  .dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    transition: margin-left 0.3s ease; /* Smooth transition for left margin */
+    width: 100%;
+  }
+  
+  /* Adjust the dashboard layout when the sidebar is visible */
+  .dashboard.sidebar-visible {
+    margin-left: 250px; /* Space for the sidebar */
+  }
+  
+  /* Adjust the dashboard layout when the sidebar is hidden */
+  .dashboard.sidebar-hidden {
+    margin-left: 0; /* Full width when sidebar is hidden */
+  }
+  
+  /* Card styles */
+  .card {
+    width: 320px; /* Set fixed width for the cards */
+    height: 150px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px; /* Added margin-bottom to give space between rows */
+  }
+  
+  /* Card hover effects */
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-icon {
+    font-size: 60px;
+    color: white; /* White color for the icon so it's visible on the pink background */
+    background-color: rgba(41, 10, 219, 0.6); /* Light pink with transparency (60% opacity) */
+    border-radius: 50%; /* Circle shape */
+    padding: 20px; /* Space around the icon */
+    margin-bottom: 10px; /* Space below the icon */
+  }
+  
+  
+  
+  .card-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .card {
+      width: calc(50% - 20px); /* Two cards per row on medium screens */
+    }
+  
+    .dashboard {
+      margin-left: 0; /* Remove left margin when sidebar is hidden */
+    }
+  
+    .dashboard.sidebar-visible {
+      margin-left: 250px; /* Adjust when sidebar is visible */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card {
+      width: calc(100% - 20px); /* One card per row on small screens */
+    }
+    
+    .dashboard-container {
+      left: 0; /* Remove left margin on smaller screens */
+    }
+  }
+  
