@@ -63,7 +63,7 @@ const MobileNavigation = () => {
                     setProceed ? (
                         <>
                             {/* Profile Icon */}
-                            <NavLink to='/update' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <NavLink to='/dashboard' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <CgProfile style={{ fontSize: 23 }} />
                             </NavLink>
 
