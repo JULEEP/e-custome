@@ -1,38 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {
-  Typography,
-  Container,
-  Box,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  CssBaseline,
-  TextField,
-} from '@mui/material';
-import { EmptyCart } from '../../Assets/Images/Image';
+import { Button, Typography, Container, Box } from '@mui/material';
+import { EmptyCart } from '../../Assets/Images/Image';  // Image when cart is empty
 import './Cart.css';
 
 const Cart = () => {
-  const { userId } = useParams(); // Get userId from URL
-  const navigate = useNavigate(); // Hook for navigation
+  const { userId } = useParams();
+  const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [showOrderForm, setShowOrderForm] = useState(false); // To control order form visibility
-  const [orderData, setOrderData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    country: '',
-    paymentMethod: 'COD', // Default payment method
-  });
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -55,40 +34,46 @@ const Cart = () => {
     fetchCart();
   }, [userId]);
 
-  const handleCheckout = () => {
-    setShowOrderForm(true);
+  const handleIncrement = (productId) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.product === productId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
   };
 
-  const handleOrderChange = (e) => {
-    const { name, value } = e.target;
-    setOrderData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleDecrement = (productId) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.product === productId && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
   };
 
-  const handlePlaceOrder = async () => {
-    if (!orderData.fullName || !orderData.email || !orderData.phone || !orderData.address || !orderData.city || !orderData.country) {
-      alert('Please fill in all fields');
-      return;
-    }
-
+  const handleRemove = async (productId) => {
     try {
-      const response = await axios.post(`https://admin-backend-rl94.onrender.com/api/orders/create-order/${userId}`, {
-        paymentMethod: orderData.paymentMethod,
-        shippingAddress: orderData,
+      const payload = { productId };
+      const response = await axios.delete(`https://admin-backend-rl94.onrender.com/api/users/delete-cart/${userId}`, {
+        data: payload,
       });
 
       if (response.data.status) {
-        // Navigate to Get Orders page after successful order
-        navigate(`/orders/${userId}`);
+        setCart((prevCart) => prevCart.filter((item) => item.product !== productId));
+        alert('Product removed from cart');
       } else {
-        alert('Failed to place order');
+        alert('Failed to remove product');
       }
     } catch (error) {
-      console.error('Error placing order:', error);
-      alert('An error occurred while placing the order');
+      console.error('Error deleting product:', error);
     }
+  };
+
+  const handleCheckout = () => {
+    navigate(`/checkout/${userId}`, {
+      state: { cart, cartTotal, subTotal, userId }
+    });
   };
 
   if (loading) {
@@ -96,83 +81,92 @@ const Cart = () => {
   }
 
   return (
-    <>
-      <CssBaseline />
-      <Container fixed>
-        <Typography
-          variant="h5"
-          sx={{ textAlign: 'center', marginTop: 8, color: '#1976d2', fontWeight: 'bold' }}
-        >
-          Your Cart!
-        </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 6, alignItems: 'center', flexDirection: 'column', width: '100%' }}>
+    <Container>
+      <Box className="cart-container">
+        {/* Left Side (Product Details & Place Order Button) */}
+        <Box className="left-side">
           {cart.length === 0 ? (
-            <div className="main-card">
-              <img src={EmptyCart} alt="Empty_cart" className="empty-cart-img" />
-              <Typography variant="h6" sx={{ textAlign: 'center', color: '#1976d2', fontWeight: 'bold' }}>
-                Your Cart is Empty
-              </Typography>
+            <div className="empty-cart">
+              <img src={EmptyCart} alt="Empty cart" />
+              <Typography variant="h6">Your cart is empty.</Typography>
             </div>
           ) : (
-            <Grid container spacing={3} sx={{ width: '100%' }}>
-              <Grid item xs={12} sm={8}>
-                <Grid container spacing={3}>
-                  {cart.map((item) => (
-                    <Grid item xs={12} sm={6} md={4} key={item.product}>
-                      <Card sx={{ maxWidth: 345 }}>
-                        <CardMedia component="img" height="140" image={item.images[0]} alt={item.name} />
-                        <CardContent>
-                          <Typography variant="h6">{item.name}</Typography>
-                          <Typography variant="body2" color="text.secondary">{item.description}</Typography>
-                          <Typography variant="h6" sx={{ marginTop: 2 }}>
-                            {`Price: $${item.price}`}
-                          </Typography>
-                          <Typography variant="body1">
-                            Quantity: {item.quantity}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-              <Box sx={{ position: 'sticky', top: 20 }}>
-                <Typography variant="h5">{`Subtotal: ${subTotal}`}</Typography>
-                <Typography variant="h5">{`Total: ${cartTotal}`}</Typography>
-                <Button variant="contained" color="primary" sx={{ marginBottom: 20 }} onClick={handleCheckout}>
-                  Checkout
-                </Button>
-              </Box>
-                {showOrderForm && (
-                  <Box sx={{ marginBottom: 20 }}>
-                    <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center', color: '#1976d2', }}>Shipping Details</Typography>
-                    <Grid container spacing={2}>
-                      {['fullName', 'email', 'phone', 'address', 'city', 'country', 'paymentMethod'].map((field) => (
-                        <Grid item xs={6} key={field}>
-                          <TextField
-                            fullWidth
-                            label={field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}
-                            variant="outlined"
-                            name={field}
-                            value={orderData[field]}
-                            onChange={handleOrderChange}
-                            sx={{ marginBottom: 2 }}
-                          />
-                        </Grid>
-                      ))}
-                    </Grid>
-                    <Button variant="contained" color="secondary" sx={{ marginBottom: 20 }} onClick={handlePlaceOrder}>
-                      Place Order
+            cart.map((item, index) => (
+              <div
+                key={item.product}
+                className={`cart-item ${index < cart.length - 1 ? 'with-border' : ''}`} // Add border class except for last item
+              >
+                {/* Product Image */}
+                <div className="cart-item-image">
+                  <img src={item.images[0]} alt={item.title} />
+                </div>
+                {/* Product Details */}
+                <div className="cart-item-details">
+                  <div className="cart-item-title">
+                    <Typography variant="h6">{item.title}</Typography>
+                  </div>
+                  {/* Price above quantity controls */}
+                  <div className="item-price">
+                    <Typography variant="body1">₹{item.price}</Typography>
+                  </div>
+                  {/* Quantity controls (now under price) */}
+                  <div className="quantity-controls">
+                    <Button
+                      variant="contained"
+                      className="quantity-button"
+                      onClick={() => handleDecrement(item.product)}
+                    >
+                      -
                     </Button>
-                  </Box>
-                )}
-              </Grid>
-            </Grid>
+                    <Typography variant="body1">{item.quantity}</Typography>
+                    <Button
+                      variant="contained"
+                      className="quantity-button"
+                      onClick={() => handleIncrement(item.product)}
+                    >
+                      +
+                    </Button>
+                  </div>
+                </div>
+                {/* Remove Button */}
+                <div className="remove-button">
+                  <Button
+                    color="primary"
+                    onClick={() => handleRemove(item.product)}
+                    className="remove-btn"
+                  >
+                    Remove
+                  </Button>
+                </div>
+              </div>
+            ))
+          )}
+
+          {/* Cart Summary */}
+          {cart.length > 0 && (
+            <div className="cart-summary">
+              <div className="summary-item">
+                <Typography variant="h6">Products in Cart: {cart.length}</Typography>
+              </div>
+              <div className="summary-item">
+                <Typography variant="h6">Subtotal: ₹{subTotal}</Typography>
+              </div>
+              <div className="summary-item">
+                <Typography variant="h6">Total: ₹{cartTotal}</Typography>
+              </div>
+              <Button
+                variant="contained"
+                color="primary"
+                className="place-order-button"
+                onClick={handleCheckout}
+              >
+                Proceed to Checkout
+              </Button>
+            </div>
           )}
         </Box>
-      </Container>
-    </>
+      </Box>
+    </Container>
   );
 };
 

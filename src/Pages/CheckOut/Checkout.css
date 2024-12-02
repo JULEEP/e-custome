@@ -1,0 +1,77 @@
+/* Left Side (Form and Place Order Button) */
+.left-side {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow */
+  width: 100%; /* Ensure it takes full width */
+}
+
+.cart-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1976d2;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Cart Details Section */
+.price-details-box {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.price-details-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1976d2;
+  margin-bottom: 20px;
+}
+
+.price-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.price-detail h6 {
+  font-size: 1.1rem;
+  font-weight: normal;
+  color: #333;
+}
+
+.price-detail p {
+  font-size: 1.1rem;
+  font-weight: normal;
+  color: #333;
+}
+
+.total-amount {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1976d2;
+  margin-top: 20px;
+}
+
+.total-amount p {
+  font-size: 1.5rem;
+  color: #1976d2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .left-side {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .price-details-box {
+    width: 100%;
+  }
+}

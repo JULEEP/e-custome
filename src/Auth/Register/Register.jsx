@@ -1,4 +1,3 @@
-import '../Login/login.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,6 +5,7 @@ import { Avatar, Button, InputAdornment, Grid, TextField, Typography, CssBaselin
 import { MdLockOutline } from 'react-icons/md';
 import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import { toast } from 'react-toastify';
+import '../Login/login.css'; // Import your CSS
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
@@ -83,110 +83,131 @@ const Register = () => {
   };
 
   return (
-    <>
-      <Container component="main" maxWidth="xs" sx={{ marginBottom: 10 }}>
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: '#1976d2' }}>
-            <MdLockOutline />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  value={credentials.firstName}
-                  onChange={handleOnChange}
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
+    <Container component="main" maxWidth="lg" sx={{ marginTop: 8 }}>
+      <CssBaseline />
+      <Grid container spacing={4} justifyContent="center" alignItems="center">
+        {/* Left side: Form */}
+        <Grid item xs={12} md={6}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              border: '1px solid #ddd',
+              borderRadius: '8px',
+              padding: '20px',
+              backgroundColor: 'white', // White background for the form
+              boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)', // Subtle shadow for depth
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: '#1976d2' }}>
+              <MdLockOutline />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete="given-name"
+                    name="firstName"
+                    value={credentials.firstName}
+                    onChange={handleOnChange}
+                    required
+                    fullWidth
+                    id="firstName"
+                    label="First Name"
+                    autoFocus
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    value={credentials.lastName}
+                    onChange={handleOnChange}
+                    autoComplete="family-name"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    value={credentials.email}
+                    onChange={handleOnChange}
+                    autoComplete="email"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="phoneNumber"
+                    label="Contact Number"
+                    name="phoneNumber"
+                    value={credentials.phoneNumber}
+                    onChange={handleOnChange}
+                    inputMode="numeric"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type={showPassword ? 'text' : 'password'}
+                    id="password"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end" onClick={handleClickShowPassword} sx={{ cursor: 'pointer' }}>
+                          {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
+                        </InputAdornment>
+                      ),
+                    }}
+                    value={credentials.password}
+                    onChange={handleOnChange}
+                    autoComplete="new-password"
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  value={credentials.lastName}
-                  onChange={handleOnChange}
-                  autoComplete="family-name"
-                />
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                Sign Up
+              </Button>
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  Already have an account?{' '}
+                  <Link to="/login" style={{ color: '#1976d2', marginLeft: 3 }}>
+                    Sign in
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  value={credentials.email}
-                  onChange={handleOnChange}
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="phoneNumber"
-                  label="Contact Number"
-                  name="phoneNumber"
-                  value={credentials.phoneNumber}
-                  onChange={handleOnChange}
-                  inputMode="numeric"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end" onClick={handleClickShowPassword} sx={{ cursor: 'pointer' }}>
-                        {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
-                      </InputAdornment>
-                    ),
-                  }}
-                  value={credentials.password}
-                  onChange={handleOnChange}
-                  autoComplete="new-password"
-                />
-              </Grid>
-            </Grid>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                Already have an account? 
-                <Link to="/login" style={{ color: '#1976d2', marginLeft: 3 }}>
-                  Sign in
-                </Link>
-              </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </>
+        </Grid>
+
+        {/* Right side: Image */}
+        <Grid item xs={12} md={6} sx={{ display: { xs: 'none', md: 'block' } }}>
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+            alt="Signup Illustration"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: '8px', // Rounded corners for the image
+            }}
+          />
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 

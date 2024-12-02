@@ -24,12 +24,31 @@
   transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
+.product-image-container {
+  position: relative; /* To position the wishlist icon */
+}
+
 .product-image {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
   margin-bottom: 10px;
 }
+
+.wishlist-icon {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  cursor: pointer;
+  transition: color 0.3s;
+  font-size: 2px; /* Set the size to 20px (adjust as needed) */
+}
+
+.wishlist-icon:hover {
+  color: #ff4081; /* Change to your desired hover color */
+  transform: scale(1.1); /* Slightly enlarge on hover for effect */
+}
+
 
 .product-title {
   font-size: 18px;

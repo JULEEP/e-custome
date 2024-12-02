@@ -1,68 +1,100 @@
 /* Container styles */
 .container {
-    margin-top: 50px;  /* Reduced margin for smaller screens */
-    height: auto;      /* Allow container to adjust height based on content */
-    border: 2px solid black;
-    padding: 20px;     /* Padding for better spacing */
-    border-radius: 8px;  /* Rounded corners for aesthetic appeal */
+  margin-top: 50px; /* Margin for spacing on top */
+  padding: 20px;    /* Padding inside the container */
+  border-radius: 8px; /* Rounded corners for aesthetics */
+  border: 2px solid #ddd; /* Light border around the container */
+  background-color: white; /* White background for form */
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Form box styling */
+.form-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;         /* Increased gap between form elements */
+  width: 100%;       /* Full width inside container */
+  padding: 10px;
+}
+
+/* Make the form input fields more responsive */
+.text-field {
+  width: 100%;  /* Ensure input fields take full width */
+  max-width: 400px; /* Limit the maximum width */
+  margin: 10px 0;   /* Margin between input fields */
+}
+
+/* Button styling */
+button {
+  width: 100%;      /* Button should take full width */
+  max-width: 400px; /* Same max-width as input fields */
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Media Query for smaller screens (tablets and phones) */
+@media (max-width: 900px) {
+  .container {
+    margin-top: 20px; /* Reduced margin for smaller screens */
+    padding: 15px;    /* Reduced padding for smaller screens */
   }
-  
-  /* Form box styling */
+
   .form-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 20px;         /* Increased gap for better spacing between elements */
-    width: 100%;       /* Ensure form takes full width inside container */
-    padding: 10px;
+    gap: 15px;        /* Reduced gap between elements */
   }
-  
-  /* Make the form input fields more responsive */
-  .text-field {
-    width: 100%;  /* Ensure the input fields take the full width */
-    max-width: 400px; /* Max width of 400px to avoid stretching too much on large screens */
-    margin: 10px 0;    /* Space between form elements */
-  }
-  
-  /* Button styling */
+
+  .text-field,
   button {
-    width: 100%;      /* Button should take full width */
-    max-width: 400px; /* Same max-width as input fields */
-    margin-top: 20px;
-    padding: 10px;
+    max-width: 100%;  /* Allow the form to take full width */
   }
-  
-  /* Media Query for smaller screens */
-  @media (max-width: 600px) {
-    .container {
-      margin-top: 20px; /* Reduced margin */
-      padding: 15px;    /* Reduced padding on smaller screens */
-    }
-  
-    .form-box {
-      gap: 15px;        /* Reduced gap between elements on smaller screens */
-    }
-  
-    .text-field,
-    button {
-      max-width: 100%;  /* Allow the form to take full width on mobile */
-    }
-  
-    .container {
-      height: auto;      /* Allow container to resize based on content */
-    }
+
+  .container {
+    height: auto; /* Allow container to resize based on content */
   }
-  
-  /* For very small screens like mobile in portrait mode */
-  @media (max-width: 400px) {
-    .form-box {
-      gap: 10px;        /* Even smaller gap on very small screens */
-    }
-  
-    .text-field,
-    button {
-      padding: 8px;     /* Reduced padding for mobile screens */
-    }
+}
+
+/* For very small screens (mobile phones in portrait mode) */
+@media (max-width: 600px) {
+  .form-box {
+    gap: 10px;        /* Even smaller gap for very small screens */
   }
-  
+
+  .text-field,
+  button {
+    padding: 8px;     /* Reduced padding for mobile screens */
+  }
+}
+
+/* For mobile and tablet screens */
+@media (max-width: 900px) {
+  /* Stack form and image vertically */
+  .grid-container {
+    display: block; /* Stack the form and image */
+  }
+
+  /* Hide the image on mobile */
+  .right-image {
+    display: none;
+  }
+}
+
+/* For larger screens (above 900px) */
+@media (min-width: 900px) {
+  /* Ensure the form and image are displayed side by side */
+  .grid-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  /* Ensure the image is on the right */
+  .right-image {
+    display: block; /* Display image */
+    width: 100%; /* Ensure image takes full width on larger screens */
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+}

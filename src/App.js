@@ -27,6 +27,7 @@ import SingleProduct from './Pages/SingleProduct/SingleProduct';
 import CanvasComponent from './Components/CanvasComponent'
 import CreateOrder from './Pages/Orders/CreateOrder/CreateOrder';
 import GetOrders from './Pages/Orders/GetOrder/GetOrders';
+import Checkout from './Pages/CheckOut/Checkout';
 
 
 
@@ -48,7 +49,7 @@ function App() {
             <Route path='product/type/:cat' element={<SingleCategory />} />
             <Route path="/cart/:userId" element={<Cart />} />
             <Route path="/create-order" element={<CreateOrder />} />
-            <Route path='/wishlist' element={<WishList />} />
+            <Route path='/wishlist/:userId' element={<WishList />} />
             <Route path='/forgotpassword' element={<ForgotPasswordForm />} />
             <Route path='/user/reset/:id/:token' element={<AddNewPassword />} />
             <Route path='/aboutUs' element={<AboutUs />} />
@@ -60,6 +61,7 @@ function App() {
             <Route path='/address' element={<Address />} />
             <Route path="/product/:id" element={<SingleProduct />} />
             <Route path="/canvas/:id" element={<CanvasComponent />} />
+            <Route path="/checkout/:userId" element={<Checkout />} />
 
 
             {/* Admin Routes */}

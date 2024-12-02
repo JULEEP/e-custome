@@ -37,7 +37,7 @@ const Dashboard = () => {
           <FaUserAlt className="card-icon" />
           <p className="card-text">Account Details</p>
         </div>
-        <div className="card">
+        <div className="card" onClick={() => navigate(`/wishlist/${userId}`)}>
           <FaHeart className="card-icon" />
           <p className="card-text">Wishlist</p>
         </div>

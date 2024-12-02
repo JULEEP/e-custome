@@ -1,160 +1,224 @@
+/* Container for all orders */
 .orders-container {
-    padding: 20px;
-  }
-  
+  padding: 20px;
+}
+
+/* Styling each order card */
+.order-card {
+  display: flex;
+  flex-direction: column;  /* Order content in column */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  align-items: flex-start; /* Align items to the top */
+  flex-wrap: wrap;
+}
+
+/* Left side of the order (Image and Order ID) */
+.order-left {
+  width: 100%;
+}
+
+/* Container to hold all products in the order */
+.order-products {
+  margin-top: 10px;
+}
+
+/* Each individual product details */
+.order-item {
+  display: flex;  /* Horizontal layout for product details */
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd; /* Border between products */
+  padding-bottom: 10px;
+  width: 100%;  /* Ensure it takes full width */
+  justify-content: space-between; /* Space between image and details */
+}
+
+/* Product image styles */
+.product-image {
+  margin-right: 20px; /* Space between image and text */
+  width: 80px;  /* Set a fixed width for the image */
+  height: 80px; /* Set a fixed height for the image */
+  overflow: hidden;  /* Ensure the image stays within bounds */
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image doesn't stretch and maintains aspect ratio */
+  border-radius: 4px; /* Optional: rounding corners */
+  box-shadow: none !important; /* Ensure no shadow is applied */
+}
+
+/* Product details area */
+.product-details {
+  flex: 1;  /* Take up remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;  /* Ensure content is spaced evenly */
+}
+
+/* Title and price styles */
+.product-details h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.product-details p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Delete Order Button */
+.delete-order-button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-order-button:hover {
+  background-color: darkred;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+/* Download Invoice Button */
+.download-invoice-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.download-invoice-button:hover {
+  background-color: #45a049;
+}
+
+
+/* Remove shadow from images globally if any other class applies */
+img {
+  box-shadow: none !important; /* Ensure no shadow is applied */
+}
+
+/* Responsive Styles */
+
+/* For Tablets and below (max-width: 768px) */
+@media (max-width: 768px) {
   .order-card {
-    display: flex;
-    flex-direction: row;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    align-items: center;
-    flex-wrap: wrap; /* Ensure elements wrap for smaller screens */
+    padding: 10px;
   }
-  
-  .order-image {
-    flex: 0 0 100px;
-    margin-right: 15px;
+
+  .order-left {
+    width: 100%;
   }
-  
-  .order-image img {
-    max-width: 100%;
-    border-radius: 4px;
+
+  .order-item {
+    flex-direction: column; /* Stack image and details vertically on smaller screens */
+    margin-bottom: 15px;
+    text-align: center; /* Center align text for better mobile display */
   }
-  
-  .order-details {
-    flex: 1;
+
+  .product-image {
+    margin-right: 0;
+    width: 60px; /* Reduce image size */
+    height: 60px; /* Reduce image size */
+    margin-bottom: 10px;
   }
-  
-  .order-status {
-    margin-top: 20px;
+
+  .product-details h4 {
+    font-size: 14px; /* Smaller font size for mobile */
   }
-  
-  .stepper-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    margin-top: 20px;
-    flex-wrap: wrap; /* Allow stepper steps to wrap on small screens */
+
+  .product-details p {
+    font-size: 12px; /* Smaller font size for mobile */
   }
-  
-  .stepper-line {
-    position: absolute;
-    top: 50%;
-    left: 8%;
-    width: 84%;
-    height: 2px;
-    background-color: #ddd;
-    z-index: 0;
+
+  /* Buttons adjustments */
+  .delete-order-button, .download-invoice-button {
+    width: 100%; /* Full width buttons for mobile screens */
+    font-size: 16px;
   }
-  
-  .stepper-step {
+}
+
+/* For Mobile Devices (max-width: 480px) */
+@media (max-width: 480px) {
+  .order-card {
+    padding: 5px;
+  }
+
+  .order-item {
+    flex-direction: column; /* Stack image and details vertically */
     text-align: center;
-    flex: 1;
-    position: relative;
-    z-index: 1;
-    margin: 0 10px; /* Adjust spacing between steps */
+    padding: 10px;
   }
-  
-  .stepper-step .step-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    background-color: #ddd;
-    color: white;
-    font-weight: bold;
+
+  .product-image {
+    width: 50px;  /* Further reduce image size */
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .product-details h4 {
+    font-size: 14px; /* Smaller font size */
+  }
+
+  .product-details p {
+    font-size: 12px; /* Smaller font size */
+  }
+
+  .delete-order-button, .download-invoice-button {
+    font-size: 14px; /* Slightly smaller text for buttons */
+  }
+}
+
+/* For larger screens (max-width: 1200px) */
+@media (max-width: 1200px) {
+  .order-card {
+    padding: 15px;
+  }
+
+  .order-item {
+    margin-bottom: 15px;
+  }
+
+  .download-invoice-button {
+    width: 100%; /* Make the download invoice button half-width on medium-sized screens */
     margin-top: 15px;
   }
-  
-  .stepper-step.completed .step-icon {
-    background-color: #1976d2;
-  }
-  
-  .stepper-step.completed .step-label {
-    color: #1976d2;
-  }
-  
-  .step-label {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #777;
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .order-card {
-      flex-direction: column;
-      align-items: flex-start; /* Stack the image and details on small screens */
-    }
-  
-    .order-image {
-      flex: 0 0 80px;
-      margin-right: 0;
-      margin-bottom: 15px;
-    }
-  
-    .stepper-container {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .stepper-line {
-      position: relative;
-      width: 100%;
-      top: auto;
-      left: auto;
-      height: 2px;
-      background-color: #ddd;
-    }
-  
-    .stepper-step {
-      margin: 10px 0; /* Adjust vertical spacing for smaller screens */
-    }
-  
-    .stepper-step .step-icon {
-      width: 35px;
-      height: 35px;
-      font-size: 16px;
-    }
-  
-    .step-label {
-      font-size: 12px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .orders-container {
-      padding: 10px;
-    }
-  
-    .order-card {
-      padding: 10px;
-    }
-  
-    .order-image {
-      flex: 0 0 70px;
-      margin-bottom: 10px;
-    }
-  
-    .order-details {
-      font-size: 14px; /* Make text smaller on mobile */
-    }
-  
-    .stepper-step .step-icon {
-      width: 30px;
-      height: 30px;
-      font-size: 14px;
-    }
-  
-    .step-label {
-      font-size: 10px;
-    }
-  }
-  
+}

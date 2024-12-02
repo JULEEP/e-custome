@@ -1,168 +1,272 @@
-/* Basic styles */
-.main-card {
-    width: 100%;
-    max-width: 500px;
-    margin: 30px 10px 40px 10px; /* Adjust the margins */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 10px;
-    height: auto;
-}
-
-.empty-cart-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain; /* Ensures the image maintains its aspect ratio */
-    max-height: 300px; /* Limits the maximum height of the image */
-}
-
-/* Responsive Media Queries */
-
-/* For screens smaller than 960px */
-@media screen and (max-width: 960px) {
-    .main-card {
-        max-width: 300px; /* Reduces the max width for smaller screens */
-        height: auto;
-    }
-
-    .empty-cart-img {
-        max-height: 250px; /* Reduces the image size for smaller screens */
-    }
-}
-
-/* For screens smaller than 768px */
-@media (max-width: 768px) {
-    .main-card {
-        max-width: 90%; /* Increases width for smaller devices */
-        padding: 20px; /* Increases padding for better readability */
-    }
-
-    .empty-cart-img {
-        max-height: 200px; /* Further reduces image size */
-    }
-}
-
-/* Flexbox Layout for larger screens */
-@media (min-width: 1024px) {
-    .main-card {
-        max-width: 500px; /* Ensures that the max width stays constant on larger screens */
-        margin-top: 50px; /* Adds top margin to position the card properly */
-    }
-}
-
-/* Additional Styling for the Cart Page */
 .cart-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 10px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: white;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
-/* Responsive Layout for Cart Items */
-@media (max-width: 600px) {
-    .cart-container {
-        flex-direction: column; /* Stacks the cart items vertically on small screens */
-    }
+/* Left Side (Product Details & Place Order Button) */
+.left-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+  width: 100%; /* Ensure it takes up full width for mobile */
+  min-height: 300px; /* Ensure a minimum height so the button stays visible */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Cart Item Card */
+/* Empty Cart State */
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.empty-cart img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* Cart Item Container */
 .cart-item {
-    display: flex;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for each product */
+  transition: box-shadow 0.3s ease;
+}
+
+.cart-item.with-border {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for all except the last product */
+}
+
+/* Styling the product details */
+.cart-item-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-right: 20px;
+}
+
+.cart-item-details {
+  flex-grow: 1;
+}
+
+.cart-item-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.item-price {
+  color: #1976d2;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.quantity-button {
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.quantity-button:hover {
+  background-color: #1565c0;
+}
+
+/* Remove Button */
+.remove-button {
+  margin-left: auto;
+  margin-top: 10px;
+}
+
+.remove-btn {
+  background-color: #000000;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.remove-btn:hover {
+  background-color: #444444;
+}
+
+.cart-summary {
+  margin-top: 2px;
+  width: 100%;
+}
+
+.summary-item {
+  margin-bottom: 2px;
+}
+
+/* Place Order Button */
+.place-order-button {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 6px; /* Ensure there's space between items and button */
+}
+
+.place-order-button:hover {
+  background-color: #1565c0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .cart-container {
     flex-direction: column;
-    width: 100%;
-    max-width: 350px; /* Limit card size */
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    transition: box-shadow 0.3s ease;
-}
+    align-items: center;
+  }
 
-.cart-item:hover {
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Adds hover effect for the card */
-}
-
-/* Order Form */
-.order-form {
-    margin-top: 20px;
-    background-color: #f7f7f7;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.order-form .form-field {
-    margin-bottom: 15px;
-}
-
-.order-form .form-field label {
-    font-weight: bold;
-    color: #1976d2;
-}
-
-.order-form .form-field input {
+  .left-side {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    margin-right: 0;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .cart-item-image img {
+    width: 100px;
+    height: 100px;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .cart-item-details {
+    text-align: left;
+  }
+
+  .quantity-controls {
+    margin-top: 10px;
+    gap: 8px;
+  }
+
+  .remove-btn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cart-item-image img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .cart-item-details {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .quantity-button {
+    width: 25px;
+    height: 25px;
     font-size: 1rem;
+  }
+
+  .remove-btn {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+
+  .place-order-button {
+    padding: 10px;
+    font-size: 1rem;
+  }
 }
 
-.order-form .form-field input:focus {
-    border-color: #1976d2;
-}
+@media (max-width: 480px) {
+  .cart-container {
+    padding: 10px;
+  }
 
-/* Grid for Order Form */
-@media (min-width: 768px) {
-    .order-form .form-field {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    
-    .order-form .form-field input {
-        width: 48%; /* Two fields per row */
-    }
-}
+  .cart-item {
+    padding: 12px;
+  }
 
-/* For very small screens (300px and above) */
-@media screen and (max-width: 400px) {
-    .cart-container {
-        max-height: 500px; /* Limit the maximum height of the cart */
-        overflow-y: auto; /* Make the cart scrollable if the content exceeds the height */
-    }
+  .cart-item-image img {
+    width: 70px;
+    height: 70px;
+  }
 
-    /* Adjust the height of the main card if necessary */
-    .main-card {
-        padding: 15px;
-        height: auto;
-    }
+  .cart-item-title {
+    font-size: 1rem;
+  }
 
-    .empty-cart-img {
-        max-height: 150px; /* Reduce the image size for smaller screens */
-    }
-}
+  .item-price {
+    font-size: 1rem;
+    margin-top: 8px;
+  }
 
-/* For screens 300px and above */
-@media screen and (max-width: 500px) {
-    .main-card {
-        max-width: 100%; /* Ensure the main card takes the full width of smaller screens */
-        padding: 10px;
-        margin-bottom: 20px;
-    }
+  .quantity-controls {
+    margin-top: 6px;
+    gap: 6px;
+  }
 
-    .cart-container {
-        max-height: 500px; /* Reduce height for smaller screens */
-        overflow-y: auto; /* Add scrolling */
-    }
+  .remove-btn {
+    font-size: 0.7rem;
+    padding: 5px 8px;
+  }
 
-    .checkout-section {
-        position: sticky;
-        bottom: 0; /* Keep checkout button at the bottom of the screen */
-        background-color: white; /* Add background to prevent overlap with content */
-        padding: 20px;
-        width: 100%;
-    }
+  .place-order-button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    margin-bottom: 4px;
+  }
 }
