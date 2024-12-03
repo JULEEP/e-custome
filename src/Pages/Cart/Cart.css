@@ -8,6 +8,7 @@
   box-sizing: border-box;
   margin: 0 auto;
   max-width: 1200px;
+  min-height: 300px; /* Prevents collapsing of cart container */
 }
 
 /* Left Side (Product Details & Place Order Button) */
@@ -26,6 +27,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
 
 /* Empty Cart State */
@@ -163,6 +165,8 @@
   .left-side {
     width: 100%;
     margin-right: 0;
+    overflow-y: auto; /* Allow scrolling on small screens */
+    max-height: 500px; /* Limit height */
   }
 
   .cart-item {
@@ -190,6 +194,12 @@
   .remove-btn {
     font-size: 0.9rem;
     padding: 6px 12px;
+  }
+
+  .place-order-button {
+    font-size: 1rem;
+    padding: 12px 20px;
+    margin-top: 15px; /* Provide more space between items and button */
   }
 }
 
@@ -228,6 +238,7 @@
   .place-order-button {
     padding: 10px;
     font-size: 1rem;
+    margin-top: 15px; /* Ensure button is always visible */
   }
 }
 
@@ -266,7 +277,8 @@
 
   .place-order-button {
     font-size: 0.9rem;
-    padding: 10px 20px;
-    margin-bottom: 4px;
+    padding: 12px 20px; /* Adequate padding for mobile */
+    margin-top: 12px; /* Ensure button is still visible */
+    width: 100%;
   }
 }
