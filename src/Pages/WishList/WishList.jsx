@@ -163,52 +163,61 @@ const WishList = () => {
                 </Typography>
               </div>
             ) : (
-              <Grid container spacing={0}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  overflowX: 'auto', // Enable horizontal scrolling
+                  paddingBottom: '20px', // Padding to avoid cutoff at the bottom
+                  width: '100%',
+                }}
+              >
                 {wishlist.map((product) => (
-                  <Grid item xs={12} sm={6} md={4} key={product._id} sx={{ margin: 0 }}>
-                    <Card className="wishlist-card">
-                      {/* Image at the top */}
-                      <CardMedia
-                        component="img"
-                        height="200"
-                        image={product.images[0] || "https://via.placeholder.com/150"}
-                        alt={product.name}
-                        className="wishlist-image"
-                      />
+                  <Card
+                    key={product._id}
+                    className="wishlist-card"
+                    sx={{
+                      width: '250px',
+                      marginRight: '15px',
+                      flexShrink: 0, // Prevent shrinking
+                    }}
+                  >
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={product.images[0] || "https://via.placeholder.com/150"}
+                      alt={product.name}
+                      className="wishlist-image"
+                    />
 
-                      {/* Product details below the image */}
-                      <CardContent className="wishlist-details">
-                        <Typography variant="h6">{product.name}</Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          {product.description}
-                        </Typography>
-                        <Typography variant="body1" color="primary">
-                          ₹{product.originalPrice}
-                        </Typography>
+                    <CardContent className="wishlist-details">
+                      <Typography variant="h6">{product.name}</Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        {product.description}
+                      </Typography>
+                      <Typography variant="body1" color="primary">
+                        ₹{product.originalPrice}
+                      </Typography>
 
-                        {/* Heart Icon for Wishlist */}
-                        <div className="wishlist-heart-icon" onClick={() => handleWishlistToggle(product._id)}>
-                          {userWishlist.includes(product._id) ? (
-                            <IoMdHeart color="red" size={24} />
-                          ) : (
-                            <IoMdHeartEmpty color="gray" size={24} />
-                          )}
-                        </div>
+                      <div className="wishlist-heart-icon" onClick={() => handleWishlistToggle(product._id)}>
+                        {userWishlist.includes(product._id) ? (
+                          <IoMdHeart color="red" size={24} />
+                        ) : (
+                          <IoMdHeartEmpty color="gray" size={24} />
+                        )}
+                      </div>
 
-                        {/* Add to Cart Button */}
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          sx={{ marginTop: 2 }}
-                          onClick={() => handleAddToCart(product)} // Call handleAddToCart on click
-                        >
-                          Add to Cart
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </Grid>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{ marginTop: 2 }}
+                        onClick={() => handleAddToCart(product)} // Call handleAddToCart on click
+                      >
+                        Add to Cart
+                      </Button>
+                    </CardContent>
+                  </Card>
                 ))}
-              </Grid>
+              </Box>
             )}
           </Box>
         )}
