@@ -14,6 +14,7 @@
   background-color: #f9f9f9;
   align-items: flex-start; /* Align items to the top */
   flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
 }
 
 /* Left side of the order (Image and Order ID) */
@@ -74,19 +75,80 @@
   color: #555;
 }
 
-/* Delete Order Button */
-.delete-order-button {
+/* Order Status Badge */
+.order-status {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+/* Status Color Styles */
+.status-pending {
+  background-color: rgba(255, 152, 0, 0.2); /* Transparent Orange */
+  color: #ff9800;
+}
+
+.status-shipped {
+  background-color: rgba(33, 150, 243, 0.2); /* Transparent Blue */
+  color: #2196f3;
+}
+
+.status-delivered {
+  background-color: rgba(76, 175, 80, 0.2); /* Transparent Green */
+  color: #4caf50;
+}
+
+.status-canceled {
+  background-color: rgba(244, 67, 54, 0.2); /* Transparent Red */
+  color: #f44336;
+}
+
+/* Button Styling */
+button {
   margin-top: 10px;
   padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Delete Order Button */
+.delete-order-button {
   background-color: red;
   color: white;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .delete-order-button:hover {
   background-color: darkred;
+}
+
+/* Cancel Order Button */
+.cancel-order-button {
+  background-color: orange;
+  color: white;
+  border: none;
+}
+
+.cancel-order-button:hover {
+  background-color: darkorange;
+}
+
+/* Download Invoice Button */
+.download-invoice-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.download-invoice-button:hover {
+  background-color: #45a049;
 }
 
 /* Modal Styles */
@@ -110,26 +172,10 @@
   width: 300px;
 }
 
-button {
+/* Modal Buttons */
+.modal button {
   margin-top: 10px;
 }
-
-/* Download Invoice Button */
-.download-invoice-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  font-size: 14px;
-  width: 100%;
-}
-
-.download-invoice-button:hover {
-  background-color: #45a049;
-}
-
 
 /* Remove shadow from images globally if any other class applies */
 img {
@@ -142,10 +188,6 @@ img {
 @media (max-width: 768px) {
   .order-card {
     padding: 10px;
-  }
-
-  .order-left {
-    width: 100%;
   }
 
   .order-item {
@@ -218,7 +260,7 @@ img {
   }
 
   .download-invoice-button {
-    width: 100%; /* Make the download invoice button half-width on medium-sized screens */
+    width: 100%; /* Make the download invoice button full-width on medium-sized screens */
     margin-top: 15px;
   }
 }

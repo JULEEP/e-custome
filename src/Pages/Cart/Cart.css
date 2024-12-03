@@ -1,3 +1,4 @@
+/* General Cart Container */
 .cart-container {
   display: flex;
   justify-content: center;
@@ -28,6 +29,12 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+}
+
+.left-side .place-order-button {
+  width: 80%; /* Optional: Set button width */
+  align-self: center; /* Centers the button horizontally */
+  margin-top: 20px; /* Spacing between price summary and button */
 }
 
 /* Empty Cart State */
@@ -127,18 +134,53 @@
   background-color: #444444;
 }
 
-.cart-summary {
-  margin-top: 2px;
+/* Price Summary Styling */
+.price-summary {
+  margin-top: 20px;
   width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .summary-item {
-  margin-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  align-items: center;
 }
 
-/* Place Order Button */
+.summary-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.summary-label {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #333;
+}
+
+.summary-value {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.delivery-free {
+  color: green; /* Green color for Free delivery */
+}
+
+hr {
+  border: 1px solid #e0e0e0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .place-order-button {
-  width: 100%;
+  width: 200%;
   padding: 12px 20px;
   background-color: #1976d2;
   color: white;
@@ -147,7 +189,7 @@
   cursor: pointer;
   font-size: 1.1rem;
   transition: background-color 0.3s ease;
-  margin-top: 6px; /* Ensure there's space between items and button */
+  margin-top: 20px;
 }
 
 .place-order-button:hover {
@@ -279,6 +321,31 @@
     font-size: 0.9rem;
     padding: 12px 20px; /* Adequate padding for mobile */
     margin-top: 12px; /* Ensure button is still visible */
+    width: 100%;
+  }
+}
+
+/* Ensure Price Summary is not stacked on small screens */
+@media (max-width: 768px) {
+  .price-summary {
+    display: flex;
+    flex-direction: column; /* Stacked vertically for mobile */
+  }
+
+  .summary-item {
+    flex-direction: row; /* Keep horizontal alignment */
+    justify-content: space-between;
+  }
+
+  .summary-title, .summary-label, .summary-value {
+    font-size: 1rem; /* Ensure font size consistency */
+  }
+
+  .summary-value {
+    font-weight: bold;
+  }
+
+  .place-order-button {
     width: 100%;
   }
 }

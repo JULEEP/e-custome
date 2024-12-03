@@ -110,8 +110,6 @@ const GetOrders = () => {
         orders.map((order) => (
           <div key={order.orderId} className="order-card">
             <div className="order-details">
-              <h3>Order ID: {order.orderId}</h3>
-              <p>Status: {order.orderStatus}</p>
               {/* Loop through products and display their details */}
               <div className="order-products">
                 {order.order.map((orderItem) => (
@@ -120,9 +118,13 @@ const GetOrders = () => {
                       <img src={orderItem.product.images[0]} alt={orderItem.product.title} />
                     </div>
                     <div className="product-details">
-                      <h4>{orderItem.product.title}</h4>
+                      <h2>{orderItem.product.title}</h2>
                       <p>Quantity: {orderItem.quantity}</p>
                       <p>Price: ₹{orderItem.product.price}</p>
+                      <p>Order ID: {order.orderId}</p>
+                      <p className={`order-status ${order.orderStatus.toLowerCase().replace(/\s+/g, '-')}`}>
+                        {order.orderStatus}
+                      </p>
                     </div>
                   </div>
                 ))}

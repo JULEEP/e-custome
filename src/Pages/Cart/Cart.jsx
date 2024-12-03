@@ -142,18 +142,32 @@ const Cart = () => {
             ))
           )}
 
-          {/* Cart Summary */}
+          {/* Price Summary Section */}
           {cart.length > 0 && (
-            <div className="cart-summary">
+            <div className="price-summary">
               <div className="summary-item">
-                <Typography variant="h6">Products in Cart: {cart.length}</Typography>
+                <Typography variant="h6" className="summary-title">PRICE SUMMARY</Typography>
               </div>
               <div className="summary-item">
-                <Typography variant="h6">Subtotal: ₹{subTotal}</Typography>
+                <div className="summary-label">Total MRP (Incl. of taxes):</div>
+                <div className="summary-value">₹{cartTotal}</div>
               </div>
               <div className="summary-item">
-                <Typography variant="h6">Total: ₹{cartTotal}</Typography>
+                <div className="summary-label">Bag Discount:</div>
+                <div className="summary-value">₹0</div> {/* Replace with actual discount logic */}
               </div>
+              <div className="summary-item">
+                <div className="summary-label">Delivery:</div>
+                <div className="summary-value delivery-free">Free</div>
+              </div>
+
+              <hr />
+
+              <div className="summary-item">
+                <div className="summary-label">Subtotal:</div>
+                <div className="summary-value">₹{subTotal}</div>
+              </div>
+
               <Button
                 variant="contained"
                 color="primary"

@@ -1,16 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from "react-router-dom";
-import {
-  Typography,
-  Container,
-  CssBaseline,
-  Box,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-} from '@mui/material';
+import { Typography, Container, Box, Card, CardContent, CardMedia, Button } from '@mui/material';
 import { IoMdHeartEmpty, IoMdHeart } from 'react-icons/io'; // Heart icons
 import { EmptyWishlist } from '../../Assets/Images/Image'; // Placeholder image for empty wishlist
 import './wishlist.css';
@@ -21,7 +10,6 @@ const WishList = () => {
   const [error, setError] = useState(null);
   const [userWishlist, setUserWishlist] = useState([]);
   const userId = localStorage.getItem('userId'); // Get the userId from localStorage
-  const navigate = useNavigate(); // Initialize the navigate function
 
   // Fetch wishlist data from the backend
   useEffect(() => {
@@ -129,7 +117,6 @@ const WishList = () => {
 
   return (
     <>
-      <CssBaseline />
       <Container fixed>
         <Typography
           variant="h4"
@@ -147,7 +134,16 @@ const WishList = () => {
             <Typography variant="h6" color="error">{error}</Typography>
           </Box>
         ) : (
-          <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', width: '100%' }}>
+          <Box
+            className="wishlist-container"
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap', // Allow wrapping on larger screens
+              paddingBottom: '20px', // Padding to avoid cutoff at the bottom
+              width: '100%',
+              justifyContent: 'center', // Center items on mobile screens
+            }}
+          >
             {wishlist.length === 0 ? (
               <div className="main-card">
                 <img
@@ -163,41 +159,25 @@ const WishList = () => {
                 </Typography>
               </div>
             ) : (
-              <Box
-                sx={{
-                  display: 'flex',
-                  overflowX: 'auto', // Enable horizontal scrolling
-                  paddingBottom: '20px', // Padding to avoid cutoff at the bottom
-                  width: '100%',
-                }}
-              >
-                {wishlist.map((product) => (
-                  <Card
-                    key={product._id}
-                    className="wishlist-card"
-                    sx={{
-                      width: '250px',
-                      marginRight: '15px',
-                      flexShrink: 0, // Prevent shrinking
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      height="200"
-                      image={product.images[0] || "https://via.placeholder.com/150"}
-                      alt={product.name}
-                      className="wishlist-image"
-                    />
-
-                    <CardContent className="wishlist-details">
+              wishlist.map((product) => (
+                <Card
+                  key={product._id}
+                  className="wishlist-card"
+                  sx={{
+                    marginRight: '15px',
+                    flexShrink: 0, // Prevent shrinking
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={product.images[0] || "https://via.placeholder.com/150"}
+                    alt={product.name}
+                    className="wishlist-image"
+                  />
+                  <CardContent className="wishlist-details">
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                       <Typography variant="h6">{product.name}</Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        {product.description}
-                      </Typography>
-                      <Typography variant="body1" color="primary">
-                        ₹{product.originalPrice}
-                      </Typography>
-
                       <div className="wishlist-heart-icon" onClick={() => handleWishlistToggle(product._id)}>
                         {userWishlist.includes(product._id) ? (
                           <IoMdHeart color="red" size={24} />
@@ -205,19 +185,24 @@ const WishList = () => {
                           <IoMdHeartEmpty color="gray" size={24} />
                         )}
                       </div>
-
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        sx={{ marginTop: 2 }}
-                        onClick={() => handleAddToCart(product)} // Call handleAddToCart on click
-                      >
-                        Add to Cart
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
-              </Box>
+                    </Box>
+                    <Typography variant="body2" color="textSecondary">
+                      {product.description}
+                    </Typography>
+                    <Typography variant="body1" color="primary">
+                      ₹{product.originalPrice}
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{ marginTop: 1, padding: '6px 12px', fontSize: '0.875rem' }}
+                      onClick={() => handleAddToCart(product)} // Call handleAddToCart on click
+                    >
+                      Add to Cart
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))
             )}
           </Box>
         )}
