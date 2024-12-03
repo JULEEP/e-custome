@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Container, Box, Card, CardContent, CardMedia, Button } from '@mui/material';
 import { IoMdHeartEmpty, IoMdHeart } from 'react-icons/io'; // Heart icons
 import { EmptyWishlist } from '../../Assets/Images/Image'; // Placeholder image for empty wishlist
+import { useParams, useNavigate } from "react-router-dom";
 import './wishlist.css';
 
 const WishList = () => {
@@ -10,6 +11,7 @@ const WishList = () => {
   const [error, setError] = useState(null);
   const [userWishlist, setUserWishlist] = useState([]);
   const userId = localStorage.getItem('userId'); // Get the userId from localStorage
+  const navigate = useNavigate(); // Initialize the navigate function
 
   // Fetch wishlist data from the backend
   useEffect(() => {
