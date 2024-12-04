@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, Button, InputAdornment, Grid, TextField, Typography, CssBaseline, Box, Container } from '@mui/material';
@@ -16,7 +16,6 @@ const Register = () => {
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-
   const navigate = useNavigate();
 
   // Toggle password visibility
@@ -28,14 +27,6 @@ const Register = () => {
   const handleOnChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
-
-  // Redirect to home if already logged in
-  useEffect(() => {
-    const auth = localStorage.getItem('Authorization');
-    if (auth) {
-      navigate('/verify-email');
-    }
-  }, [navigate]);
 
   // Form submission handler
   const handleSubmit = async (e) => {
@@ -71,10 +62,10 @@ const Register = () => {
         if (data.success === true) {
           toast.success('Registered Successfully', { autoClose: 500, theme: 'colored' });
           localStorage.setItem('Authorization', data.token); // Store the auth token in local storage
-          navigate('/verify-email'); // Redirect to home page after successful registration
+          navigate('/dashboard'); // Redirect to dashboard after successful registration
         } else {
           toast.error('Something went wrong, Please try again', { autoClose: 500, theme: 'colored' });
-          navigate('/');
+          navigate('/'); // If there's an error, redirect to the homepage
         }
       }
     } catch (error) {
