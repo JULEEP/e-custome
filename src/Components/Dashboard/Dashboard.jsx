@@ -30,10 +30,10 @@ const Dashboard = () => {
           <p className="card-text">Orders</p>
         </div>
         <div className="card">
-          <FaAddressCard className="card-icon" />
+          <FaAddressCard className="card-icon" onClick={() => navigate(`/shipping-address/${userId}`)}/>
           <p className="card-text">Addresses</p>
         </div>
-        <div className="card">
+        <div className="card" onClick={() => navigate(`/userDetails/${userId}`)}> {/* Navigate to Account Details */}
           <FaUserAlt className="card-icon" />
           <p className="card-text">Account Details</p>
         </div>

@@ -28,6 +28,9 @@ import CanvasComponent from './Components/CanvasComponent'
 import CreateOrder from './Pages/Orders/CreateOrder/CreateOrder';
 import GetOrders from './Pages/Orders/GetOrder/GetOrders';
 import Checkout from './Pages/CheckOut/Checkout';
+import OrderStatusStepper from './Pages/OrderStepper/OrderStatusStepper';
+import UserDetails from './Pages/UserDetails/UserDetails';
+import ShippingAddress from './Pages/ShippingAddress/ShippingAddress';
 
 
 
@@ -62,6 +65,10 @@ function App() {
             <Route path="/product/:id" element={<SingleProduct />} />
             <Route path="/canvas/:id" element={<CanvasComponent />} />
             <Route path="/checkout/:userId" element={<Checkout />} />
+            <Route path='/orderStepper' element={<OrderStatusStepper />} />
+            <Route path="/userDetails/:userId" element={<UserDetails />} />
+            <Route path="/shipping-address/:userId" element={<ShippingAddress />} />
+
 
 
             {/* Admin Routes */}

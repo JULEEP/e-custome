@@ -1,0 +1,230 @@
+/* Container for the user details */
+.user-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f7fb;
+    height: 100vh;
+  }
+  
+  /* Style for the user card */
+  .user-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;  /* Adjust width to fit the screen */
+    max-width: 900px;  /* Max width for large screens */
+    text-align: left;
+  }
+  
+  /* Style for headings */
+  .user-card h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Form Styling */
+  .user-info-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Row styling for displaying user information */
+  .info-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;  /* Adds space between columns */
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for the fields inside each row */
+  .half-field {
+    flex: 1;  /* Each half will take 50% of the width */
+    min-width: 250px;  /* Ensure input fields don't get too small */
+  }
+  
+  /* Style for labels */
+  .info-row label {
+    color: #1976d2;  /* Blue color for labels */
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  /* Style for input fields */
+  .info-row input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #555;
+  }
+  
+  /* Style for loading and error states */
+  .loading,
+  .error {
+    font-size: 18px;
+    color: #f44336;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Style for the Edit Pen Icon */
+  .edit-icon {
+    font-size: 24px;
+    color: #1976d2;
+    cursor: pointer;
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+  }
+  
+  .edit-icon:hover {
+    color: #004ba0;
+  }
+  
+  /* Modal Overlay Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Modal Content Styles */
+  .modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+  }
+  
+  .modal-content h3 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Button Styles for Modal */
+  .modal-content button {
+    background-color: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .modal-content button:hover {
+    background-color: #004ba0;
+  }
+  
+  .modal-content button[type="button"] {
+    background-color: #e0e0e0;
+  }
+  
+  .modal-content button[type="button"]:hover {
+    background-color: #bdbdbd;
+  }
+  
+  /* Close Button Styles for Modal */
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #999;
+    cursor: pointer;
+  }
+  
+  .modal-close:hover {
+    color: #333;
+  }
+  
+  /* ----- Media Queries for Responsiveness ----- */
+  
+  /* For screens smaller than 768px (Mobile/Tablet) */
+  @media (max-width: 768px) {
+    /* Adjust User Card to take more width */
+    .user-card {
+      width: 95%;  /* Make it full width on smaller screens */
+    }
+  
+    /* Adjust Form Layout */
+    .user-info-form {
+      gap: 15px;
+    }
+  
+    .info-row {
+      flex-direction: column;  /* Stack the fields vertically */
+      gap: 15px;  /* Reduce gap between fields */
+    }
+  
+    /* Adjust input field size */
+    .half-field {
+      min-width: 100%;  /* Ensure input fields take full width */
+    }
+  
+    /* Style for Pen Icon */
+    .edit-icon {
+      font-size: 20px;
+      margin-top: 15px;
+    }
+  
+    /* Modal Adjustments */
+    .modal-content {
+      padding: 20px;
+      width: 90%;  /* Ensure modal takes 90% width */
+    }
+  
+    .modal-content button {
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+  }
+  
+  /* For very small screens (Mobile) */
+  @media (max-width: 480px) {
+    /* Adjust User Card */
+    .user-card {
+      padding: 15px;
+    }
+  
+    /* Adjust Font Sizes */
+    .user-card h2 {
+      font-size: 20px;
+    }
+  
+    .modal-content h3 {
+      font-size: 18px;
+    }
+  
+    /* Adjust Button Sizes */
+    .modal-content button {
+      padding: 10px;
+      font-size: 14px;
+    }
+  
+    .edit-icon {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+  }
+  

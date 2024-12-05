@@ -1,0 +1,67 @@
+/* Container for the entire shipping address */
+.shipping-address-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .shipping-address-container h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Row styling to ensure two fields per row */
+  .address-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  /* Individual field styling */
+  .address-field {
+    width: 48%; /* Adjusts the width to fit two columns per row */
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Bold labels */
+  .address-field strong {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Error or loading states */
+  .error-message,
+  .loading-message {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  /* Loading spinner */
+  .loading-message {
+    font-size: 18px;
+    color: #3498db;
+  }
+  
+  /* For responsiveness: Ensure columns stack on smaller screens */
+  @media screen and (max-width: 768px) {
+    .address-row {
+      flex-direction: column;  /* Stack the fields vertically */
+    }
+    .address-field {
+      width: 100%; /* Take full width on smaller screens */
+      margin-bottom: 10px;  /* Space out fields */
+    }
+  }
+  

@@ -2,25 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './GetOrders.css';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
+import OrderStatusStepper from '../../OrderStepper/OrderStatusStepper';
 
 const GetOrders = () => {
-  const { userId } = useParams();
+  const { userId } = useParams();  // Get userId from the URL
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false); // Track if the modal is open
-  const [selectedOrderId, setSelectedOrderId] = useState(null); // Track which order is being canceled
-  const [cancelReason, setCancelReason] = useState(''); // Track the selected cancel reason
+  const [isTrackModalOpen, setIsTrackModalOpen] = useState(false);  // Track Order Modal
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);  // Cancel Order Modal
+  const [selectedOrderId, setSelectedOrderId] = useState(null);  // Track selected order
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState('');  // Track selected order's status
+  const [cancelReason, setCancelReason] = useState('');  // Track the cancel reason
 
-  // List of cancel reasons
   const cancelReasons = ['Change of mind', 'Incorrect item', 'Damaged item', 'Late delivery', 'Other'];
 
+  // Fetch orders from API
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`https://admin-backend-rl94.onrender.com/api/orders/getorder/${userId}`);
         if (response.data.status) {
-          setOrders(response.data.orders);
+          setOrders(response.data.orders);  // Set orders if fetch is successful
         } else {
           setError(response.data.message || 'Failed to fetch orders.');
         }
@@ -28,22 +32,61 @@ const GetOrders = () => {
         console.error('Error fetching orders:', err);
         setError('An error occurred while fetching orders.');
       } finally {
-        setLoading(false);
+        setLoading(false);  // Set loading to false once the request is complete
       }
     };
 
     fetchOrders();
   }, [userId]);
 
-  // Handle delete order
+  // Handle Track Order
+  const handleTrackOrder = (orderId, orderStatus) => {
+    setSelectedOrderId(orderId);
+    setSelectedOrderStatus(orderStatus);
+    setIsTrackModalOpen(true);  // Open Track Order Modal
+  };
+
+  // Handle Cancel Order
+  const handleCancelOrder = (orderId) => {
+    setSelectedOrderId(orderId);
+    setIsCancelModalOpen(true);  // Open Cancel Order Modal
+  };
+
+  // Submit Cancel Order Request
+  const handleSubmitCancelOrder = async () => {
+    if (!cancelReason) {
+      alert('Please select a reason to cancel.');
+      return;
+    }
+
+    try {
+      const response = await axios.put(`https://admin-backend-rl94.onrender.com/api/orders/cancel-order-by-user/${userId}`, {
+        orderId: selectedOrderId,
+        cancelReason: cancelReason,
+      });
+
+      if (response.data.status) {
+        setOrders(orders.filter(order => order.orderId !== selectedOrderId));  // Remove the cancelled order
+        alert('Order cancelled successfully');
+        setIsCancelModalOpen(false);  // Close Cancel Modal
+      } else {
+        alert(response.data.message || 'Failed to cancel order');
+      }
+    } catch (err) {
+      console.error('Error cancelling order:', err);
+      alert('An error occurred while cancelling the order.');
+    }
+  };
+
+  // Handle Delete Order
   const handleDeleteOrder = async (orderId) => {
     try {
       const response = await axios.delete(`https://admin-backend-rl94.onrender.com/api/orders/delete-order/${userId}`, {
         data: { orderId },
       });
+
       if (response.data.status) {
-        // Update the state by removing the deleted order
-        setOrders(orders.filter(order => order.orderId !== orderId));
+        setOrders(orders.filter(order => order.orderId !== orderId));  // Remove the deleted order
         alert('Order deleted successfully');
       } else {
         alert(response.data.message || 'Failed to delete order');
@@ -54,42 +97,8 @@ const GetOrders = () => {
     }
   };
 
-  // Handle cancel order
-  const handleCancelOrder = (orderId) => {
-    setSelectedOrderId(orderId);
-    setIsModalOpen(true); // Open the modal to choose cancel reason
-  };
-
-  // Submit cancel order request
-  const handleSubmitCancelOrder = async () => {
-    if (!cancelReason) {
-      alert('Please select a reason to cancel.');
-      return;
-    }
-
-    try {
-      const response = await axios.put(`https://admin-backend-rl94.onrender.com/api/orders/cancel-order-by-user/${userId}`, {
-        orderId: selectedOrderId,
-        cancelReasons: cancelReason,
-      });
-
-      if (response.data.status) {
-        // Update the state by removing the canceled order
-        setOrders(orders.filter(order => order.orderId !== selectedOrderId));
-        alert('Order cancelled successfully');
-        setIsModalOpen(false); // Close the modal
-      } else {
-        alert(response.data.message || 'Failed to cancel order');
-      }
-    } catch (err) {
-      console.error('Error cancelling order:', err);
-      alert('An error occurred while cancelling the order.');
-    }
-  };
-
-  // Handle invoice download
+  // Handle Download Invoice
   const handleDownloadInvoice = (orderId) => {
-    // Redirect to the invoice download API endpoint
     window.location.href = `https://admin-backend-rl94.onrender.com/api/orders/download-invoice/${userId}/${orderId}`;
   };
 
@@ -110,7 +119,6 @@ const GetOrders = () => {
         orders.map((order) => (
           <div key={order.orderId} className="order-card">
             <div className="order-details">
-              {/* Loop through products and display their details */}
               <div className="order-products">
                 {order.order.map((orderItem) => (
                   <div key={orderItem._id} className="order-item">
@@ -129,6 +137,15 @@ const GetOrders = () => {
                   </div>
                 ))}
               </div>
+
+              {/* Track Order Button */}
+              <button
+                onClick={() => handleTrackOrder(order.id, order.orderStatus)}
+                className="track-order-button"
+              >
+                Track Order
+              </button>
+
               {/* Delete Order Button */}
               <button
                 onClick={() => handleDeleteOrder(order.orderId)}
@@ -157,31 +174,40 @@ const GetOrders = () => {
         ))
       )}
 
-      {/* Modal for cancel order */}
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <h4>Cancel Order</h4>
-            <label htmlFor="cancelReason">Select Reason:</label>
-            <select
-              id="cancelReason"
-              value={cancelReason}
-              onChange={(e) => setCancelReason(e.target.value)}
-            >
-              <option value="">Select a reason</option>
-              {cancelReasons.map((reason, index) => (
-                <option key={index} value={reason}>
-                  {reason}
-                </option>
-              ))}
-            </select>
-            <div>
-              <button onClick={handleSubmitCancelOrder}>Submit</button>
-              <button onClick={() => setIsModalOpen(false)}>Close</button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Track Order Modal */}
+      <Dialog open={isTrackModalOpen} onClose={() => setIsTrackModalOpen(false)} maxWidth="md" fullWidth>
+        <DialogTitle>Track Order</DialogTitle>
+        <DialogContent>
+          <OrderStatusStepper orderStatus={selectedOrderStatus} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setIsTrackModalOpen(false)} color="primary">Close</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Cancel Order Modal */}
+      <Dialog open={isCancelModalOpen} onClose={() => setIsCancelModalOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>Cancel Order</DialogTitle>
+        <DialogContent>
+          <label htmlFor="cancelReason">Select Reason:</label>
+          <select
+            id="cancelReason"
+            value={cancelReason}
+            onChange={(e) => setCancelReason(e.target.value)}
+          >
+            <option value="">Select a reason</option>
+            {cancelReasons.map((reason, index) => (
+              <option key={index} value={reason}>
+                {reason}
+              </option>
+            ))}
+          </select>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleSubmitCancelOrder} color="primary">Submit</Button>
+          <Button onClick={() => setIsCancelModalOpen(false)} color="secondary">Close</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
