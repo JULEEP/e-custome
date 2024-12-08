@@ -17,6 +17,9 @@ const DesktopNavigation = () => {
   let authToken = localStorage.getItem('Authorization');
   let setProceed = authToken !== null ? true : false
 
+  // Get userId from localStorage for wishlist URL
+  const userId = localStorage.getItem('userId');
+
   useEffect(() => {
     getCart(setProceed, setCart, authToken)
     getWishList(setProceed, setWishlistData, authToken)
@@ -38,7 +41,7 @@ const DesktopNavigation = () => {
         <div className="logo-search-container">
           <div className="logo">
             <Link to='/'>
-            <h4><span class="jaiswal">Jaiswal</span><span class="offset">Offset</span></h4>
+              <h4><span className="jaiswal">Jaiswal</span><span className="offset">Offset</span></h4>
             </Link>
           </div>
           <input
@@ -60,7 +63,6 @@ const DesktopNavigation = () => {
           >
             Go
           </Button>
-
         </div>
 
         <div className="nav-items">
@@ -74,8 +76,8 @@ const DesktopNavigation = () => {
             </li>
             <li className="nav-links">
               <Tooltip title='Cart'>
-                <NavLink to="/cart">
-                  <span className='nav-icon-span'>
+              <NavLink to={`/cart/${userId}`}> {/* Updated wishlist link */}
+              <span className='nav-icon-span'>
                     <Badge badgeContent={setProceed ? cart.length : 0}>
                       <AiOutlineShoppingCart className='nav-icon' />
                     </Badge>
@@ -85,7 +87,7 @@ const DesktopNavigation = () => {
             </li>
             <li className="nav-links">
               <Tooltip title='Wishlist'>
-                <NavLink to="/wishlist">
+                <NavLink to={`/wishlist/${userId}`}> {/* Updated wishlist link */}
                   <span className='nav-icon-span'>
                     <Badge badgeContent={setProceed ? wishlistData.length : 0}>
                       <AiOutlineHeart className='nav-icon' />

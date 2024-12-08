@@ -1,264 +1,224 @@
+/* Main container for the entire product page */
 .single-product-container {
   display: flex;
-  justify-content: space-between; /* Push details further to the right */
-  gap: 50px; /* Increased gap between sections */
+  justify-content: space-between; /* This will push the sections to opposite sides */
+  gap: 30px; /* Gap between left and right sections */
   padding: 20px;
-  font-family: Arial, sans-serif;
-  flex-wrap: wrap; /* Allow wrapping of content on smaller screens */
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f7f7f7;
+  flex-wrap: wrap; /* Allows the layout to stack on smaller screens */
 }
 
+/* Left side (Image + Action buttons) */
 .product-image-container {
-  flex: 2;
-  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 20px; /* Added space to the left */
+  flex: 0 0 40%; /* Take up 40% of the width */
+  min-width: 350px; /* Minimum width */
+  margin-bottom: 20px; /* Add bottom margin for mobile spacing */
 }
 
+/* Wrapper for product image */
 .image-wrapper {
-  position: relative;
   width: 100%;
-  border: 1px solid #ddd;
+  height: auto;
+  max-height: 350px;
+  overflow: hidden;
   border-radius: 10px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow for better aesthetics */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .product-image {
   width: 100%;
-  height: auto;
-  border-radius: 10px;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease-in-out;
 }
 
-.wishlist-icon {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.8); /* Circular white background */
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: red;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+/* Image hover effect */
+.product-image:hover {
+  transform: scale(1.1); /* Zoom effect on hover */
 }
 
+/* Action buttons (Add to Cart, Quantity Controls, Buy Now) */
 .image-buttons {
   margin-top: 20px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 15px;
-  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
 }
 
 .add-to-cart-button,
-.buy-now-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px; /* Space between icon and text */
-  padding: 12px 24px;
+.buy-now-button,
+.customize-product-button {
+  background-color: #ff4d00;
+  color: white;
+  padding: 12px 20px;
   border: none;
-  border-radius: 10px;
-  cursor: pointer;
+  border-radius: 5px;
   font-size: 16px;
-  font-weight: bold;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  width: 100%; /* Make the buttons full width on smaller screens */
+  width: 200px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.add-to-cart-button {
-  background-color: #2a9d8f;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.add-to-cart-button:hover,
+.buy-now-button:hover,
+.customize-product-button:hover {
+  background-color: #ff6600; /* Slightly darker orange on hover */
 }
 
-.add-to-cart-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.buy-now-button {
-  background-color: #e63946;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.buy-now-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Quantity Controls */
 .quantity-controls {
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the buttons horizontally */
   gap: 10px;
-  margin-top: 10px;
 }
 
-.increment-button,
-.decrement-button {
-  background-color: #2a9d8f;
-  color: white;
-  width: 40px; /* Fix the width */
-  height: 40px; /* Fix the height to make it a square */
-  padding: 0; /* Remove extra padding */
-  border: none;
-  border-radius: 5px; /* Square with rounded corners */
+.quantity-controls button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px; /* Font size for the icons */
-  transition: background-color 0.2s;
-  box-sizing: border-box; /* Ensure that the width and height include padding and border */
+  transition: background-color 0.2s ease;
 }
 
-.increment-button:hover,
-.decrement-button:hover {
-  background-color: #1f7a6f;
+.quantity-controls button:hover {
+  background-color: #ff6600;
+  border-color: #ff6600;
+  color: white;
 }
 
-span {
+.quantity-controls span {
   font-size: 18px;
-  color: #333;
   font-weight: bold;
 }
 
-/* Product Details */
+/* Right side (Product details) */
 .product-details {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Increased spacing for readability */
-  padding-right: 30px; /* Added right padding */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 55%; /* Take up 55% of the width */
+  min-width: 300px; /* Minimum width */
 }
 
 .product-name {
-  font-size: 30px;
-  color: #333;
-  margin-bottom: 10px;
+  font-size: 24px;
   font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
 }
 
 .product-details p {
   font-size: 16px;
   color: #555;
-  margin: 0;
-  line-height: 1.6; /* Improved readability */
+  margin-bottom: 10px;
 }
 
-.error-message {
-  text-align: center;
-  color: red;
-  font-size: 16px;
-}
-
-/* Customize Product Button */
-.customize-product-button {
-  padding: 12px 24px;
-  font-size: 16px;
+.product-details strong {
   font-weight: bold;
-  background-color: #1e90ff;
+}
+
+/* Customize button section */
+.customize-button-container {
+  margin-top: 30px;
+  margin-bottom: 20px; /* Add bottom margin */
+}
+
+/* Style for the customize button */
+.customize-product-button {
+  background-color: #ff4081;
   color: white;
+  padding: 12px 20px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 200px;
   cursor: pointer;
-  width: 100%; /* Full width button on smaller screens */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-top: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .customize-product-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background-color: #ff3b8f; /* Slightly darker pink on hover */
 }
 
-/* Media Queries for Responsiveness */
+/* Responsive design: Stack the content vertically on smaller screens */
 @media (max-width: 768px) {
   .single-product-container {
-    flex-direction: column; /* Stack the sections vertically on smaller screens */
-    align-items: center; /* Center align the content */
+    flex-direction: column; /* Stack the sections vertically */
+    gap: 20px;
   }
 
+  /* Left side (Image + Action buttons) */
   .product-image-container {
-    max-width: 100%; /* Image section takes full width */
-    margin-left: 0;
+    width: 100%; /* Take up full width on smaller screens */
+    min-width: unset; /* Remove the minimum width */
+    margin-bottom: 20px;
   }
 
-  .image-buttons {
-    flex-direction: column; /* Stack the buttons vertically */
-    gap: 4px; /* Decrease gap between buttons */
-    width: 100%;
+  .image-wrapper {
+    height: auto; /* Let the image height adjust automatically */
+    max-height: 350px; /* Ensure image doesn't stretch too much */
   }
 
-  .add-to-cart-button,
-  .buy-now-button {
-    width: 100%; /* Full width for all buttons */
-  }
-
-  .customize-product-button {
-    margin-top: 4px;
-  }
-
+  /* Right side (Product details) */
   .product-details {
-    padding-right: 0; /* Remove right padding for smaller screens */
-    align-items: center; /* Center align the text */
+    width: 100%; /* Take up full width on smaller screens */
   }
 
-  .product-name {
-    font-size: 24px; /* Adjust product name size */
-  }
-
-  .product-details p {
-    font-size: 14px; /* Adjust text size for better readability */
-  }
-
-  .quantity-controls {
-    gap: 8px; /* Reduce gap between the buttons */
-  }
-
-  .increment-button,
-  .decrement-button {
-    width: 35px; /* Reduce the size for smaller screens */
-    height: 35px; /* Keep the square shape */
-    font-size: 16px; /* Adjust the font size for smaller buttons */
-  }
-}
-
-@media (max-width: 480px) {
-  .product-name {
-    font-size: 20px; /* Smaller product name font on very small screens */
-  }
-
-  .product-details p {
-    font-size: 12px; /* Smaller text size */
-  }
-
+  /* Button styles */
   .add-to-cart-button,
   .buy-now-button,
   .customize-product-button {
-    padding: 10px 20px; /* Smaller button size */
-    font-size: 14px; /* Smaller font size for buttons */
-    margin-bottom: 60px;
+    width: 100%; /* Make buttons full width on mobile */
+    font-size: 14px;
+    padding: 10px 0;
   }
 
-  .quantity-controls {
-    gap: 6px; /* Further reduce gap for very small screens */
+  .quantity-controls span {
+    font-size: 16px;
   }
 
-  .increment-button,
-  .decrement-button {
-    width: 30px; /* Even smaller buttons for very small screens */
-    height: 30px;
-    font-size: 14px; /* Adjust icon size */
+  /* Ensure customization button is fully visible */
+  .customize-product-button {
+    width: 100%; /* Full width on small screens */
+  }
+}
+
+/* For mobile screens */
+@media (max-width: 480px) {
+  .product-name {
+    font-size: 20px;
+  }
+
+  .product-details {
+    padding: 15px;
+  }
+
+  .quantity-controls span {
+    font-size: 14px;
+  }
+
+  /* Ensure image maintains its aspect ratio */
+  .image-wrapper {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Customize button adjustments for smaller screens */
+  .customize-product-button {
+    width: 100%; /* Ensure full width */
+    padding: 10px 0; /* Adjust padding for small screens */
+    font-size: 14px; /* Smaller font size */
+  }
+
+  /* Add bottom margin to the product details and button container */
+  .customize-button-container {
+    margin-bottom: 80px;
   }
 }

@@ -31,8 +31,11 @@ import Checkout from './Pages/CheckOut/Checkout';
 import OrderStatusStepper from './Pages/OrderStepper/OrderStatusStepper';
 import UserDetails from './Pages/UserDetails/UserDetails';
 import ShippingAddress from './Pages/ShippingAddress/ShippingAddress';
-
-
+import TermsOfService from './Pages/Term&Condition/TermAndCondition';
+import PrivacyPolicy from './Pages/PrivacyPage/Privecy';
+import CategoryPage from './Helpers/CategoryPage';
+import CategoryDetailsPage from './Helpers/SubCategoriesPage';
+import AllProducts from './Pages/AllProdutcs/AllProducts';
 
 
 
@@ -68,6 +71,20 @@ function App() {
             <Route path='/orderStepper' element={<OrderStatusStepper />} />
             <Route path="/userDetails/:userId" element={<UserDetails />} />
             <Route path="/shipping-address/:userId" element={<ShippingAddress />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/privecyPolicy" element={<PrivacyPolicy />} />
+            <Route path="/category" element={<CategoryPage />} />
+            <Route path="/category/:slug" element={<CategoryDetailsPage />} />
+            <Route path="/allproducts" element={<AllProducts />} />
+
+
+
+
+
+            
+
+
+
 
 
 

@@ -91,8 +91,8 @@ const Footer = () => {
             <p style={{ color: '#1976d2', fontWeight: 'bold' }}>COMPANY</p>
             <ul>
             <li onClick={() => window.location.href = '/aboutUs'} style={{ cursor: 'pointer' }}>About Us</li>
-            <li>Privacy Policy</li>
-                <li>T&C's</li>
+            <li onClick={() => window.location.href = '/privecyPolicy'} style={{ cursor: 'pointer' }}>Privacy Policy</li>
+                <li onClick={() => window.location.href = '/terms'} style={{ cursor: 'pointer' }}>T&C's</li>
                 <li>Refer & Earn</li>
               </ul>
             </div>

@@ -1,21 +1,45 @@
 import React from 'react';
-import './contact.css'; // Make sure the CSS file is imported
+import './contact.css'; // Ensure the CSS file is imported
 
 const ContactUs = () => {
   return (
-    <div className="about-us">
-      <div className="text">
-        {/* Added a wrapper div for the h2 */}
-        <div className="contact-button">
-          <h2>Contact Us</h2>
-        </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae eros eget tellus tristique bibendum. Donec rutrum sed sem quis venenatis.</p>
-      </div>
+    <div className="contact-us">
+      {/* Image Section with Overlay */}
       <div className="image">
         <img 
-          src="https://th.bing.com/th/id/R.bdf91335ae0f65168c403ae4f2483e29?rik=o3vp6WHduy8kwg&riu=http%3a%2f%2fsilvertech.in%2fimage%2fcontact-us-figure.png&ehk=qIhuzUu%2f8ud5ynO4hpe%2fS75J7VCwTAIzBSHdUY9I%2fsc%3d&risl=&pid=ImgRaw&r=0" 
-          alt="Contact Us" 
+          src="https://static.vecteezy.com/system/resources/previews/006/801/832/non_2x/get-in-touch-illustration-exclusive-design-inspiration-vector.jpg" 
+          alt="Contact Us"
         />
+        <div className="overlay">
+          <h2>Get in Touch</h2>
+          <ul>
+            <li><i className="fas fa-envelope"></i> <a href="mailto:jaiswaloffset@gmail.com">jaiswaloffset@gmail.com</a></li>
+            <li><i className="fas fa-phone"></i> Office Phone: 07692-224203</li>
+            <li><i className="fas fa-mobile-alt"></i> Mob: 9827274100, 9425174803</li>
+            <li><i className="fas fa-globe"></i> <a href="http://jaiswaloffset.com" target="_blank" rel="noopener noreferrer">jaiswaloffset.com</a></li>
+            <li><i className="fas fa-headset"></i> Customer Care: 9827274100</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Contact Form */}
+      <div className="form-section">
+        <form>
+          <h3>Contact Form</h3>
+          <div className="form-field">
+            <label htmlFor="name">Name</label>
+            <input type="text" id="name" placeholder="Your Name" required />
+          </div>
+          <div className="form-field">
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" placeholder="Your Email" required />
+          </div>
+          <div className="form-field">
+            <label htmlFor="message">Message</label>
+            <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" className="submit-btn">Submit</button>
+        </form>
       </div>
     </div>
   );

@@ -18,6 +18,9 @@ const MobileNavigation = () => {
     let authToken = localStorage.getItem('Authorization');
     let setProceed = authToken !== null ? true : false;
 
+    // Get userId from localStorage for dynamic URL
+    const userId = localStorage.getItem('userId');
+
     useEffect(() => {
         getCart(setProceed, setCart, authToken);
         getWishList(setProceed, setWishlistData, authToken);
@@ -45,14 +48,14 @@ const MobileNavigation = () => {
                 </NavLink>
 
                 {/* Cart Icon with Badge */}
-                <NavLink to='/cart' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <NavLink to={`/cart/${userId}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Badge badgeContent={setProceed ? cart.length : 0}>
                         <AiOutlineShoppingCart style={{ fontSize: 23 }} />
                     </Badge>
                 </NavLink>
 
                 {/* Wishlist Icon with Badge */}
-                <NavLink to='/wishlist' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <NavLink to={`/wishlist/${userId}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Badge badgeContent={setProceed ? wishlistData.length : 0}>
                         <AiOutlineHeart style={{ fontSize: 23 }} />
                     </Badge>

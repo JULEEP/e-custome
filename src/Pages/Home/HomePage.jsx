@@ -17,6 +17,8 @@ import OurVision from '../OurVision/OurVision'
 import { keyframes } from '@emotion/react';
 import NewBanner from '../../NewBanner'
 import AllProducts from '../AllProdutcs/AllProducts'
+import CategoryPage from '../../Helpers/CategoryPage'
+import BestCategoriesSlider from '../../Helpers/BestCategoriesSlider'
 
 const jumpAnimation = keyframes`
   0% {
@@ -59,92 +61,6 @@ const HomePage = () => {
         <Box padding={1}>
           <Carousel />
         </Box>
-        <hr className="section-divider" />
-        <Container
-        style={{
-          marginTop: 0,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Typography
-          variant="h3"
-          sx={{
-            textAlign: "center",
-            color: "#1976d2",
-            fontWeight: "bold",
-            fontSize: "2rem", // Reduced size
-            animation: `${jumpAnimation} 1s ease-out`, // Animation added
-            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)", // Corrected box shadow syntax
-            padding: "10px", // Added padding to create space around the text
-            borderRadius: "20px", // Optional: if you want the text box to have rounded corners too
-            backgroundColor: "#f5f5f5", // Added background color
-          }}
-        >
-          Top Categories
-        </Typography>
-      </Container>      
-
-        <Container
-          maxWidth='xl'
-          style={{
-            marginTop: 90,
-            display: "flex",
-            justifyContent: 'center',
-            flexGrow: 1,
-            flexWrap: 'wrap',
-            gap: 20
-          }}
-        >
-          {BannerData.map((data) => (
-            <Box
-              key={data.img}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: 'center',
-                width: '150px',
-                marginBottom: '20px',
-              }}
-            >
-              <Box
-                style={{
-                  width: '100px', // Set the width of the container
-                  height: '100px', // Set the height of the container
-                  borderRadius: '50%', // Make the container circular
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: '#f5f5f5', // Background color for better visibility
-                  boxShadow: '0 4px 10px rgba(0, 123, 255, 0.5)', // Add a blue shadow
-                  marginBottom: '10px',
-                }}
-              >
-                <img
-                  src={data.img}
-                  alt={data.name}
-                  style={{
-                    width: '80px', // Image width
-                    height: '80px', // Image height
-                    borderRadius: '50%', // Make the image circular
-                    objectFit: 'cover', // Ensure the image fits within the circle
-                  }}
-                />
-              </Box>
-              <Typography
-                variant='h6'
-                style={{
-                  marginTop: '10px',
-                  fontWeight: 'normal', // Removed bold font weight
-                }}
-              >
-                {data.name}
-              </Typography>
-            </Box>
-          ))}
-        </Container>
       </Container>
       <hr className="section-divider" />
       <NewBanner/>
@@ -202,10 +118,9 @@ const HomePage = () => {
           All Products
         </Typography>
       </Container>
-      <AllCarts />
+      <AllProducts />
 
       <hr className="section-divider" />
-
       <Banner />
       <hr className="section-divider" />
 
@@ -235,6 +150,9 @@ const HomePage = () => {
       </Container>
       <FeaturesPage />
       <hr className="section-divider" />
+      <BestCategoriesSlider/>
+      <hr className="section-divider" />
+
 
       <OurVision />
       <hr className="section-divider" />

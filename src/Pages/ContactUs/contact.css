@@ -1,213 +1,206 @@
-/* Styling for the button-like "About Us" heading */
-.contact-button h2 {
-    background-color: #1976d2; /* Blue background */
-    color: white; /* White text */
-    padding: 8px 15px; /* Reduced padding for a more compact button */
-    border-radius: 20px; /* Slightly smaller rounded corners */
-    text-align: center; /* Center the text */
-    font-size: 1.3rem; /* Smaller font size for better proportion */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Reduced shadow for a subtler effect */
-    cursor: pointer; /* Make it look clickable */
-    transition: all 0.3s ease; /* Smooth transition on hover */
-    width: auto; /* Adjust width based on content */
-    max-width: 250px; /* Set a max-width to avoid stretching on larger screens */
-    margin: 10px 0; /* Add margin for spacing */
-}
-
-/* Hover effect for the "About Us" button */
-.contact-button h2:hover {
-    transform: translateY(-3px); /* Slightly lift the element on hover */
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
-}
-
-/* Rest of your existing styling */
-.about-us {
+/* Container for the whole Contact Us page */
+.contact-us {
     display: flex;
-    flex-direction: row; /* Default side-by-side layout */
-    align-items: center;
-    padding: 20px;
     flex-wrap: wrap;
-}
-
-.text {
+    justify-content: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  
+  /* Image Section with Overlay */
+  .image {
+    position: relative;
     flex: 1;
-    margin-right: 20px;
-}
-
-.image {
+    max-width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .image:hover img {
+    transform: scale(1.05); /* Zoom effect on hover */
+  }
+  
+  /* Overlay for contact details */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 1;
+  }
+  
+  .overlay h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #f9a825;
+  }
+  
+  .overlay ul {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 1.2rem;
+    line-height: 1.8;
+  }
+  
+  .overlay li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .overlay i {
+    margin-right: 10px;
+    font-size: 1.5rem;
+    color: #1976d2;
+  }
+  
+  .overlay a {
+    color: #f9a825;
+    text-decoration: none;
+  }
+  
+  .overlay a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Contact Form Section */
+  .form-section {
     flex: 1;
-}
-
-.image img {
-    width: 80%; /* Reduce the image width slightly */
-    object-fit: contain; /* Ensure the image maintains its aspect ratio */
-    max-width: 80%; /* Prevent image from stretching too much */
-    height: auto; /* Ensure the height adjusts automatically */
-}
-
-/* Large Desktop: 1440px and above */
-@media (min-width: 1440px) {
-    .about-us {
-        padding: 30px; /* Slightly reduced padding for larger screens */
+    max-width: 50%; /* Reduced form width */
+    margin-top: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-section h3 {
+    font-size: 1.8rem;
+    color: #1976d2;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .form-field {
+    margin-bottom: 15px;
+  }
+  
+  .form-field label {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .form-field input,
+  .form-field textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+  
+  /* Focus Effect for Inputs and Textareas */
+  .form-field input:focus,
+  .form-field textarea:focus {
+    border-color: #1976d2; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.5); /* Blue glow effect */
+  }
+  
+  .form-field textarea {
+    resize: vertical;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #1565c0;
+    transform: translateY(-2px);
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .contact-us {
+      flex-direction: column; /* Stack image and form on smaller screens */
+      padding: 10px;
     }
-
-    .text h2 {
-        font-size: 2.5rem; /* Larger heading on larger screens */
+  
+    .form-section {
+      max-width: 100%; /* Make form take full width on mobile */
+      margin-top: 20px;
     }
-
-    .text p {
-        font-size: 1.25rem; /* Larger text on large screens */
+  
+    .overlay h2 {
+      font-size: 1rem; /* Adjust overlay heading for small screens */
+      margin-top: 8px;
     }
-
-    .image img {
-        width: 110%; /* Slightly increased width */
+  
+    .overlay ul {
+      font-size: 1rem; /* Adjust list font size for small screens */
     }
-}
-
-/* Desktop: 1025px - 1439px */
-@media (max-width: 1439px) and (min-width: 1025px) {
-    .about-us {
-        flex-direction: row; /* Side-by-side layout for desktop */
-        padding: 25px;
+  
+    .form-section h3 {
+      font-size: 1.5rem; /* Adjust form heading for mobile */
     }
-
-    .text h2 {
-        font-size: 2rem; /* Medium heading size */
+  
+    /* Reduce the overlay text size for small screens */
+    .overlay li {
+      font-size: 1rem;
     }
-
-    .text p {
-        font-size: 1.125rem; /* Medium text size */
+  
+    /* Adjust overlay icon size for small screens */
+    .overlay i {
+      font-size: 1.2rem;
     }
-
-    .image img {
-        width: 85%; /* Adjust image width for desktop */
+  }
+  
+  /* For very small screens (under 480px) */
+  @media (max-width: 480px) {
+    .overlay h2 {
+      font-size: 1rem; /* Smaller font size for the heading */
+      margin-top: 14px;
     }
-}
-
-/* Tablet: 768px - 1024px */
-@media (max-width: 1024px) and (min-width: 768px) {
-    .about-us {
-        flex-direction: column; /* Stack the text and image vertically */
-        padding: 15px;
+  
+    .overlay ul {
+      font-size: 0.9rem; /* Smaller font size for the details */
     }
-
-    .text h2 {
-        font-size: 1.8rem; /* Adjust heading size for tablets */
+  
+    .overlay i {
+      font-size: 1rem; /* Adjust icon size */
     }
-
-    .text p {
-        font-size: 1.1rem; /* Adjust paragraph text for tablets */
-    }
-
-    .image img {
-        width: 100%; /* Keep image size at 100% */
-        margin-top: 15px; /* Add space between text and image */
-    }
-}
-
-/* Small Tablet: 600px - 767px */
-@media (max-width: 767px) and (min-width: 600px) {
-    .about-us {
-        flex-direction: column; /* Stack the text and image vertically */
-        align-items: center; /* Center the elements */
-        padding: 10px;
-    }
-
-    .text {
-        margin-right: 0;
-        text-align: center; /* Center text on small tablets */
-    }
-
-    .image {
-        margin-top: 15px; /* Add space between text and image */
-    }
-
-    .text h2 {
-        font-size: 1.6rem; /* Adjust heading for smaller tablet screens */
-    }
-
-    .text p {
-        font-size: 1rem; /* Adjust paragraph text */
-    }
-
-    .image img {
-        width: 90%; /* Ensure image stays within bounds */
-    }
-}
-
-/* Mobile: 480px - 599px */
-@media (max-width: 599px) and (min-width: 480px) {
-    .about-us {
-        flex-direction: column; /* Stack elements vertically on mobile */
-        padding: 10px;
-    }
-
-    .text {
-        margin-right: 0;
-        text-align: center; /* Center text on mobile */
-    }
-
-    .image {
-        margin-top: 15px; /* Add space between text and image */
-    }
-
-    .text h2 {
-        font-size: 1.4rem; /* Adjust heading for mobile screens */
-    }
-
-    .text p {
-        font-size: 0.95rem; /* Adjust paragraph text */
-    }
-
-    .image img {
-        width: 100%; /* Keep the image at 100% of the container */
-    }
-}
-
-/* Small Mobile: 320px - 479px */
-@media (max-width: 479px) and (min-width: 320px) {
-    .about-us {
-        flex-direction: column; /* Stack elements vertically on mobile */
-        padding: 10px;
-    }
-
-    .text h2 {
-        margin-right: 0;
-        text-align: center; /* Center text on mobile */    }
-
-    .text p {
-        font-size: 0.5rem; /* Adjust paragraph text */
-    }
-
-    .image {
-        max-width: 100%; /* Ensure image fits small screens */
-    }
-
-    .image img {
-        width: 100%; /* Keep image at 100% */
-    }
-}
-
-/* Ultra-Small Mobile: Below 320px */
-@media (max-width: 319px) {
-    .about-us {
-        flex-direction: column; /* Stack elements vertically on mobile */
-        padding: 10px;
-    }
-
-    .text h2 {
-        margin-right: 0;
-        text-align: center; /* Center text on mobile */    }
-
-    .text p {
-        font-size: 0.5rem; /* Adjust paragraph text */
-    }
-
-    .image {
-        max-width: 100%; /* Ensure image fits small screens */
-    }
-
-    .image img {
-        width: 100%; /* Keep image at 100% */
-    }
-}
+  }
+  

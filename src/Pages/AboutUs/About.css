@@ -1,23 +1,16 @@
-/* Styling for the button-like "About Us" heading */
-.contact-button h2 {
-    background-color: #1976d2; /* Blue background */
-    color: white; /* White text */
-    padding: 8px 15px; /* Reduced padding for a more compact button */
-    border-radius: 20px; /* Slightly smaller rounded corners */
-    text-align: center; /* Center the text */
-    font-size: 1.3rem; /* Smaller font size for better proportion */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Reduced shadow for a subtler effect */
-    cursor: pointer; /* Make it look clickable */
-    transition: all 0.3s ease; /* Smooth transition on hover */
-    width: auto; /* Adjust width based on content */
-    max-width: 250px; /* Set a max-width to avoid stretching on larger screens */
-    margin: 10px 0; /* Add margin for spacing */
+/* Styling for the "About Us" heading in dark blue */
+.about-us-heading {
+    color: #003366; /* Dark blue color */
+    font-size: 2rem; /* Adjust font size for better prominence */
+    font-weight: bold; /* Make the heading bold */
+    margin-bottom: 20px; /* Spacing below the heading */
+    text-align: center; /* Center-align the text */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
-/* Hover effect for the "About Us" button */
-.contact-button h2:hover {
-    transform: translateY(-3px); /* Slightly lift the element on hover */
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+/* Change color on hover for the heading */
+.about-us-heading:hover {
+    color: #1976d2; /* Lighter blue when hovered */
 }
 
 /* Rest of your existing styling */
@@ -25,189 +18,226 @@
     display: flex;
     flex-direction: row; /* Default side-by-side layout */
     align-items: center;
-    padding: 20px;
+    justify-content: center;
+    padding: 30px;
     flex-wrap: wrap;
+    animation: fadeIn 1s ease-out; /* Animation added for fade-in effect */
 }
 
 .text {
     flex: 1;
     margin-right: 20px;
+    animation: slideInFromLeft 1s ease-out; /* Slide in effect */
 }
 
 .image {
     flex: 1;
+    animation: slideInFromRight 1s ease-out; /* Slide in effect */
 }
 
+/* Paragraph Styling */
+.intro-text {
+    font-size: 1.2rem; /* Default font size for large screens */
+    line-height: 1.6;
+    margin-top: 15px;
+    color: #333; /* Slightly darker text color for readability */
+    text-align: center; /* Center-align the paragraph text */
+    transition: font-size 0.3s ease; /* Smooth font size transition */
+}
+
+/* Adjusting font size for mobile screens */
+@media (max-width: 767px) {
+    .intro-text {
+        font-size: 1.1rem; /* Increase font size slightly on smaller screens */
+    }
+}
+
+/* Bullet Points Styling */
+.about-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    font-size: 1.2rem; /* Slightly bigger font for better readability */
+    line-height: 1.6; /* More spacing between list items */
+    margin-top: 15px;
+}
+
+.about-list li {
+    margin-bottom: 10px; /* Space between list items */
+    position: relative;
+    padding-left: 20px; /* Make space for bullet point */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animation for bullet points */
+.about-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #1976d2; /* Blue bullet points */
+    font-size: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.about-list li:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    color: #1976d2; /* Change text color on hover */
+}
+
+/* Image Styling */
 .image img {
-    width: 80%; /* Reduce the image width slightly */
-    object-fit: contain; /* Ensure the image maintains its aspect ratio */
-    max-width: 80%; /* Prevent image from stretching too much */
-    height: auto; /* Ensure the height adjusts automatically */
+    width: 80%;
+    object-fit: contain;
+    height: auto;
+    border-radius: 8px; /* Rounded corners for the image */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Shadow for image */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.image img:hover {
+    transform: scale(1.05); /* Slightly enlarge image on hover */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
 }
 
 /* Large Desktop: 1440px and above */
 @media (min-width: 1440px) {
     .about-us {
-        padding: 30px; /* Slightly reduced padding for larger screens */
+        padding: 40px;
     }
 
     .text h2 {
-        font-size: 2.5rem; /* Larger heading on larger screens */
+        font-size: 2.5rem;
     }
 
     .text p {
-        font-size: 1.25rem; /* Larger text on large screens */
+        font-size: 1.4rem;
     }
 
     .image img {
-        width: 110%; /* Slightly increased width */
+        width: 90%;
     }
 }
 
 /* Desktop: 1025px - 1439px */
 @media (max-width: 1439px) and (min-width: 1025px) {
     .about-us {
-        flex-direction: row; /* Side-by-side layout for desktop */
+        flex-direction: row;
         padding: 25px;
     }
 
     .text h2 {
-        font-size: 2rem; /* Medium heading size */
+        font-size: 2rem;
     }
 
     .text p {
-        font-size: 1.125rem; /* Medium text size */
+        font-size: 1.2rem;
     }
 
     .image img {
-        width: 85%; /* Adjust image width for desktop */
+        width: 85%;
     }
 }
 
 /* Tablet: 768px - 1024px */
 @media (max-width: 1024px) and (min-width: 768px) {
     .about-us {
-        flex-direction: column; /* Stack the text and image vertically */
-        padding: 15px;
+        flex-direction: column;
+        padding: 20px;
     }
 
     .text h2 {
-        font-size: 1.8rem; /* Adjust heading size for tablets */
+        font-size: 1.8rem;
     }
 
     .text p {
-        font-size: 1.1rem; /* Adjust paragraph text for tablets */
+        font-size: 1.15rem;
     }
 
     .image img {
-        width: 100%; /* Keep image size at 100% */
-        margin-top: 15px; /* Add space between text and image */
-    }
-}
-
-/* Small Tablet: 600px - 767px */
-@media (max-width: 767px) and (min-width: 600px) {
-    .about-us {
-        flex-direction: column; /* Stack the text and image vertically */
-        align-items: center; /* Center the elements */
-        padding: 10px;
-    }
-
-    .text {
-        margin-right: 0;
-        text-align: center; /* Center text on small tablets */
-    }
-
-    .image {
-        margin-top: 15px; /* Add space between text and image */
-    }
-
-    .text h2 {
-        font-size: 1.6rem; /* Adjust heading for smaller tablet screens */
-    }
-
-    .text p {
-        font-size: 1rem; /* Adjust paragraph text */
-    }
-
-    .image img {
-        width: 90%; /* Ensure image stays within bounds */
+        width: 100%;
+        margin-top: 15px;
     }
 }
 
 /* Mobile: 480px - 599px */
 @media (max-width: 599px) and (min-width: 480px) {
     .about-us {
-        flex-direction: column; /* Stack elements vertically on mobile */
+        flex-direction: column;
         padding: 10px;
     }
 
     .text {
-        margin-right: 0;
-        text-align: center; /* Center text on mobile */
-    }
-
-    .image {
-        margin-top: 15px; /* Add space between text and image */
+        text-align: center;
     }
 
     .text h2 {
-        font-size: 1.4rem; /* Adjust heading for mobile screens */
+        font-size: 1.5rem;
+    }
+
+    .intro-text {
+        font-size: 1.2rem; /* Ensure the paragraph is readable on mobile */
     }
 
     .text p {
-        font-size: 0.95rem; /* Adjust paragraph text */
+        font-size: 1rem;
     }
 
     .image img {
-        width: 100%; /* Keep the image at 100% of the container */
+        width: 100%;
     }
 }
 
 /* Small Mobile: 320px - 479px */
 @media (max-width: 479px) and (min-width: 320px) {
     .about-us {
-        flex-direction: column; /* Stack elements vertically on mobile */
+        flex-direction: column;
         padding: 10px;
     }
 
     .text h2 {
-        margin-right: 0;
-        text-align: center; /* Center text on mobile */    }
-
-    .text p {
-        font-size: 0.5rem; /* Adjust paragraph text */
+        font-size: 1.2rem;
     }
 
-    .image {
-        max-width: 100%; /* Ensure image fits small screens */
+    .intro-text {
+        font-size: 1.1rem; /* Make the text readable on small screens */
+    }
+
+    .text p {
+        font-size: 0.95rem;
     }
 
     .image img {
-        width: 100%; /* Keep image at 100% */
+        width: 100%;
     }
 }
 
-/* Ultra-Small Mobile: Below 320px */
-@media (max-width: 319px) {
-    .about-us {
-        flex-direction: column; /* Stack elements vertically on mobile */
-        padding: 10px;
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
     }
-
-    .text h2 {
-        margin-right: 0;
-        text-align: center; /* Center text on mobile */    }
-
-    .text p {
-        font-size: 0.5rem; /* Adjust paragraph text */
+    100% {
+        opacity: 1;
     }
+}
 
-    .image {
-        max-width: 100%; /* Ensure image fits small screens */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-50%);
+        opacity: 0;
     }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
 
-    .image img {
-        width: 100%; /* Keep image at 100% */
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
     }
 }

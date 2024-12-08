@@ -151,8 +151,10 @@ const AllCarts = () => {
                   )}
                 </div>
               </div>
-              <h2 className="product-title">{product.name || "No Name Available"}</h2>
-              <p className="product-price">₹{product.originalPrice || "N/A"}</p>
+              <div className="product-details">
+                <h2 className="product-title">{product.name || "No Name Available"}</h2>
+                <p className="product-price">₹{product.originalPrice || "N/A"}</p>
+              </div>
             </div>
           ))}
         </Slider>

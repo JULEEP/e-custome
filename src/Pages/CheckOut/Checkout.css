@@ -17,51 +17,67 @@
   font-size: 1.5rem;
 }
 
-/* Cart Details Section */
-.price-details-box {
-  background-color: #f9f9f9;
-  border-radius: 10px;
+/* Price Summary Styling */
+.price-summary {
+  margin-top: 20px;
+  width: 100%;
   padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.price-details-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1976d2;
-  margin-bottom: 20px;
-}
-
-.price-detail {
+.summary-item {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.summary-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.summary-label {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #333;
+}
+
+.summary-value {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.delivery-free {
+  color: green; /* Green color for Free delivery */
+}
+
+hr {
+  border: 1px solid #e0e0e0;
+  margin-top: 15px;
   margin-bottom: 15px;
 }
 
-.price-detail h6 {
+/* Place Order Button */
+.place-order-button {
+  width: 100%; /* Ensure the button takes the full width */
+  padding: 12px 20px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
   font-size: 1.1rem;
-  font-weight: normal;
-  color: #333;
-}
-
-.price-detail p {
-  font-size: 1.1rem;
-  font-weight: normal;
-  color: #333;
-}
-
-.total-amount {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1976d2;
+  transition: background-color 0.3s ease;
   margin-top: 20px;
 }
 
-.total-amount p {
-  font-size: 1.5rem;
-  color: #1976d2;
+.place-order-button:hover {
+  background-color: #1565c0;
 }
 
 /* Responsive Design */
@@ -71,7 +87,7 @@
     margin-bottom: 20px;
   }
 
-  .price-details-box {
+  .price-summary {
     width: 100%;
   }
 }

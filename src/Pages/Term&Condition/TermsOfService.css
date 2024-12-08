@@ -1,0 +1,100 @@
+
+  /* Main Content Styling */
+  .terms-content {
+    max-width: 1200px; /* Make the page wider */
+    margin: 0 auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(17, 0, 10, 0.1);
+    animation: fadeIn 1s ease-out;
+  }
+  
+  /* Header */
+  .terms-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .terms-header h1 {
+    font-size: 2.5rem;
+    color: #040113;
+    margin-bottom: 10px;
+  }
+  
+  .terms-header p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  /* Section Styling */
+  .terms-section {
+    background-color: #fafafa;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .terms-section h2 {
+    font-size: 1.8rem;
+    color: #00796b;
+    margin-bottom: 10px;
+  }
+  
+  .terms-section p,
+  .terms-section ul {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  .terms-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .terms-section li {
+    margin-bottom: 10px;
+  }
+  
+  /* Strong Text */
+  strong {
+    color: #00796b;
+  }
+  
+  /* Icons */
+  .terms-section h2 .fa {
+    margin-right: 10px;
+    color: #00796b;
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .terms-content {
+      padding: 20px;
+    }
+  
+    .terms-header h1 {
+      font-size: 2rem;
+    }
+  
+    .terms-section h2 {
+      font-size: 1.5rem;
+    }
+  
+    .terms-section p,
+    .terms-section ul {
+      font-size: 1rem;
+    }
+  }
+  
