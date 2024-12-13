@@ -102,8 +102,17 @@ const CategoryDetailsPage = () => {
         {category.name}
       </Typography>
 
-      {/* Displaying Subcategories in a cart-like format */}
-      <Box display="flex" flexWrap="wrap" justifyContent="space-evenly" gap={3}>
+      {/* Displaying Subcategories in a grid-like format */}
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(7, 1fr)" // 7 items in a row
+        gap="10px" // Reduced gap between grid items
+        sx={{
+          '@media (max-width: 1200px)': { gridTemplateColumns: 'repeat(4, 1fr)' },  // 4 items in a row for smaller screens
+          '@media (max-width: 900px)': { gridTemplateColumns: 'repeat(3, 1fr)' },   // 3 items for even smaller screens
+          '@media (max-width: 600px)': { gridTemplateColumns: 'repeat(2, 1fr)' },   // 2 items for mobile
+        }}
+      >
         {category.subcategories.map((subcategory) => (
           <Box
             key={subcategory.name}
@@ -115,8 +124,7 @@ const CategoryDetailsPage = () => {
               padding: '10px',
               backgroundColor: '#f5f5f5',
               borderRadius: '8px',
-              width: '150px', // Fixed width for consistency
-              marginBottom: '20px',
+              textAlign: 'center',
             }}
           >
             <Link
@@ -129,7 +137,7 @@ const CategoryDetailsPage = () => {
                 width: '100%',
               }}
             >
-              <Typography variant="h6" style={{ fontWeight: 'bold' }}>
+              <Typography variant="h6" style={{ fontWeight: 'bold', color: 'black' }}>
                 {subcategory.name}
               </Typography>
             </Link>

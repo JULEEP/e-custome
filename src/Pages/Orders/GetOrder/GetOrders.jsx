@@ -3,18 +3,21 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './GetOrders.css';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 import OrderStatusStepper from '../../OrderStepper/OrderStatusStepper';
 
 const GetOrders = () => {
-  const { userId } = useParams();  // Get userId from the URL
+  const { userId } = useParams(); // Get userId from the URL
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [isTrackModalOpen, setIsTrackModalOpen] = useState(false);  // Track Order Modal
-  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);  // Cancel Order Modal
-  const [selectedOrderId, setSelectedOrderId] = useState(null);  // Track selected order
-  const [selectedOrderStatus, setSelectedOrderStatus] = useState('');  // Track selected order's status
-  const [cancelReason, setCancelReason] = useState('');  // Track the cancel reason
+  const [isTrackModalOpen, setIsTrackModalOpen] = useState(false); // Track Order Modal
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel Order Modal
+  const [selectedOrderId, setSelectedOrderId] = useState(null); // Track selected order
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState([]); // Track selected order's status
+  const [cancelReason, setCancelReason] = useState(''); // Track the cancel reason
+  const navigate = useNavigate(); // Initialize the navigate function
+  
 
   const cancelReasons = ['Change of mind', 'Incorrect item', 'Damaged item', 'Late delivery', 'Other'];
 
@@ -24,7 +27,7 @@ const GetOrders = () => {
       try {
         const response = await axios.get(`https://admin-backend-rl94.onrender.com/api/orders/getorder/${userId}`);
         if (response.data.status) {
-          setOrders(response.data.orders);  // Set orders if fetch is successful
+          setOrders(response.data.orders); // Set orders if fetch is successful
         } else {
           setError(response.data.message || 'Failed to fetch orders.');
         }
@@ -32,24 +35,23 @@ const GetOrders = () => {
         console.error('Error fetching orders:', err);
         setError('An error occurred while fetching orders.');
       } finally {
-        setLoading(false);  // Set loading to false once the request is complete
+        setLoading(false); // Set loading to false once the request is complete
       }
     };
 
     fetchOrders();
   }, [userId]);
 
-  // Handle Track Order
-  const handleTrackOrder = (orderId, orderStatus) => {
-    setSelectedOrderId(orderId);
-    setSelectedOrderStatus(orderStatus);
-    setIsTrackModalOpen(true);  // Open Track Order Modal
-  };
+    // Handle Track Order - This will navigate to the orderStepper route
+    const handleTrackOrder = (orderId) => {
+      navigate(`/orderStepper/${orderId}`); // Navigate to the track order route
+    };
+  
 
   // Handle Cancel Order
   const handleCancelOrder = (orderId) => {
     setSelectedOrderId(orderId);
-    setIsCancelModalOpen(true);  // Open Cancel Order Modal
+    setIsCancelModalOpen(true); // Open Cancel Order Modal
   };
 
   // Submit Cancel Order Request
@@ -66,9 +68,9 @@ const GetOrders = () => {
       });
 
       if (response.data.status) {
-        setOrders(orders.filter(order => order.orderId !== selectedOrderId));  // Remove the cancelled order
+        setOrders(orders.filter(order => order.orderId !== selectedOrderId)); // Remove the cancelled order
         alert('Order cancelled successfully');
-        setIsCancelModalOpen(false);  // Close Cancel Modal
+        setIsCancelModalOpen(false); // Close Cancel Modal
       } else {
         alert(response.data.message || 'Failed to cancel order');
       }
@@ -86,7 +88,7 @@ const GetOrders = () => {
       });
 
       if (response.data.status) {
-        setOrders(orders.filter(order => order.orderId !== orderId));  // Remove the deleted order
+        setOrders(orders.filter(order => order.orderId !== orderId)); // Remove the deleted order
         alert('Order deleted successfully');
       } else {
         alert(response.data.message || 'Failed to delete order');
@@ -140,7 +142,7 @@ const GetOrders = () => {
 
               {/* Track Order Button */}
               <button
-                onClick={() => handleTrackOrder(order.id, order.orderStatus)}
+                onClick={() => handleTrackOrder(order.orderId)}
                 className="track-order-button"
               >
                 Track Order

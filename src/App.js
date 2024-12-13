@@ -68,7 +68,7 @@ function App() {
             <Route path="/product/:id" element={<SingleProduct />} />
             <Route path="/canvas/:id" element={<CanvasComponent />} />
             <Route path="/checkout/:userId" element={<Checkout />} />
-            <Route path='/orderStepper' element={<OrderStatusStepper />} />
+            <Route path='/orderStepper/:orderId' element={<OrderStatusStepper />} />
             <Route path="/userDetails/:userId" element={<UserDetails />} />
             <Route path="/shipping-address/:userId" element={<ShippingAddress />} />
             <Route path="/terms" element={<TermsOfService />} />

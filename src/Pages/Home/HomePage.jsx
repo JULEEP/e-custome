@@ -19,7 +19,7 @@ import NewBanner from '../../NewBanner'
 import AllProducts from '../AllProdutcs/AllProducts'
 import CategoryPage from '../../Helpers/CategoryPage'
 import BestCategoriesSlider from '../../Helpers/BestCategoriesSlider'
-
+import CategoryDetailsPages from '../../Helpers/CategoryDetailsPages'
 const jumpAnimation = keyframes`
   0% {
     transform: translateY(500px); /* Start from below the container */
@@ -65,34 +65,33 @@ const HomePage = () => {
       <hr className="section-divider" />
       <NewBanner/>
       <hr className="section-divider" />
-
       <Container
-        style={{
-          marginTop: 0,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-      <Typography
-      variant="h3"
-      sx={{
-        textAlign: "center",
-        color: "#1976d2",
-        fontWeight: "bold",
-        fontSize: "2rem", // Reduced size
-        animation: `${jumpAnimation} 1s ease-out`, // Animation added
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)", // Corrected box shadow syntax
-        padding: "10px", // Added padding to create space around the text
-        borderRadius: "20px", // Optional: if you want the text box to have rounded corners too
-        backgroundColor: "#f5f5f5", // Added background color
+      style={{
+        marginTop: 0,
+        display: "flex",
+        justifyContent: "center",
       }}
     >
-          Best Sellers
+    <Typography
+    variant="h3"
+    sx={{
+      textAlign: "center",
+      color: "#1976d2",
+      fontWeight: "bold",
+      fontSize: "2rem", // Reduced size
+      animation: `${jumpAnimation} 1s ease-out`, // Animation added
+      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)", // Corrected box shadow syntax
+      padding: "10px", // Added padding to create space around the text
+      borderRadius: "20px", // Optional: if you want the text box to have rounded corners too
+      backgroundColor: "#f5f5f5", // Added background color
+    }}
+  >
+          SHOP BY CATEGORIES
         </Typography>
       </Container>
-      <BestSellers />
-
+      <BestCategoriesSlider/>
       <hr className="section-divider" />
+
 
       <Container
         style={{
@@ -124,6 +123,7 @@ const HomePage = () => {
       <Banner />
       <hr className="section-divider" />
 
+
       <Container
       style={{
         marginTop: 0,
@@ -150,7 +150,7 @@ const HomePage = () => {
       </Container>
       <FeaturesPage />
       <hr className="section-divider" />
-      <BestCategoriesSlider/>
+      <CategoryDetailsPages/>
       <hr className="section-divider" />
 
 

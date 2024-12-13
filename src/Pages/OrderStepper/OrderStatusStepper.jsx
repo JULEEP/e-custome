@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Stepper, Step, StepLabel, Typography, Box, Button, useMediaQuery, useTheme } from '@mui/material';
+import { useParams } from 'react-router-dom'; // Import useParams
+import axios from 'axios';
 
-// Define the specific order statuses
 const statuses = [
   "Draft",
   "Payment Pending",
@@ -12,18 +13,51 @@ const statuses = [
 ];
 
 const OrderStatusStepper = () => {
-  // Static order status for simulation
-  const orderStatus = "Shipped";  // The current order status (for example, it's "Shipped")
-  const orderStatusHistory = [
-    "Draft", "Payment Pending", "Payment Confirmed", "Order Confirmed", "Print Ready"
-  ];  // History of statuses that have been completed
+  const { orderId } = useParams();  // Get orderId from the URL parameters
+  const [orderStatusHistory, setOrderStatusHistory] = useState([]);  // State to store order status history
+  const [loading, setLoading] = useState(true);  // Loading state
+  const [error, setError] = useState(null);  // Error state
 
-  // Active Step is the current status step
-  const activeStep = statuses.indexOf(orderStatus);
+  const [activeStep, setActiveStep] = useState(0);  // Active step (current status)
 
-  // Use Material-UI's useTheme and useMediaQuery to handle responsive design
+  // Use Material-UI's useTheme and useMediaQuery for responsive design
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));  // True if the screen width is <= 600px
+
+  // Fetch order status history when component mounts
+  useEffect(() => {
+    if (!orderId) {
+      setError("Order ID is missing.");
+      setLoading(false);
+      return;
+    }
+
+    const fetchOrderStatus = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/api/orders/orderStatus/${orderId}`);
+        console.log('Order Status History:', response.data.orderStatusHistory); // Log the data
+
+        setOrderStatusHistory(response.data.orderStatusHistory);  // Set the fetched status history
+        setActiveStep(response.data.orderStatusHistory.length);  // Set active step based on the history length
+      } catch (err) {
+        setError('Error fetching order status');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrderStatus();
+  }, [orderId]);
+
+  // Show loading state while data is being fetched
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // Show error message if there is an error
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -33,19 +67,19 @@ const OrderStatusStepper = () => {
         orientation={isSmallScreen ? "vertical" : "horizontal"}  // Change orientation based on screen size
       >
         {statuses.map((status, index) => {
-          const isCompleted = orderStatusHistory.includes(status);
-          const isActive = orderStatus === status;
+          // Check if status is present in orderStatusHistory
+          const isCompleted = orderStatusHistory.some(orderStatus => orderStatus === status);
+          const isActive = index === activeStep - 1;  // Check if the current step is the active one
+
           return (
             <Step key={index}>
               <StepLabel
                 sx={{
-                  // Active step styling (blue)
                   '& .MuiStepIcon-root': {
-                    color: isActive ? '#1976d2' : isCompleted ? 'green' : 'gray',
-                    fontSize: '1.5rem',  // Increasing icon size for better visibility
+                    color: isActive ? '#1976d2' : isCompleted ? 'green' : 'gray', // Mark as blue if active, green if completed, gray otherwise
+                    fontSize: '1.5rem',
                   },
-                  // Step label text styling
-                  color: isActive ? '#1976d2' : isCompleted ? 'green' : 'gray',
+                  color: isActive ? '#1976d2' : isCompleted ? 'green' : 'gray',  // Mark as blue if active, green if completed, gray otherwise
                 }}
               >
                 <Typography variant="body1">
