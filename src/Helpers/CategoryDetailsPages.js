@@ -36,7 +36,7 @@ const CategoryDetailsPages = () => {
   const settings = {
     infinite: true, // Infinite scrolling
     speed: 500, // Transition speed
-    slidesToShow: 5, // Show 5 items at a time
+    slidesToShow: 5, // Default: Show 5 items at a time
     slidesToScroll: 1, // Scroll one item at a time
     autoplay: true, // Enable auto-sliding
     autoplaySpeed: 3000, // Speed between slides
@@ -44,15 +44,19 @@ const CategoryDetailsPages = () => {
     responsive: [
       {
         breakpoint: 1200,
-        settings: { slidesToShow: 3 }, // 3 items on smaller screens
+        settings: { slidesToShow: 4 }, // Show 4 items for screens < 1200px
       },
       {
         breakpoint: 900,
-        settings: { slidesToShow: 2 }, // 2 items on even smaller screens
+        settings: { slidesToShow: 3 }, // Show 3 items for screens < 900px
       },
       {
         breakpoint: 600,
-        settings: { slidesToShow: 1 }, // 1 item for very small screens
+        settings: { slidesToShow: 3 }, // Show 3 items for screens < 600px
+      },
+      {
+        breakpoint: 480,
+        settings: { slidesToShow: 3 }, // Show 3 items for screens < 480px
       },
     ],
   };
@@ -73,16 +77,15 @@ const CategoryDetailsPages = () => {
               borderRadius: '8px',
               boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
               textAlign: 'center',
-              overflow: 'hidden',
               width: '100%',
-              maxWidth: '250px', // Max width to keep it consistent
+              maxWidth: '150px', // Compact size for smaller screens
             }}
           >
             {/* Display the image as background */}
             <Box
               style={{
-                width: '150px',
-                height: '150px',
+                width: '100px',
+                height: '100px',
                 backgroundImage: `url(${backgroundImageUrl})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -92,7 +95,7 @@ const CategoryDetailsPages = () => {
             ></Box>
 
             {/* Display subcategory name below the image */}
-            <Typography variant="h6" style={{ fontWeight: 'bold', color: 'black' }}>
+            <Typography variant="h6" style={{ fontWeight: 'bold', fontSize: '14px', color: 'black' }}>
               {subcategory}
             </Typography>
           </Box>

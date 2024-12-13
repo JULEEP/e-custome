@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // To navigate to individual product pages
-import './AllProducts.css'; // Import the CSS file for styling
+import { useNavigate } from "react-router-dom"; // For navigation to product detail pages
+import './BestChoices.css'; // Optional: add a new CSS file for styling
 
-const AllProducts = () => {
+const BestChoices = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showAll, setShowAll] = useState(false); // State for showing all products
 
   const navigate = useNavigate(); // useNavigate for routing
 
-  // Fetch all products from the API
+  // Fetch products from the API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -19,7 +18,7 @@ const AllProducts = () => {
           throw new Error("Failed to fetch products");
         }
         const data = await response.json();
-        setProducts(data); // Set the products state
+        setProducts(data); // Set all products without any filtering
       } catch (err) {
         setError(err.message); // Set error if fetch fails
       } finally {
@@ -28,10 +27,7 @@ const AllProducts = () => {
     };
 
     fetchProducts();
-  }, []);
-
-  // Handle the "Show All" functionality
-  const displayedProducts = showAll ? products : products.slice(0, 5);
+  }, []); // Empty dependency array means this effect runs only once when the component mounts
 
   // Handle click on product card to navigate to product detail page
   const handleProductClick = (productId) => {
@@ -39,7 +35,8 @@ const AllProducts = () => {
   };
 
   return (
-    <div className="products-container">
+    <div className="best-choices-container">
+      <h2>Best Choices</h2>
       {isLoading ? (
         <div className="loading">
           <p>Loading...</p>
@@ -50,15 +47,14 @@ const AllProducts = () => {
         </div>
       ) : (
         <div className="products-list">
-          {displayedProducts.length === 0 ? (
+          {products.length === 0 ? (
             <p>No products available</p>
           ) : (
-            displayedProducts.map((product) => (
+            products.map((product) => (
               <div key={product._id} className="product-card" onClick={() => handleProductClick(product._id)}>
                 <img
                   className="product-image"
-                  // Replace with the static image URL or fallback to the placeholder if product image is not available
-                  src="https://d2zn16t8uygl6t.cloudfront.net/myprintea/images/contentimages/images/topsellercalendars.png"
+                  src={product.images[0] || "https://via.placeholder.com/150"}
                   alt={product.name}
                 />
                 <div className="product-details">
@@ -75,4 +71,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default BestChoices;

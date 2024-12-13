@@ -20,6 +20,12 @@ import AllProducts from '../AllProdutcs/AllProducts'
 import CategoryPage from '../../Helpers/CategoryPage'
 import BestCategoriesSlider from '../../Helpers/BestCategoriesSlider'
 import CategoryDetailsPages from '../../Helpers/CategoryDetailsPages'
+import BestChoices from '../BestChoice/BestChoice'
+import SimilarProductsPage from '../SimilarProduct/SimilarProductPage'
+import OurMostPopularProduct from '../MostPopularProduct/OurMostPopularProduct'
+import TrendingProductsPage from '../TrendingProducts/TrendingProducts'
+import BrandedProducts from '../BrandedProduct/BrandedProduct'
+import NewArrival from '../NewArrival/NewArrival'
 const jumpAnimation = keyframes`
   0% {
     transform: translateY(500px); /* Start from below the container */
@@ -63,8 +69,6 @@ const HomePage = () => {
         </Box>
       </Container>
       <hr className="section-divider" />
-      <NewBanner/>
-      <hr className="section-divider" />
       <Container
       style={{
         marginTop: 0,
@@ -73,12 +77,12 @@ const HomePage = () => {
       }}
     >
     <Typography
-    variant="h3"
+    variant="h5"
     sx={{
       textAlign: "center",
       color: "#1976d2",
       fontWeight: "bold",
-      fontSize: "2rem", // Reduced size
+      fontSize: "1.5rem", // Reduced size
       animation: `${jumpAnimation} 1s ease-out`, // Animation added
       boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)", // Corrected box shadow syntax
       padding: "10px", // Added padding to create space around the text
@@ -91,37 +95,25 @@ const HomePage = () => {
       </Container>
       <BestCategoriesSlider/>
       <hr className="section-divider" />
-
-
-      <Container
-        style={{
-          marginTop: 0,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-      <Typography
-      variant="h3"
-      sx={{
-        textAlign: "center",
-        color: "#1976d2",
-        fontWeight: "bold",
-        fontSize: "2rem", // Reduced size
-        animation: `${jumpAnimation} 1s ease-out`, // Animation added
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)", // Corrected box shadow syntax
-        padding: "10px", // Added padding to create space around the text
-        borderRadius: "20px", // Optional: if you want the text box to have rounded corners too
-        backgroundColor: "#f5f5f5", // Added background color
-      }}
-    >
-          All Products
-        </Typography>
-      </Container>
-      <AllProducts />
-
-      <hr className="section-divider" />
       <Banner />
       <hr className="section-divider" />
+      <SimilarProductsPage/>
+      <hr className="section-divider" />
+      <OurMostPopularProduct/>
+      <hr className="section-divider" />
+      <TrendingProductsPage/>
+      <hr className="section-divider" />
+      <BrandedProducts/>
+      <hr className="section-divider" />
+      <NewArrival/>
+      <hr className="section-divider" />
+
+
+
+
+
+
+
 
 
       <Container

@@ -1,0 +1,114 @@
+.best-choices-container {
+    padding: 8px;
+    background-color: #f4f4f4;
+  }
+  
+  .best-choices-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .products-list {
+    display: grid; /* Use grid for better control */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Automatically adjust columns */
+    gap: 10px; /* Spacing between product cards */
+    justify-items: center; /* Center the cards */
+    width: 100%; /* Ensure it fits within the screen */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  .product-card {
+    width: 100%;
+    max-width: 150px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover; /* Ensures images are properly cropped */
+    border-radius: 5px;
+  }
+  
+  .product-details h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .product-details p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 14px;
+  }
+  
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  /* Responsive Design */
+  
+  /* For tablets and small screens (up to 768px) */
+  @media (max-width: 768px) {
+    .products-list {
+      grid-template-columns: repeat(2, 1fr); /* Two products per row */
+    }
+  }
+  
+  /* For phones and smaller screens (up to 480px) */
+  @media (max-width: 480px) {
+    .products-list {
+      grid-template-columns: repeat(2, 1fr); /* Ensure two products per row */
+      gap: 10px; /* Reduced gap for compact view */
+    }
+  
+    .product-card {
+      padding: 8px; /* Adjust padding for smaller screens */
+      max-width: 150px; /* Ensure products fit side by side */
+    }
+  
+    .product-image {
+      height: 120px; /* Adjust image height */
+    }
+  }
+  
+  /* For very small phones (up to 360px) */
+  @media (max-width: 360px) {
+    .products-list {
+      grid-template-columns: repeat(2, 1fr); /* Ensure two products per row */
+      gap: 8px; /* Reduced gap for tight spaces */
+    }
+  
+    .product-card {
+      padding: 5px; /* Minimal padding for very small screens */
+      max-width: 140px; /* Compact size for cards */
+    }
+  
+    .product-image {
+      height: 100px; /* Adjust image height */
+    }
+  
+    .product-details h3 {
+      font-size: 12px; /* Reduce font size for titles */
+    }
+  
+    .product-details p {
+      font-size: 10px; /* Reduce font size for descriptions */
+    }
+  }
+  

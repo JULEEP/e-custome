@@ -1,8 +1,7 @@
 import React from 'react';
 import { FaShoppingBag, FaStar } from 'react-icons/fa';
-import './SimilarProductsPage.css';
-
-const SimilarProductsPage = () => {
+import './OurMostPopularProduct.css'
+const OurMostPopularProduct = () => {
   // Similar Products Data (dummy data)
   const similarProducts = [
     {
@@ -51,7 +50,7 @@ const SimilarProductsPage = () => {
 
   return (
     <div className="similar-products-page">
-      <h2>Similar Products</h2>
+      <h2>Our Most Popular Products</h2>
       <div className="similar-products-container">
         {similarProducts.map((product) => (
           <div key={product.id} className="similar-product-card">
@@ -80,4 +79,4 @@ const SimilarProductsPage = () => {
   );
 };
 
-export default SimilarProductsPage;
+export default OurMostPopularProduct;
