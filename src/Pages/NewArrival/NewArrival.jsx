@@ -32,7 +32,7 @@ const NewArrival = () => {
 
   const handleProductClick = (id) => {
     if (id) {
-      navigate(`/product/${id}`);
+      navigate(`/single-product/${id}`);
     } else {
       console.error("Invalid product ID:", id);
     }

@@ -43,6 +43,7 @@ import AcrylicCategory from './Helpers/AcrylicCategory';
 import BankCategory from './Helpers/BankCategory';
 import BillBooksCategory from './Helpers/BillBooksCategory';
 import CardsCategory from './Helpers/Cards';
+import SinglePro from './Pages/SinglePro/SinglePro';
 
 
 
@@ -90,6 +91,8 @@ function App() {
             <Route path="/category/banks" element={<BankCategory />} />
             <Route path="/category/bill-books" element={<BillBooksCategory />} />
             <Route path="/category/cards" element={<CardsCategory />} />
+            <Route path="/single-product/:id" element={<SinglePro />} />
+
 
 
 

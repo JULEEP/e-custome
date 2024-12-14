@@ -1,0 +1,249 @@
+/* Base Styles */
+.single-product {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    overflow: hidden;
+    margin: 0 auto; /* Center the entire product container */
+}
+
+.image-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; /* Adds padding to avoid image touching the edges */
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain; /* Ensure the image stays centered and scales well */
+    margin-left: 0;
+    margin-bottom: 200px; /* Large screen margin */
+    max-height: 500px; /* Prevent image from becoming too large */
+}
+
+.details-section {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 60px; /* Remove left margin */
+    text-align: left; /* Align the text to the left */
+}
+
+.details-section h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-right: 160px;
+    color: #333;
+    text-align: center; /* Center the title */
+}
+
+.details-section p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #666;
+    text-align: left; /* Left align the description */
+}
+
+#product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: left; /* Align the price text to the left */
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    justify-content: center;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button svg {
+    font-size: 18px;
+}
+
+/* Product Details Section */
+.product-details p {
+    margin-bottom: 10px; /* Adjust gap between product details */
+}
+
+/* Secure Payment Information in a Single Row */
+.secure-info-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Adjust the gap between items */
+    flex-wrap: wrap; /* Ensure items wrap only if necessary */
+    margin-top: 20px;
+}
+
+.secure-item {
+    display: flex;
+    align-items: center;
+    flex: 1 1 30%; /* Ensure 3 items per row */
+    text-align: center; /* Center the text and icon */
+}
+
+.secure-icon {
+    font-size: 20px;
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.secure-text {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Accordion Section */
+.return-exchange-container {
+    margin-top: 20px;
+}
+
+.return-exchange-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.return-exchange-header h4 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.return-exchange-header .plus-icon {
+    font-size: 20px;
+}
+
+.return-exchange-subheading {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.accordion-content {
+    margin-top: 10px;
+}
+
+.return-exchange-text {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .single-product {
+        flex-direction: column; /* Stack the product image and details */
+        width: 90%;
+    }
+
+    .details-section {
+        margin-left: 0; /* Remove margin-left for smaller screens */
+        padding: 15px;
+    }
+
+    .details-section h1 {
+        text-align: left; /* Align title to the left */
+        font-size: 22px; /* Adjust font size */
+        margin-right: 0; /* Remove right margin */
+    }
+
+    .button-group {
+        justify-content: flex-start; /* Align buttons to the left */
+        flex-direction: row; /* Ensure buttons are in a single row */
+        gap: 15px; /* Adjust gap between buttons */
+        width: 100%; /* Ensure buttons use full width */
+    }
+
+    button {
+        width: 48%; /* Reduce button width to fit both in a row */
+        margin-bottom: 10px; /* Add space between buttons */
+    }
+
+    .image-wrapper img {
+        max-width: 90%; /* Make image smaller to fit screen */
+        max-height: 400px; /* Adjust image size */
+        margin-bottom: 30px; /* Reduce margin */
+    }
+
+    .secure-info-container {
+        flex-direction: column; /* Stack secure items vertically */
+        align-items: flex-start; /* Align to the left */
+    }
+
+    .secure-item {
+        flex: 1 1 100%; /* Ensure each item takes full width */
+        text-align: left; /* Align text to the left */
+    }
+
+    .return-exchange-container {
+        margin-top: 15px; /* Reduce top margin */
+    }
+
+    .return-exchange-header h4 {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    .return-exchange-subheading {
+        font-size: 14px; /* Adjust subheading font size */
+    }
+
+    .return-exchange-text {
+        font-size: 12px; /* Smaller font size for text */
+    }
+}
+
+@media (max-width: 480px) {
+    .single-product {
+        width: 100%; /* Full width on very small screens */
+    }
+
+    .details-section {
+        padding: 10px; /* Adjust padding */
+    }
+
+    .details-section h1 {
+        font-size: 20px; /* Smaller font size */
+    }
+
+    .button-group {
+        justify-content: flex-start; /* Keep buttons aligned to the left */
+        flex-direction: row; /* Ensure buttons are in the same row */
+        gap: 10px; /* Adjust gap between buttons */
+        width: 100%; /* Full width */
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 48%; /* Ensure both buttons fit in a single row */
+        font-size: 14px; /* Smaller font size */
+    }
+
+    .image-wrapper img {
+        max-height: 300px; /* Further reduce image height */
+    }
+}
