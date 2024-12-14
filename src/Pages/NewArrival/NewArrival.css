@@ -70,42 +70,43 @@
   }
   
   /* For screens up to 480px (mobile screens) */
-  @media (max-width: 480px) {
-    .similar-product-card {
-      width: 45%; /* One product per row */
-    }
-  
-    .similar-product-image {
-      height: 120px; /* Adjust image size for small screens */
-    }
-  
-    .similar-product-price {
-      font-size: 16px; /* Smaller font size */
-    }
-  
-    .similar-product-cart-button {
-      font-size: 12px; /* Smaller button font size */
-      padding: 8px; /* Adjust padding for compact screens */
-    }
+@media (max-width: 480px) {
+  .similar-product-card {
+    width: 45%; /* One product per row */
   }
-  
-  /* For very small screens (up to 360px) */
-  @media (max-width: 360px) {
-    .similar-product-card {
-      width: 45%; /* Two products per row for 360px screens */
-    }
-  
-    .similar-product-image {
-      height: 120px; /* Adjust image height for smaller screens */
-    }
-  
-    .similar-product-price {
-      font-size: 14px; /* Smaller font size for prices */
-    }
-  
-    .similar-product-cart-button {
-      font-size: 12px; /* Smaller button font size */
-      padding: 8px; /* Adjust padding for small screens */
-    }
+
+  .similar-product-image {
+    height: 120px; /* Adjust image size for small screens */
   }
-  
+
+  .similar-product-price {
+    font-size: 16px; /* Smaller font size */
+  }
+
+  .similar-product-cart-button {
+    font-size: 12px; /* Smaller button font size */
+    padding: 6px 10px; /* Reduced padding */
+    width: 100%; /* Full width to fit the card */
+  }
+}
+
+/* For very small screens (up to 360px) */
+@media (max-width: 360px) {
+  .similar-product-card {
+    width: 45%; /* Two products per row for 360px screens */
+  }
+
+  .similar-product-image {
+    height: 120px; /* Adjust image height for smaller screens */
+  }
+
+  .similar-product-price {
+    font-size: 14px; /* Smaller font size for prices */
+  }
+
+  .similar-product-cart-button {
+    font-size: 12px; /* Smaller button font size */
+    padding: 6px 10px; /* Reduced padding for small screens */
+    width: 100%; /* Ensure button takes full width of the card */
+  }
+}
