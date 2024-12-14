@@ -65,12 +65,12 @@ const HomePage = () => {
 
   return (
     <>
-      <Container maxWidth='xl' style={{ display: 'flex', justifyContent: "center", padding: 0, flexDirection: "column", marginBottom: 70 }}>
+      <Container maxWidth='xl' style={{ display: 'flex', justifyContent: "center", padding: 0, flexDirection: "column", marginBottom: 8 }}>
         <Box padding={1}>
           <Carousel />
         </Box>
       </Container>
-      <hr className="section-divider" />
+      <hr className="section-divider" style={{ marginTop: "10px" }} />
       <Container
       style={{
         marginTop: 0,
@@ -96,15 +96,15 @@ const HomePage = () => {
         </Typography>
       </Container>
       <BestCategoriesSlider/>
-      <hr className="section-divider" />
+      <hr className="section-divider" style={{ marginBottom: "4px" }} />
       <Banner />
-      <hr className="section-divider" />
+      <hr className="section-divider" style={{ marginTop: "10px" }} />
       <SimilarProductsPage/>
       <hr className="section-divider" />
       <OurMostPopularProduct/>
-      <hr className="section-divider" />
+      <hr className="section-divider" style={{ marginBottom: "20px" }} />
       <ImageCarousel/>
-      <hr className="section-divider" />
+      <hr className="section-divider" style={{ marginTop: "20px" }} />
       <TrendingProductsPage/>
       <hr className="section-divider" />
       <BrandedProducts/>
@@ -146,14 +146,14 @@ const HomePage = () => {
         </Typography>
       </Container>
       <FeaturesPage />
-      <hr className="section-divider" />
+      <hr className="section-divider" style={{ marginTop: "0px" }} />
       <CategoryDetailsPages/>
       <hr className="section-divider" />
       <BandOfTrust/>
       <hr className="section-divider" />
 
-      <OurVision />
-      <hr className="section-divider" />
+      <OurVision  style={{ marginTop: "0px", marginBottom: "90px" }} />
+      <hr className="section-divider" style={{ marginTop: "10px", marginBottom: "20px" }} />
 
       <Footer />
     </>
