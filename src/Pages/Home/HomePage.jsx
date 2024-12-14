@@ -26,6 +26,8 @@ import OurMostPopularProduct from '../MostPopularProduct/OurMostPopularProduct'
 import TrendingProductsPage from '../TrendingProducts/TrendingProducts'
 import BrandedProducts from '../BrandedProduct/BrandedProduct'
 import NewArrival from '../NewArrival/NewArrival'
+import BandOfTrust from '../BandOfTrust'
+import ImageCarousel from '../ImageCoursal'
 const jumpAnimation = keyframes`
   0% {
     transform: translateY(500px); /* Start from below the container */
@@ -101,12 +103,15 @@ const HomePage = () => {
       <hr className="section-divider" />
       <OurMostPopularProduct/>
       <hr className="section-divider" />
+      <ImageCarousel/>
+      <hr className="section-divider" />
       <TrendingProductsPage/>
       <hr className="section-divider" />
       <BrandedProducts/>
       <hr className="section-divider" />
       <NewArrival/>
       <hr className="section-divider" />
+
 
 
 
@@ -144,7 +149,8 @@ const HomePage = () => {
       <hr className="section-divider" />
       <CategoryDetailsPages/>
       <hr className="section-divider" />
-
+      <BandOfTrust/>
+      <hr className="section-divider" />
 
       <OurVision />
       <hr className="section-divider" />

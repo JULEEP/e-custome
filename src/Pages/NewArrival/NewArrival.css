@@ -65,14 +65,14 @@
   /* For screens up to 768px (tablets, smaller screens) */
   @media (max-width: 768px) {
     .similar-product-card {
-      width: 45%; /* Two products per row */
+      width: 48%; /* Two products per row */
     }
   }
   
   /* For screens up to 480px (mobile screens) */
   @media (max-width: 480px) {
     .similar-product-card {
-      width: 40%; /* One product per row */
+      width: 45%; /* One product per row */
     }
   
     .similar-product-image {
@@ -92,7 +92,7 @@
   /* For very small screens (up to 360px) */
   @media (max-width: 360px) {
     .similar-product-card {
-      width: 48%; /* Two products per row for 360px screens */
+      width: 45%; /* Two products per row for 360px screens */
     }
   
     .similar-product-image {

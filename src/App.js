@@ -36,6 +36,13 @@ import PrivacyPolicy from './Pages/PrivacyPage/Privecy';
 import CategoryPage from './Helpers/CategoryPage';
 import CategoryDetailsPage from './Helpers/SubCategoriesPage';
 import AllProducts from './Pages/AllProdutcs/AllProducts';
+import HoardingsPage from './Helpers/HordingsCategory/HordingsCategory';
+import FlierCategory from './Helpers/FlierCategory';
+import CanvaCategory from './Helpers/CanvasCategory';
+import AcrylicCategory from './Helpers/AcrylicCategory';
+import BankCategory from './Helpers/BankCategory';
+import BillBooksCategory from './Helpers/BillBooksCategory';
+import CardsCategory from './Helpers/Cards';
 
 
 
@@ -76,6 +83,20 @@ function App() {
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/category/:slug" element={<CategoryDetailsPage />} />
             <Route path="/allproducts" element={<AllProducts />} />
+            <Route path="/category/hoardings" element={<HoardingsPage />} />
+            <Route path="/category/fliers" element={<FlierCategory />} />
+            <Route path="/category/canvas-printing" element={<CanvaCategory />} />
+            <Route path="/category/acrylic-printing" element={<AcrylicCategory />} />
+            <Route path="/category/banks" element={<BankCategory />} />
+            <Route path="/category/bill-books" element={<BillBooksCategory />} />
+            <Route path="/category/cards" element={<CardsCategory />} />
+
+
+
+
+
+
+
 
 
 

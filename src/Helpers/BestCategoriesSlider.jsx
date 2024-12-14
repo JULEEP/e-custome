@@ -8,7 +8,7 @@ const bestCategories = [
   {
     img: Hoarding,
     name: "Hoardings",
-    slug: "hoardings",
+    slug: "hoardings", // This will be used in the link to display products
   },
   {
     img: Flier,
@@ -45,7 +45,7 @@ const bestCategories = [
 const BestCategoriesSlider = () => {
   return (
     <Container maxWidth="xl" style={{ padding: '20px', textAlign: 'center', backgroundColor: '#e0c8a0', marginTop: '12px' }}>
-    <Box
+      <Box
         display="grid"
         gridTemplateColumns="repeat(7, 1fr)" // 7 items in a row
         gap="5px" // Reduced gap between grid items
@@ -82,14 +82,13 @@ const BestCategoriesSlider = () => {
                     marginBottom: '10px',
                   }}
                 />
-                {/* Category Name below the image */}
                 <Box
                   style={{
                     backgroundColor: 'white',
                     padding: '10px',
                     borderRadius: '4px',
                     width: '100%',
-                    marginTop: '10px', // Spacing between image and name
+                    marginTop: '10px',
                   }}
                 >
                   <p style={{ fontWeight: 'bold', color: 'black', margin: 0 }}>{category.name}</p>

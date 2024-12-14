@@ -1,423 +1,168 @@
-/* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* General Container Styles */
 .single-product-container {
   display: flex;
   flex-direction: row;
-  gap: 20px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  max-width: 1200px;
-  margin: 40px auto;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
 }
 
+/* Product Image Container */
 .product-image-container {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden; /* Prevents unwanted scaling or overflow */
+  max-height: 500px; /* Ensures consistent height */
 }
 
 .product-image {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  width: 600%; /* Make the image fill the container */
+  height: 600px; /* Maintain aspect ratio */
+  object-fit: contain; /* Avoid cropping the image */
+  transition: none; /* Remove any hover scaling or transformation */
 }
 
+/* Product Details Container */
 .product-details {
-  flex: 2;
+  flex: 1.5;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1rem;
 }
 
 .product-name {
-  font-size: 24px;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #333;
 }
 
-.product-details p {
-  font-size: 16px;
-  color: #555;
-}
-
 .product-price {
-  font-size: 22px;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #e63946;
+  color: #d32f2f;
 }
 
 .product-ratings {
-  font-size: 16px;
-  color: #ffb703;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #ff9800;
 }
 
-/* Buttons */
+/* Buttons Styling */
 .buttons-container {
   display: flex;
-  gap: 15px;
+  gap: 1rem;
 }
 
-.add-to-cart-button,
-.wishlist-button,
-.customize-product-button {
-  padding: 10px 20px;
+.add-to-bag-button,
+.wishlist-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
   border: none;
   border-radius: 4px;
-  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
-.add-to-cart-button {
-  background-color: #2a9d8f;
+.add-to-bag-button {
+  background-color: #d32f2f;
   color: #fff;
 }
 
+.add-to-bag-button:hover {
+  background-color: #b71c1c;
+}
+
 .wishlist-button {
-  color: #bd619e;
+  background-color: #ff9800;
+  color: #fff;
 }
 
-/* Key Highlights */
+.wishlist-button:hover {
+  background-color: #e65100;
+}
+
+/* Key Highlights Section */
 .key-highlights {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-.key-highlights h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: bold;
 }
 
 .key-highlights ul {
   list-style: disc;
-  padding-left: 20px;
+  padding-left: 1.5rem;
 }
 
-.key-highlights ul li {
-  font-size: 16px;
-  margin-bottom: 5px;
-  color: #555;
-}
-
-/* Return & Exchange Section */
+/* Accordion Section */
 .return-exchange-container {
-  margin-top: 20px;
+  margin-top: 1rem;
 }
 
 .return-exchange-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between; /* Space between the text and the icon */
-}
-
-.return-exchange-subheading {
-  color: gray;
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-/* Accordion Header with Plus Icon */
-.accordion-header {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  font-size: 16px;
+}
+
+.return-exchange-text {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .plus-icon {
-  margin-left: 10px; /* Adds space between text and icon */
-  font-size: 18px;
   transition: transform 0.3s ease;
 }
 
 .plus-icon.open {
-  transform: rotate(45deg); /* Rotate the plus icon when open */
+  transform: rotate(45deg);
 }
 
-.accordion-content {
-  margin-top: 10px;
-}
-
-.return-exchange-text {
-  color: gray;
-  font-size: 14px;
-}
-
-/* Secure Information Section */
+/* Secure Info Section */
 .secure-info-container {
-  margin-top: 30px;
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
 }
 
 .secure-item {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  gap: 0.5rem;
 }
 
 .secure-icon {
-  font-size: 20px;
-  color: #2a9d8f; /* Green color for the icons */
-  margin-right: 10px;
+  font-size: 1.5rem;
+  color: #4caf50;
 }
 
 .secure-text {
-  color: gray; /* Gray text color */
-  font-size: 14px;
-}
-
-/* Product Reviews Section */
-.product-reviews {
-  margin-top: 30px;
-}
-
-.product-reviews h3 {
-  font-size: 20px;
+  font-size: 1rem;
   font-weight: bold;
+  color: #333;
 }
 
-.verified-buyers {
-  color: #555;
-  font-size: 14px;
-  margin: 10px 0;
-}
-
-.rating-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.rating {
-  display: flex;
-  gap: 5px;
-}
-
-.rating-text {
-  font-size: 20px;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-.rating-count {
-  color: gray;
-  font-size: 14px;
-  margin-left: 10px;
-}
-
-.ratings-breakdown {
-  margin-top: 15px;
-}
-
-.ratings-stars {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.rating-item {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-}
-
-.rating-item p {
-  margin: 0;
-}
-
-/* Media Queries for Responsiveness */
-
-/* For devices with width 768px and below */
-@media screen and (max-width: 768px) {
+/* General Styles for Responsiveness */
+@media (max-width: 768px) {
   .single-product-container {
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
   }
 
-  .product-image {
-    max-width: 300px; /* Reduce image size on small screens */
-  }
-
-  .product-details {
-    flex: 1;
-    width: 100%;
-    gap: 15px;
-  }
-
-  .product-name {
-    font-size: 20px;
-  }
-
-  .product-details p {
-    font-size: 14px;
-  }
-
-  .product-price {
-    font-size: 18px;
-  }
-
-  .product-ratings {
-    font-size: 14px;
-  }
-
-  .buttons-container {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .add-to-cart-button,
-  .wishlist-button,
-  .customize-product-button {
-    font-size: 14px;
-    padding: 8px 16px;
-  }
-
-  .key-highlights h3 {
-    font-size: 16px;
-  }
-
-  .key-highlights ul li {
-    font-size: 14px;
-  }
-
-  .return-exchange-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .return-exchange-subheading {
-    font-size: 12px;
-  }
-
-  .secure-info-container {
-    flex-direction: column;
-  }
-
-  .secure-item {
-    margin-bottom: 10px;
-  }
-
-  .secure-icon {
-    font-size: 18px;
-  }
-
-  .secure-text {
-    font-size: 12px;
-  }
-
-  .product-reviews h3 {
-    font-size: 18px;
-  }
-
-  .rating-text {
-    font-size: 16px;
-  }
-
-  .rating-count {
-    font-size: 12px;
-  }
-
-  .rating-item p {
-    font-size: 12px;
-  }
-}
-
-/* For devices with width 480px and below */
-@media screen and (max-width: 480px) {
-  .single-product-container {
-    padding: 15px;
-  }
-
-  .product-image {
-    max-width: 250px; /* Further reduce image size on very small screens */
-  }
-
-  .product-name {
-    font-size: 18px;
-  }
-
-  .product-details p {
-    font-size: 12px;
-  }
-
-  .product-price {
-    font-size: 16px;
-  }
-
-  .product-ratings {
-    font-size: 12px;
-  }
-
-  .buttons-container {
-    gap: 5px;
-  }
-
-  .add-to-cart-button,
-  .wishlist-button,
-  .customize-product-button {
-    font-size: 12px;
-    padding: 6px 12px;
-  }
-
-  .key-highlights h3 {
-    font-size: 14px;
-  }
-
-  .key-highlights ul li {
-    font-size: 12px;
-  }
-
-  .return-exchange-header {
-    align-items: flex-start;
-  }
-
-  .return-exchange-subheading {
-    font-size: 10px;
-  }
-
-  .secure-info-container {
-    padding: 10px;
-  }
-
-  .secure-item {
-    margin-bottom: 8px;
-  }
-
-  .secure-icon {
-    font-size: 16px;
-  }
-
-  .secure-text {
-    font-size: 10px;
-  }
-
-  .product-reviews h3 {
-    font-size: 16px;
-  }
-
-  .rating-text {
-    font-size: 14px;
-  }
-
-  .rating-count {
-    font-size: 10px;
-  }
-
-  .rating-item p {
-    font-size: 10px;
+  .product-image-container {
+    max-height: 300px;
   }
 }
