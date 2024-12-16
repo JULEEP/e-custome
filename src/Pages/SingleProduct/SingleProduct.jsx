@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
-  FaShoppingBag,
+  FaShoppingCart,
   FaHeart,
   FaPlus,
   FaShieldAlt,
@@ -9,202 +9,140 @@ import {
   FaCheckCircle,
   FaStar,
 } from "react-icons/fa";
-import { toast, ToastContainer } from "react-toastify"; // Import Toastify
-import "react-toastify/dist/ReactToastify.css"; // Toastify CSS
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./SingleProduct.css";
 import SimilarProductsPage from "../SimilarProduct/SimilarProductPage";
 import Footer from "../../Components/Footer/Footer";
 
 const SingleProduct = () => {
-  const { id } = useParams(); // Get product ID from URL params
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isAccordionOpen, setIsAccordionOpen] = useState(false); // Accordion state
+  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://admin-backend-rl94.onrender.com/api/products/${id}`);
-        if (!response.ok) throw new Error("Failed to fetch product");
+        const response = await fetch(
+          `https://admin-backend-rl94.onrender.com/api/products/${id}`
+        );
+        if (!response.ok) throw new Error("Failed to fetch product.");
         const data = await response.json();
-        setProduct(data); // Set the product data
+        setProduct(data);
       } catch (err) {
-        setError(err.message); // Set error if API fails
+        setError(err.message || "Something went wrong.");
       } finally {
-        setIsLoading(false); // Mark loading as complete
+        setIsLoading(false);
       }
     };
-
     fetchProduct();
   }, [id]);
 
-  // Function to add product to cart
+  const toggleAccordion = () => setIsAccordionOpen((prev) => !prev);
+
   const addToCart = async (productId, quantity = 1) => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) return toast.error("Please log in to add items to the cart.");
+
     try {
-      const userId = localStorage.getItem("userId"); // Fetch userId from localStorage
-      if (!userId) {
-        toast.error("User not logged in!", {
-          position: "top-right",
-          autoClose: 3000,
-        });
-        return;
-      }
-
-      const response = await fetch(`https://admin-backend-rl94.onrender.com/api/users/cart/${userId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId,
-          quantity,
-          action: "increment",
-        }),
-      });
-
+      const response = await fetch(
+        `https://admin-backend-rl94.onrender.com/api/users/cart/${userId}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ productId, quantity, action: "increment" }),
+        }
+      );
       const data = await response.json();
 
-      if (response.ok) {
-        toast.success(`Added to Cart: ${data.product.name}, Quantity: ${data.product.quantity}`, {
-          position: "top-right",
-          autoClose: 3000,
-        });
-      } else {
-        toast.error(`Failed to add to cart: ${data.message}`, {
-          position: "top-right",
-          autoClose: 3000,
-        });
-      }
+      if (!response.ok) throw new Error(data.message || "Failed to add to cart.");
+      toast.success(`Added to cart: ${data.product.name}, Quantity: ${data.product.quantity}`);
     } catch (error) {
-      toast.error("Something went wrong. Please try again.", {
-        position: "top-right",
-        autoClose: 3000,
-      });
+      toast.error(error.message || "Unable to add to cart.");
     }
   };
 
-  // Function to add product to wishlist
   const addToWishlist = async () => {
-    const userId = localStorage.getItem("userId"); // Fetch userId from localStorage
-    if (!userId) {
-      toast.error("User not logged in!", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      return;
-    }
+    const userId = localStorage.getItem("userId");
+    if (!userId) return toast.error("Please log in to add items to the wishlist.");
 
     try {
-      const response = await fetch(`https://admin-backend-rl94.onrender.com/api/users/wishlist/${userId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId: product._id, // The product ID of the current product
-        }),
-      });
-
+      const response = await fetch(
+        `https://admin-backend-rl94.onrender.com/api/users/wishlist/${userId}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ productId: product._id }),
+        }
+      );
       const data = await response.json();
 
-      if (response.ok) {
-        toast.success(data.message, {
-          position: "top-right",
-          autoClose: 3000,
-        });
-      } else {
-        toast.error(data.message, {
-          position: "top-right",
-          autoClose: 3000,
-        });
-      }
+      if (!response.ok) throw new Error(data.message || "Failed to add to wishlist.");
+      toast.success(data.message || "Added to wishlist.");
     } catch (error) {
-      toast.error("Something went wrong. Please try again.", {
-        position: "top-right",
-        autoClose: 3000,
-      });
+      toast.error(error.message || "Unable to add to wishlist.");
     }
   };
 
-  // Handle "Add to Bag" action
-  const handleAddToBag = () => {
-    const productId = product._id; // Assuming `product._id` contains the product's ID
-    addToCart(productId);
-  };
+  const handleEditDesign = () => navigate(`/canvas`, { state: { product } });
 
-  const toggleAccordion = () => {
-    setIsAccordionOpen(!isAccordionOpen); // Toggle accordion state
-  };
-
-  // Show loading or error if applicable
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (isLoading) return <p className="loading-text">Loading...</p>;
+  if (error) return <p className="error-text">{error}</p>;
 
   return (
     <>
       <div className="single-product-container">
-        {/* Left Section: Product Image */}
         <div className="product-image-container">
-          {product.images && product.images.length > 0 ? (
+          {product.images?.length ? (
             <img src={product.images[0]} alt={product.name} className="product-image" />
           ) : (
-            <p>No Image Available</p>
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Placeholder"
+              className="product-image"
+            />
           )}
         </div>
 
-        {/* Right Section: Product Details */}
         <div className="product-details">
-          <h1 className="product-name">{product.name}</h1>
-          <p>
-            <strong>Description:</strong> {product.description}
+          <h1>{product.name || "Product Name"}</h1>
+          <p className="product-description">{product.description || "No description available."}</p>
+          <p className="product-price">
+            ₹{product.discountedPrice || product.originalPrice || "N/A"}
           </p>
-          <p className="product-price">₹{product.discountedPrice || product.originalPrice}</p>
+
           <p className="product-ratings">
             {[...Array(5)].map((_, index) => (
-              <FaStar key={index} color={index < product.rating ? "#FFD700" : "#D3D3D3"} />
+              <FaStar key={index} color={index < (product.rating || 4) ? "#FFD700" : "#D3D3D3"} />
             ))}{" "}
             ({product.rating || "4.5"}/5)
           </p>
-          <p>
-            <strong>Available Sizes:</strong> {product.availableSizes?.join(", ") || "M, L, XL"}
-          </p>
 
-          {/* Action Buttons */}
-          <div className="buttons-container">
-            <button className="add-to-bag-button" onClick={handleAddToBag}>
-              <FaShoppingBag /> Add to Bag
+          <div className="button-group">
+            <button onClick={() => addToCart(product._id)}>
+              <FaShoppingCart /> Add to Cart
             </button>
-            <button className="wishlist-button" onClick={addToWishlist}>
+            <button onClick={addToWishlist}>
               <FaHeart /> Add to Wishlist
             </button>
+            <button onClick={handleEditDesign}>
+              ✏️ Edit Your Design
+            </button>
           </div>
 
-          {/* Key Highlights */}
-          <div className="key-highlights">
-            <h3>Key Highlights</h3>
-            <ul>
-              <li>High-quality material</li>
-              <li>Available in multiple sizes</li>
-              <li>Free shipping on orders above ₹500</li>
-            </ul>
-          </div>
-
-          {/* Accordion Section: Return & Exchange Policy */}
+          {/* Return & Exchange Accordion */}
           <div className="return-exchange-container">
-            <div className="return-exchange-header">
+            <div className="return-exchange-header" onClick={toggleAccordion}>
               <h4>15 Days Returns & Exchange</h4>
-              <FaPlus
-                className={`plus-icon ${isAccordionOpen ? "open" : ""}`}
-                onClick={toggleAccordion}
-              />
+              <FaPlus className={`plus-icon ${isAccordionOpen ? "open" : ""}`} />
             </div>
-            <h5 className="return-exchange-subheading">Know about return & exchange policy</h5>
             {isAccordionOpen && (
               <div className="accordion-content">
-                <p className="return-exchange-text">
-                  Easy returns up to 15 days of delivery. Exchange available on select pincodes.
-                </p>
+                <p>Easy returns up to 15 days of delivery. Exchange available on select pincodes.</p>
               </div>
             )}
           </div>
@@ -213,29 +151,22 @@ const SingleProduct = () => {
           <div className="secure-info-container">
             <div className="secure-item">
               <FaShieldAlt className="secure-icon" />
-              <p className="secure-text">100% Secure Payment</p>
+              <p>100% Secure Payment</p>
             </div>
             <div className="secure-item">
               <FaUndoAlt className="secure-icon" />
-              <p className="secure-text">Easy Returns and Instant Refunds</p>
+              <p>Easy Returns and Refunds</p>
             </div>
             <div className="secure-item">
               <FaCheckCircle className="secure-icon" />
-              <p className="secure-text">100% Genuine Product</p>
+              <p>100% Genuine Product</p>
             </div>
           </div>
-
-          {/* Product Reviews Section */}
-          <h3>Product Reviews</h3>
-          <p className="verified-buyers">91% of verified buyers recommend this product</p>
         </div>
       </div>
 
-      {/* Similar Products & Footer */}
       <SimilarProductsPage />
       <Footer />
-
-      {/* Toastify Notification Container */}
       <ToastContainer />
     </>
   );

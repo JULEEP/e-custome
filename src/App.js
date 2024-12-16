@@ -74,7 +74,7 @@ function App() {
             <Route path='/user-orders' element={<Order />} />
             <Route path='/address' element={<Address />} />
             <Route path="/product/:id" element={<SingleProduct />} />
-            <Route path="/canvas/:id" element={<CanvasComponent />} />
+            <Route path="/canvas" element={<CanvasComponent />} />
             <Route path="/checkout/:userId" element={<Checkout />} />
             <Route path='/orderStepper/:orderId' element={<OrderStatusStepper />} />
             <Route path="/userDetails/:userId" element={<UserDetails />} />

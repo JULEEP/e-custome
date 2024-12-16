@@ -1,357 +1,327 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { fabric } from 'fabric';
+import { FaTextWidth, FaImage, FaBrush, FaPalette, FaSave, FaPuzzlePiece } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const CanvasComponent = () => {
-  const canvasRef = useRef(null);
-  const [canvas, setCanvas] = useState(null);
+  const canvasRef = useRef(null); // Ref for the canvas DOM element
+  const [canvas, setCanvas] = useState(null); // Fabric canvas instance
   const [savedDesign, setSavedDesign] = useState(null);
-  const [userId, setUserId] = useState(null);
   const [textColor, setTextColor] = useState('black');
   const [selectedFont, setSelectedFont] = useState('Arial');
   const [fontSize, setFontSize] = useState(30);
   const [templates, setTemplates] = useState([]);
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isResizing, setIsResizing] = useState(false);
-  const [isCropping, setIsCropping] = useState(false);
-  const [cropBox, setCropBox] = useState(null);
+  const [isTextFormOpen, setIsTextFormOpen] = useState(false);
+  const [selectedText, setSelectedText] = useState(null);
+  const [newText, setNewText] = useState('');
   const { state } = useLocation();
-  const { product } = state || {};
+  const { product } = state || {}; // Get the product from the location state
   const navigate = useNavigate();
 
-  // Initialize Fabric.js canvas
+  // State for the design upload form
+  const [designFile, setDesignFile] = useState(null);
+  const [description, setDescription] = useState('');
+
   useEffect(() => {
     const initCanvas = new fabric.Canvas(canvasRef.current, {
       width: 800,
       height: 600,
       backgroundColor: '#f3f3f3',
-      selection: false,
     });
     setCanvas(initCanvas);
 
-    return () => {
-      initCanvas.dispose();
-    };
+    return () => initCanvas.dispose();
   }, []);
 
-  // Retrieve userId from localStorage
-  useEffect(() => {
-    const storedUserId = localStorage.getItem('userId');
-    if (storedUserId) {
-      setUserId(storedUserId);
-    } else {
-      console.log('User not logged in');
-    }
-  }, []);
-
-  // Predefined template URLs
   useEffect(() => {
     const templateUrls = [
-      'https://static.vecteezy.com/system/resources/previews/000/254/814/original/vector-abstract-beautiful-wedding-invitation-card-design.jpg',
+      'https://rendering.mcp.cimpress.com/v2/vp/preview?width=412&category=gal6&format=auto&quality=95&instructions_uri=https%3A%2F%2Finstructions.documents.cimpress.io%2Fv3%2Finstructions%3Apreview%3FignoreProjection%3Dtrue%26documentUri%3Dhttps%253A%252F%252Fdesign-specifications.design.vpsvc.com%252Fv2%252FrenderDocuments%252Fproducts%252FPRD-YN48WWE9%252F8%252Ftemplates%252Fc6615021..f9c58b2a-e04f-4251-a983-6eb421ba478d%253Fculture%253Den-in%2526useFakeFamily%253Dfalse%2526requester%253Dgallery-content-query%2526optionSelections%25255BVisiting%2BCards%25255D%253DStandard%2526optionSelections%25255BSize%25255D%253DStandard%2B%25252889%2Bx%2B51%2Bmm%252529%2526optionSelections%25255BStock%25255D%253DStandard%2BGlossy%2526optionSelections%25255BCut%2BShape%2BType%25255D%253DRectangle%2526optionSelections%25255BFinish%25255D%253DNone%2526optionSelections%25255BBackside%25255D%253DBlank%2526optionSelections%25255BProduct%2BOrientation%25255D%253DHorizontal&merchant_metadata=c6615021..f9c58b2a-e04f-4251-a983-6eb421ba478d&scene=https%3A%2F%2Fscenes.documents.cimpress.io%2Fv3%2Fscenes%3Agenerate%3Fdata%3DlY9Ba4QwFIT%252FSplzEN1V0PyBXnoobG9lD9kkaKgmkjzZtZL%252FXozS7dJLe3nMGzLzviy4GkUdeH0oGTpt2o7Ay%252FrAEHpH4AtG0WrwgmEQ4WM1aB41OMibATEySGdJ39Lb0AnlrquSrnd%252BFR48Z2jTvKQpwIsqjwzCtr1OljKBhJXbEsznKrK8WNtH79QkU%252FuOiiYrGjngzosqO9bJCdMlkBekf4CeSFglvHp67l0IMyLb2BOlJTf5AP6%252BQPYuaAVOftIMgYSnV2dsOn0DR54VVToy35f9%252B27yJ90O2tJWtV9%252BMVa%252FOTBoqx6qmiwvf1VF9s9glR2Ofw0%252BwH8Hz%252FEcY%252FwC&showerr=true&bgcolor=f3f3f3',
     ];
     setTemplates(templateUrls);
   }, []);
 
-  // Load selected template onto the canvas
-  const loadTemplate = (templateUrl) => {
+  const loadTemplate = (url) => {
     if (!canvas) return;
-
-    fabric.Image.fromURL(templateUrl, (img) => {
+    
+    fabric.Image.fromURL(url, (img) => {
       const canvasWidth = canvas.getWidth();
       const canvasHeight = canvas.getHeight();
-      const imgWidth = img.width;
-      const imgHeight = img.height;
 
-      const scaleX = canvasWidth / imgWidth;
-      const scaleY = canvasHeight / imgHeight;
+      const scaleX = canvasWidth / img.width;
+      const scaleY = canvasHeight / img.height;
 
       const scale = Math.min(scaleX, scaleY);
 
+      img.scale(scale);
       img.set({
-        left: 0,
-        top: 0,
-        scaleX: scale,
-        scaleY: scale,
-        hasControls: true,
-        hasBorders: true,
-        cornerSize: 20,
+        left: 50,
+        top: 50,
       });
 
       canvas.clear();
       canvas.add(img);
-      canvas.setActiveObject(img);
-    }, { crossOrigin: 'anonymous' })
-    .catch(err => {
-      console.error('Error loading template:', err);
-      alert('Failed to load template.');
+      canvas.sendToBack(img);
+      canvas.renderAll();
     });
   };
 
-  // Update image size (in pixels)
-  const handleResizeChange = () => {
-    const activeObject = canvas?.getActiveObject();
-    if (activeObject && activeObject.set) {
-      const newWidth = document.getElementById('resizeWidth').value;
-      const newHeight = document.getElementById('resizeHeight').value;
-      activeObject.set({ width: newWidth, height: newHeight });
-      canvas.renderAll();
-    }
-  };
-
-  // Enable cropping mode
-  const startCropping = () => {
-    setIsCropping(true);
-    const activeObject = canvas?.getActiveObject();
-    if (activeObject && activeObject.set) {
-      const cropBox = new fabric.Rect({
-        left: activeObject.left,
-        top: activeObject.top,
-        width: activeObject.width * 0.5,
-        height: activeObject.height * 0.5,
-        fill: 'rgba(255, 255, 255, 0.5)',
-        stroke: 'black',
-        strokeWidth: 2,
-        hasControls: true,
-        lockScalingFlip: true,
-      });
-
-      setCropBox(cropBox);
-      canvas.add(cropBox);
-      canvas.setActiveObject(cropBox);
-    }
-  };
-
-  // Crop the image to the selected area
-  const cropImage = () => {
-    if (cropBox && canvas) {
-      const activeObject = canvas.getActiveObject();
-      const cropArea = cropBox.getBoundingRect();
-
-      const img = canvas.getObjects().find((obj) => obj !== cropBox && obj.type === 'image');
-      if (img) {
-        img.set({
-          clipPath: new fabric.Rect({
-            left: cropArea.left,
-            top: cropArea.top,
-            width: cropArea.width,
-            height: cropArea.height,
-          }),
-        });
-        canvas.renderAll();
-        setIsCropping(false);
-        canvas.remove(cropBox);
-      }
-    }
-  };
-
-  // Save the custom design
-  const saveDesign = () => {
-    if (!canvas) return;
-    const designData = canvas.toDataURL();
-    setSavedDesign(designData);
-    console.log('Design saved:', designData);
-  };
-
-  // Toggle modal visibility
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  // Add text to canvas
   const addText = () => {
-    if (!canvas) return;
-
-    // Create the text object
     const text = new fabric.Textbox('Editable Text', {
-      left: 100,
-      top: 200,
-      fontSize: fontSize,
+      left: 50,
+      top: 50,
       fill: textColor,
+      fontSize,
       fontFamily: selectedFont,
     });
-
-    // Add the text to the canvas
+    text.on('selected', () => {
+      setSelectedText(text);
+      setNewText(text.text);
+      setIsTextFormOpen(true);
+    });
     canvas.add(text);
-
-    // Bring the text to the front, ensuring it is above the image
     canvas.bringToFront(text);
-
-    // Render the canvas to apply changes
-    canvas.renderAll();
   };
 
-  // Handle text color change
-  const handleTextColorChange = (e) => {
-    setTextColor(e.target.value);
-    const activeObject = canvas?.getActiveObject();
-    if (activeObject && activeObject.type === 'textbox') {
-      activeObject.set({ fill: e.target.value });
+  const addLogo = () => {
+    const logoUrl = 'https://your-logo-url.com/logo.png'; 
+    fabric.Image.fromURL(logoUrl, (img) => {
+      img.set({
+        left: 100,
+        top: 100,
+        selectable: true,
+      });
+      canvas.add(img);
+      canvas.bringToFront(img);
+    });
+  };
+
+  const saveDesign = () => {
+    setSavedDesign(canvas.toDataURL());
+  };
+
+  const handleSaveText = () => {
+    if (selectedText) {
+      selectedText.set({ text: newText });
       canvas.renderAll();
+      setIsTextFormOpen(false);
+      canvas.bringToFront(selectedText);
     }
   };
 
-  // Handle font change
-  const handleFontChange = (e) => {
-    setSelectedFont(e.target.value);
-    const activeObject = canvas?.getActiveObject();
-    if (activeObject && activeObject.type === 'textbox') {
-      activeObject.set({ fontFamily: e.target.value });
-      canvas.renderAll();
-    }
-  };
-
-  // Handle font size change
-  const handleFontSizeChange = (e) => {
-    setFontSize(e.target.value);
-    const activeObject = canvas?.getActiveObject();
-    if (activeObject && activeObject.type === 'textbox') {
-      activeObject.set({ fontSize: e.target.value });
-      canvas.renderAll();
-    }
+  // Handle the form submission (for the design upload form)
+  const handleDesignUpload = () => {
+    // This is where you'd handle the design and description submission logic
+    console.log('Design File:', designFile);
+    console.log('Description:', description);
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      {/* Left Sidebar with buttons */}
+    <div style={{ display: 'flex' }}>
+      {/* Left Sidebar for Icons */}
       <div
         style={{
-          width: '200px',
-          backgroundColor: '#333',
-          color: '#fff',
-          paddingTop: '20px',
+          position: 'fixed',
+          top: '90px',
+          left: '20px',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
           gap: '20px',
-          position: 'fixed',
-          height: '100vh',
+          alignItems: 'center',
+          backgroundColor: '#fff',
+          padding: '10px',
+          borderRadius: '10px',
         }}
       >
-        <button onClick={saveDesign} style={buttonStyle}>Save Design</button>
+        <div onClick={addText} style={{ textAlign: 'center' }}>
+          <FaTextWidth size={30} />
+          <div>Text</div>
+        </div>
+        <div onClick={addLogo} style={{ textAlign: 'center' }}>
+          <FaImage size={30} />
+          <div>Image</div>
+        </div>
+        <div onClick={saveDesign} style={{ textAlign: 'center' }}>
+          <FaSave size={30} />
+          <div>Save</div>
+        </div>
+        <div onClick={() => setIsModalOpen(true)} style={{ textAlign: 'center' }}>
+          <FaPuzzlePiece size={30} />
+          <div>Change Template</div>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <input
+            type="color"
+            value={textColor}
+            onChange={(e) => setTextColor(e.target.value)}
+            style={{ marginTop: '10px', width: '30px', height: '30px', border: 'none', cursor: 'pointer' }}
+          />
+          <div>Color</div>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <input
+            type="number"
+            placeholder="Font Size"
+            value={fontSize}
+            onChange={(e) => setFontSize(e.target.value)}
+            style={{ marginTop: '10px', width: '50px' }}
+          />
+          <div>Size</div>
+        </div>
+      </div>
 
-        <button onClick={toggleModal} style={buttonStyle}>Choose Template</button>
+      {/* Canvas */}
+      <div style={{ marginLeft: '150px', flex: 1 }}>
+        <canvas ref={canvasRef} style={{ border: '1px solid #ccc', width: '100%', height: '100%' }} />
+      </div>
 
-        {/* Resize Section */}
-        <button onClick={() => setIsResizing(true)} style={buttonStyle}>Resize</button>
+      <div
+  style={{
+    position: 'fixed',
+    right: '20px',
+    top: '120px',
+    backgroundColor: '#fff',
+    padding: '20px',
+    borderRadius: '12px',
+    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+    width: '280px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '15px',
+  }}
+>
+  <h3 style={{ textAlign: 'center', marginBottom: '15px', fontSize: '20px', fontWeight: 'bold' }}>Upload Your Design</h3>
 
-        {/* Text Customization Section */}
-        <button onClick={addText} style={buttonStyle}>Add Text</button>
+  {/* File Upload */}
+  <input
+    type="file"
+    onChange={(e) => setDesignFile(e.target.files[0])}
+    style={{
+      width: '100%',
+      padding: '10px',
+      borderRadius: '8px',
+      border: '1px solid #ccc',
+      backgroundColor: '#f9f9f9',
+      cursor: 'pointer',
+      fontSize: '14px',
+    }}
+  />
 
-        <input
-          type="color"
-          value={textColor}
-          onChange={handleTextColorChange}
-          style={inputStyle}
-        />
-        <select
-          value={selectedFont}
-          onChange={handleFontChange}
-          style={inputStyle}
+  {/* Description Input */}
+  <textarea
+    value={description}
+    onChange={(e) => setDescription(e.target.value)}
+    placeholder="Enter Description"
+    style={{
+      width: '100%',
+      padding: '10px',
+      borderRadius: '8px',
+      border: '1px solid #ccc',
+      backgroundColor: '#f9f9f9',
+      fontSize: '14px',
+      minHeight: '80px',
+      resize: 'vertical',
+    }}
+  />
+
+  {/* Submit Button */}
+  <button
+    onClick={handleDesignUpload}
+    style={{
+      padding: '12px 0',
+      backgroundColor: '#007BFF',
+      color: '#fff',
+      border: 'none',
+      borderRadius: '8px',
+      cursor: 'pointer',
+      fontSize: '16px',
+      fontWeight: 'bold',
+      transition: 'background-color 0.3s ease',
+    }}
+    onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
+    onMouseLeave={(e) => (e.target.style.backgroundColor = '#007BFF')}
+  >
+    Send
+  </button>
+</div>
+
+      {/* Template Modal */}
+      {isModalOpen && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+          }}
         >
-          <option value="Arial">Arial</option>
-          <option value="Times New Roman">Times New Roman</option>
-          <option value="Courier New">Courier New</option>
-          <option value="Georgia">Georgia</option>
-        </select>
-        <input
-          type="number"
-          value={fontSize}
-          onChange={handleFontSizeChange}
-          style={inputStyle}
-          placeholder="Font Size"
-        />
-      </div>
-
-      {/* Canvas Area */}
-      <div style={{ marginLeft: '220px', paddingTop: '20px', flexGrow: 1 }}>
-        <canvas ref={canvasRef} style={{ border: '1px solid #ccc' }} />
-      </div>
-
-      {/* Saved Design Preview */}
-      {savedDesign && (
-        <div style={{ marginLeft: '220px', marginTop: '20px' }}>
-          <h3>Your Saved Design:</h3>
-          <img src={savedDesign} alt="Saved Design" />
+          <div
+            style={{
+              margin: '10% auto',
+              backgroundColor: '#fff',
+              padding: '20px',
+              width: '300px',
+              textAlign: 'center',
+            }}
+          >
+            <h3>Choose a Template</h3>
+            {templates.map((url, idx) => (
+              <img
+                key={idx}
+                src={url}
+                alt="Template"
+                style={{ width: '100%', cursor: 'pointer', marginBottom: '10px' }}
+                onClick={() => {
+                  loadTemplate(url);
+                  setIsModalOpen(false);
+                }}
+              />
+            ))}
+            <button onClick={() => setIsModalOpen(false)} style={{ padding: '5px 10px', cursor: 'pointer' }}>
+              Close
+            </button>
+          </div>
         </div>
       )}
 
-      {/* Modal for Template Selection */}
-      {isModalOpen && (
-        <div style={modalOverlayStyle}>
-          <div style={modalContentStyle}>
-            <h3>Select a Template:</h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-              {templates.map((template, index) => (
-                <div
-                  key={index}
-                  style={{ margin: '10px', cursor: 'pointer' }}
-                  onClick={() => {
-                    loadTemplate(template);
-                    toggleModal();
-                  }}
-                >
-                  <img
-                    src={template}
-                    alt={`Template ${index}`}
-                    style={{
-                      width: '150px',
-                      height: '150px',
-                      objectFit: 'contain',
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-            <button onClick={toggleModal} style={buttonStyle}>Close</button>
-          </div>
+      {/* Text Edit Form */}
+      {isTextFormOpen && selectedText && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '20%',
+            left: '20%',
+            backgroundColor: '#fff',
+            padding: '20px',
+            borderRadius: '10px',
+            zIndex: 1000,
+          }}
+        >
+          <h3>Edit Text</h3>
+          <input
+            type="text"
+            value={newText}
+            onChange={(e) => setNewText(e.target.value)}
+            style={{ width: '100%', padding: '5px' }}
+          />
+          <button
+            onClick={handleSaveText}
+            style={{
+              padding: '5px 10px',
+              backgroundColor: '#007BFF',
+              color: '#fff',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Save
+          </button>
         </div>
       )}
     </div>
   );
-};
-
-// Button style
-const buttonStyle = {
-  background: 'none',
-  border: 'none',
-  color: '#fff',
-  cursor: 'pointer',
-  padding: '10px',
-  borderRadius: '5px',
-  transition: 'background 0.3s ease',
-  width: '150px',
-  textAlign: 'center',
-};
-
-// Input style for text settings
-const inputStyle = {
-  padding: '5px',
-  marginTop: '10px',
-  borderRadius: '5px',
-};
-
-// Modal styles
-const modalOverlayStyle = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  zIndex: 1000,
-};
-
-const modalContentStyle = {
-  backgroundColor: '#fff',
-  padding: '20px',
-  borderRadius: '10px',
-  width: '80%',
-  maxWidth: '600px',
-  textAlign: 'center',
 };
 
 export default CanvasComponent;
