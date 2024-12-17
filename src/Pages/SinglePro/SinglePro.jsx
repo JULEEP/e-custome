@@ -339,7 +339,7 @@ const SinglePro = () => {
               <AiFillStar /> 5
             </span>
             <span className="review-title">
-              The men blue polo neck shirt offers a classic, versatile look with a comfortable fit.
+            Nice
             </span>
           </div>
           <p className="reviewer-name">Test3</p>
