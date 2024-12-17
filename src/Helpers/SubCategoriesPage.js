@@ -84,7 +84,7 @@ const CategoryDetailsPage = () => {
   const category = data.find((item) => item.slug === slug);
 
   if (!category) {
-    return <Typography variant="h6">Category not found.</Typography>;
+    return <Typography variant="h6">Category not found</Typography>;
   }
 
   return (

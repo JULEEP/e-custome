@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from "react-router-dom"; 
+import { useParams, useNavigate } from "react-router-dom";
 import './SinglePro.css';
 import { FaShoppingCart, FaHeart, FaPlus, FaShieldAlt, FaUndoAlt, FaCheckCircle } from 'react-icons/fa';
-import { toast } from 'react-toastify'; 
+import { AiFillStar } from 'react-icons/ai'; // Import AiFillStar for star rating icons
+import { toast } from 'react-toastify';
 import SimilarProductsPage from '../SimilarProduct/SimilarProductPage';
 import Footer from '../../Components/Footer/Footer';
 
 const SinglePro = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal
-  const [uploadedImage, setUploadedImage] = useState(null); // State for uploaded image
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState(null);
 
-  const navigate = useNavigate(); 
+  const [rating, setRating] = useState(1);
+  const [comment, setComment] = useState('');
+  const [isRatingFormOpen, setIsRatingFormOpen] = useState(false); // State for controlling the rating form visibility
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://admin-backend-rl94.onrender.com/api/products/singleproduct/${id}`)
@@ -34,7 +38,7 @@ const SinglePro = () => {
 
   const addToCart = async (productId, quantity = 1) => {
     try {
-      const userId = localStorage.getItem("userId"); 
+      const userId = localStorage.getItem("userId");
       if (!userId) {
         toast.error("User not logged in!", { position: "top-right", autoClose: 3000 });
         return;
@@ -58,7 +62,7 @@ const SinglePro = () => {
   };
 
   const addToWishlist = async () => {
-    const userId = localStorage.getItem("userId"); 
+    const userId = localStorage.getItem("userId");
     if (!userId) {
       toast.error("User not logged in!", { position: "top-right", autoClose: 3000 });
       return;
@@ -83,7 +87,7 @@ const SinglePro = () => {
   };
 
   const handleAddToBag = () => {
-    const productId = product._id; 
+    const productId = product._id;
     addToCart(productId);
   };
 
@@ -132,6 +136,39 @@ const SinglePro = () => {
     }
   };
 
+  // Handle rating submission
+  const submitRating = async () => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      toast.error("User not logged in!", { position: "top-right", autoClose: 3000 });
+      return;
+    }
+
+    const ratingData = { productId: product._id, rating, comment };
+
+    try {
+      const response = await fetch(`https://admin-backend-rl94.onrender.com/api/products/rate/${userId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(ratingData),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        toast.success('Rating submitted successfully!', { position: "top-right", autoClose: 3000 });
+        setIsRatingFormOpen(false); // Close the form after successful submission
+      } else {
+        toast.error(data.message, { position: "top-right", autoClose: 3000 });
+      }
+    } catch (error) {
+      toast.error('Failed to submit rating', { position: "top-right", autoClose: 3000 });
+    }
+  };
+
+  const handleRateProductClick = () => {
+    setIsRatingFormOpen(true); // Open the rating form when the button is clicked
+  };
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -143,7 +180,7 @@ const SinglePro = () => {
   const productImage = Array.isArray(product.images) && product.images.length > 0 ? product.images[0] : '';
 
   return (
-    <div> 
+    <div>
       <div className="single-product">
         <div className="image-wrapper">
           <img src={productImage} alt={product.name} />
@@ -216,6 +253,7 @@ const SinglePro = () => {
         </div>
       </div>
 
+      {/* Modal for Image Upload */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -226,7 +264,90 @@ const SinglePro = () => {
           </div>
         </div>
       )}
-      
+
+     {/* Modal for Rating Form */}
+{isRatingFormOpen && (
+  <div className="rating-modal-overlay">
+    <div className="rating-modal-content">
+      <h3>Submit Your Rating</h3>
+      <div className="rating-input">
+        <span className="rating-label">Rating:</span>
+        <select value={rating} onChange={(e) => setRating(Number(e.target.value))} className="rating-select">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <option key={star} value={star}>
+              {star}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="comment-input">
+        <span className="comment-label">Comment:</span>
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Leave a comment"
+          className="comment-textarea"
+        />
+      </div>
+      <button onClick={submitRating}>Submit Rating</button>
+      <button onClick={() => setIsRatingFormOpen(false)}>Cancel</button>
+    </div>
+  </div>
+)}
+
+      {/* Gray Divider */}
+      <hr className="gray-divider" />
+
+      {/* Ratings and Reviews Section */}
+      <div className="ratings-reviews">
+        <h2 className="section-title">Ratings & Reviews</h2>
+        <div className="ratings-summary">
+          <span className="average-rating">3.7</span>
+          <span className="total-ratings">(7777 ratings and 56 reviews)</span>
+        </div>
+
+        <button className="rate-product-btn" onClick={handleRateProductClick}>Rate Product</button>
+
+        {/* Individual Reviews */}
+        <div className="review">
+          <div className="review-header">
+            <span className="review-rating">
+              <AiFillStar /> 4
+            </span>
+            <span className="review-title">Good</span>
+          </div>
+          <p className="reviewer-name">Test1</p>
+          <p className="review-time">3 months ago</p>
+          <p className="review-location">Certified Buyer, Hyderabad</p>
+        </div>
+
+        <div className="review">
+          <div className="review-header">
+            <span className="review-rating">
+              <AiFillStar /> 4
+            </span>
+            <span className="review-title">Good</span>
+          </div>
+          <p className="reviewer-name">Test2</p>
+          <p className="review-time">4 months ago</p>
+          <p className="review-location">Certified Buyer, Hyderabad</p>
+        </div>
+
+        <div className="review">
+          <div className="review-header">
+            <span className="review-rating">
+              <AiFillStar /> 5
+            </span>
+            <span className="review-title">
+              The men blue polo neck shirt offers a classic, versatile look with a comfortable fit.
+            </span>
+          </div>
+          <p className="reviewer-name">Test3</p>
+          <p className="review-time">3 months ago</p>
+          <p className="review-location">Certified Buyer, Kolkata</p>
+        </div>
+      </div>
+
       <SimilarProductsPage />
       <Footer />
     </div>
