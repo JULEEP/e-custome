@@ -15,7 +15,7 @@ const ProductRatings = () => {
     // Fetch ratings data
     const fetchRatings = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/products/ratings/${id}`);
+        const response = await fetch(`http://localhost:4000/api/products/ratings/${productId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch ratings data');
         }
@@ -27,7 +27,7 @@ const ProductRatings = () => {
     };
 
     fetchRatings();
-  }, [id]);
+  }, [productId]); // Use productId instead of id
 
   if (error) {
     return <div>Error: {error}</div>;
