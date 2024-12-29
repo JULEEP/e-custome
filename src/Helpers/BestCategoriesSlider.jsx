@@ -40,51 +40,6 @@ const bestCategories = [
     name: "Cards",
     slug: "cards",
   },
-  {
-    img: FlexPrint,
-    name: "Flex Print",
-    slug: "flexPrint",
-  },
-  {
-    img: OffsetPrint,
-    name: "Offset Print",
-    slug: "OffsetPrint",
-  },
-  {
-    img: TshirtPrint,
-    name: "Tshirt Print",
-    slug: "TshirtPrint",
-  },
-  {
-    img: PrintableReligiousCards,
-    name: "Religious Card",
-    slug: "PrintableReligiousCards",
-  },
-  {
-    img: InvitationCard,
-    name: "Invitation Card",
-    slug: "InvitationCard",
-  },
-  {
-    img: Election,
-    name: "Election Printing",
-    slug: "Election",
-  },
-  {
-    img: BagPrinting,
-    name: "Bag Printing",
-    slug: "Bag",
-  },
-  {
-    img: Advanture,
-    name: "Advanture Printing",
-    slug: "Advanture",
-  },
-  {
-    img: PackagingPrinting,
-    name: "Packaging Printing",
-    slug: "PackagingPrinting",
-  },
 ];
 
 const BestCategoriesSlider = () => {

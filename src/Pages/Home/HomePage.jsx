@@ -28,6 +28,7 @@ import BrandedProducts from '../BrandedProduct/BrandedProduct'
 import NewArrival from '../NewArrival/NewArrival'
 import BandOfTrust from '../BandOfTrust'
 import ImageCarousel from '../ImageCoursal'
+import CategoriesMenu from '../../Helpers/CategoriesMenu'
 const jumpAnimation = keyframes`
   0% {
     transform: translateY(500px); /* Start from below the container */
@@ -65,6 +66,7 @@ const HomePage = () => {
 
   return (
     <>
+    <CategoriesMenu/>
       <Container maxWidth='xl' style={{ display: 'flex', justifyContent: "center", padding: 0, flexDirection: "column", marginBottom: 8 }}>
         <Box padding={1}>
           <Carousel />
@@ -99,7 +101,7 @@ const HomePage = () => {
       <hr className="section-divider" style={{ marginBottom: "4px" }} />
       <Banner />
       <hr className="section-divider" style={{ marginTop: "10px" }} />
-      <SimilarProductsPage/>
+      <CategoriesMenu/>
       <hr className="section-divider" />
       <OurMostPopularProduct/>
       <hr className="section-divider" style={{ marginBottom: "20px" }} />
