@@ -43,7 +43,7 @@ const CategoriesMenu = () => {
             position: 'fixed', // Make it fixed
             zIndex: 1200, // Ensure it's above other content
             color: '#0000FF', // Change icon color to blue
-            right: '210px', // Adjust the distance from the right side
+            right: '310px', // Adjust the distance from the right side
           }}
         >
           <MenuIcon />
