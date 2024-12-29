@@ -103,12 +103,12 @@ function App() {
             <Route path="/category/banks" element={<BankCategory />} />
             <Route path="/category/bill-books" element={<BillBooksCategory />} />
             <Route path="/category/cards" element={<CardsCategory />} />
-            <Route path="/category/TshirtPrint" element={<TshirtCategory />} />
-            <Route path="/category/flexPrint" element={<FlexCategory />} />
-            <Route path="/category/OffsetPrint" element={<OffsetPrint />} />
-            <Route path="/category/PrintableReligiousCards" element={<PrintableReligiousCards />} />
-            <Route path="/category/InvitationCard" element={<InvitationCard />} />
-            <Route path="/category/PackagingPrinting" element={<PackagingPrinting />} />
+            <Route path="/category/tshirt-print" element={<TshirtCategory />} />
+            <Route path="/category/flex-print" element={<FlexCategory />} />
+            <Route path="/category/offset-print" element={<OffsetPrint />} />
+            <Route path="/category/religious-cards" element={<PrintableReligiousCards />} />
+            <Route path="/category/invitation-cards" element={<InvitationCard />} />
+            <Route path="/category/packaging-printing" element={<PackagingPrinting />} />
             <Route path="/category/Bag" element={<Bag />} />
             <Route path="/category/Election" element={<Election />} />
             <Route path="/category/Advanture" element={<Advanture />} />

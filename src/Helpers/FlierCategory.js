@@ -9,9 +9,9 @@ const FlierCategory = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch Hoardings products on page load
+  // Fetch Fliers products on page load
   useEffect(() => {
-    const fetchHoardingsProducts = async () => {
+    const fetchFliersProducts = async () => {
       try {
         const response = await axios.get("https://admin-backend-rl94.onrender.com/api/products/getfliers");
         setProducts(response.data);
@@ -22,7 +22,7 @@ const FlierCategory = () => {
       }
     };
 
-    fetchHoardingsProducts();
+    fetchFliersProducts();
   }, []);
 
   // Add product to cart
@@ -71,9 +71,9 @@ const FlierCategory = () => {
       ) : (
         <Grid container spacing={3}>
           {products.map((product) => (
-            <Grid item xs={12} sm={6} md={3} key={product._id}> {/* Adjusted md={3} for smaller width */}
+            <Grid item xs={12} sm={6} md={3} key={product._id}>
               <Box
-                style={{
+                sx={{
                   border: '1px solid #ddd',
                   borderRadius: '8px',
                   padding: '10px',
@@ -101,20 +101,31 @@ const FlierCategory = () => {
                     <FaStar key={index} color={index < product.rating ? '#FFD700' : '#D3D3D3'} />
                   ))}
                 </div>
-                <button
-                  onClick={() => addToCart(product._id)}
-                  style={{
-                    backgroundColor: '#f5a623',
-                    color: '#fff',
-                    border: 'none',
-                    padding: '10px 20px',
-                    cursor: 'pointer',
-                    borderRadius: '5px',
+
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
                     marginTop: '10px',
+                    width: '100%',
                   }}
                 >
-                  <FaShoppingBag /> Add to Cart
-                </button>
+                  <button
+                    onClick={() => addToCart(product._id)}
+                    style={{
+                      backgroundColor: '#f5a623',
+                      color: '#fff',
+                      border: 'none',
+                      padding: '10px 20px',
+                      cursor: 'pointer',
+                      borderRadius: '5px',
+                      width: '100%',  // Ensure button width is 100% of the container
+                      maxWidth: '220px', // Limit the max width of the button
+                    }}
+                  >
+                    <FaShoppingBag /> Add to Cart
+                  </button>
+                </Box>
               </Box>
             </Grid>
           ))}

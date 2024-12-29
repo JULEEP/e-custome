@@ -101,8 +101,6 @@ const HomePage = () => {
       <hr className="section-divider" style={{ marginBottom: "4px" }} />
       <Banner />
       <hr className="section-divider" style={{ marginTop: "10px" }} />
-      <CategoriesMenu/>
-      <hr className="section-divider" />
       <OurMostPopularProduct/>
       <hr className="section-divider" style={{ marginBottom: "20px" }} />
       <ImageCarousel/>
@@ -158,6 +156,8 @@ const HomePage = () => {
       <hr className="section-divider" style={{ marginTop: "10px", marginBottom: "20px" }} />
 
       <Footer />
+      <hr className="section-divider" style={{ marginTop: "10px", marginBottom: "20px" }} />
+
     </>
   )
 }

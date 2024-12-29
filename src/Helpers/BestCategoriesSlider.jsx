@@ -54,6 +54,8 @@ const BestCategoriesSlider = () => {
           '@media (max-width: 1200px)': { gridTemplateColumns: 'repeat(4, 1fr)' },  // 4 items in a row for smaller screens
           '@media (max-width: 900px)': { gridTemplateColumns: 'repeat(3, 1fr)' },   // 3 items for even smaller screens
           '@media (max-width: 600px)': { gridTemplateColumns: 'repeat(2, 1fr)' },   // 2 items for mobile
+          width: '100%', // Ensure the grid takes up 100% width
+          boxSizing: 'border-box', // Include padding in the element's total width
         }}
       >
         {bestCategories.map((category) => (

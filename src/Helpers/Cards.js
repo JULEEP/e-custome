@@ -111,6 +111,9 @@ const CardsCategory = () => {
                     cursor: 'pointer',
                     borderRadius: '5px',
                     marginTop: '10px',
+                    marginLeft: '30px',
+                    width: '130%',  // Ensure button width is 100% of the container
+                    maxWidth: '220px', // Limit the max width of the button
                   }}
                 >
                   <FaShoppingBag /> Add to Cart
