@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Hoarding, Flier, Acrylic, Canvas, Bank, Bill, Cards } from '../Assets/Images/Image'; // Import images
+import { Hoarding, Flier, Acrylic, Canvas, Bank, Bill, Cards, FlexPrint, OffsetPrint, TshirtPrint, PrintableReligiousCards, InvitationCard, PackagingPrinting, BagPrinting, Election, Advanture } from '../Assets/Images/Image'; // Import images
 
 // Best categories data
 const bestCategories = [
@@ -40,6 +40,51 @@ const bestCategories = [
     name: "Cards",
     slug: "cards",
   },
+  {
+    img: FlexPrint,
+    name: "Flex Print",
+    slug: "flexPrint",
+  },
+  {
+    img: OffsetPrint,
+    name: "Offset Print",
+    slug: "OffsetPrint",
+  },
+  {
+    img: TshirtPrint,
+    name: "Tshirt Print",
+    slug: "TshirtPrint",
+  },
+  {
+    img: PrintableReligiousCards,
+    name: "Religious Card",
+    slug: "PrintableReligiousCards",
+  },
+  {
+    img: InvitationCard,
+    name: "Invitation Card",
+    slug: "InvitationCard",
+  },
+  {
+    img: Election,
+    name: "Election Printing",
+    slug: "Election",
+  },
+  {
+    img: BagPrinting,
+    name: "Bag Printing",
+    slug: "Bag",
+  },
+  {
+    img: Advanture,
+    name: "Advanture Printing",
+    slug: "Advanture",
+  },
+  {
+    img: PackagingPrinting,
+    name: "Packaging Printing",
+    slug: "PackagingPrinting",
+  },
 ];
 
 const BestCategoriesSlider = () => {
@@ -75,9 +120,9 @@ const BestCategoriesSlider = () => {
                   src={category.img}
                   alt={category.name}
                   style={{
-                    width: '150px', // Square shape
-                    height: '150px', // Square shape
-                    objectFit: 'cover',
+                    width: '150px', // Fixed width
+                    height: '150px', // Fixed height
+                    objectFit: 'cover', // Ensures all images have consistent size and aspect ratio
                     borderRadius: '8px', // Square corners
                     marginBottom: '10px',
                   }}

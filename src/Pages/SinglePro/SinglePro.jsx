@@ -298,58 +298,61 @@ const SinglePro = () => {
       {/* Gray Divider */}
       <hr className="gray-divider" />
 
-      {/* Ratings and Reviews Section */}
-      <div className="ratings-reviews">
-        <h2 className="section-title">Ratings & Reviews</h2>
-        <div className="ratings-summary">
-          <span className="average-rating">3.7</span>
-          <span className="total-ratings">(7777 ratings and 56 reviews)</span>
-        </div>
-
         <button className="rate-product-btn" onClick={handleRateProductClick}>Rate Product</button>
 
-        {/* Individual Reviews */}
-        <div className="review">
-          <div className="review-header">
-            <span className="review-rating">
-              <AiFillStar /> 4
-            </span>
-            <span className="review-title">Good</span>
-          </div>
-          <p className="reviewer-name">Test1</p>
-          <p className="review-time">3 months ago</p>
-          <p className="review-location">Certified Buyer, Hyderabad</p>
-        </div>
-
-        <div className="review">
-          <div className="review-header">
-            <span className="review-rating">
-              <AiFillStar /> 4
-            </span>
-            <span className="review-title">Good</span>
-          </div>
-          <p className="reviewer-name">Test2</p>
-          <p className="review-time">4 months ago</p>
-          <p className="review-location">Certified Buyer, Hyderabad</p>
-        </div>
-
-        <div className="review">
-          <div className="review-header">
-            <span className="review-rating">
-              <AiFillStar /> 5
-            </span>
-            <span className="review-title">
-            Nice
-            </span>
-          </div>
-          <p className="reviewer-name">Test3</p>
-          <p className="review-time">3 months ago</p>
-          <p className="review-location">Certified Buyer, Kolkata</p>
-        </div>
+{/* Display Average Rating and Total Count */}
+{product.ratings && product.ratings.length > 0 ? (
+  <>
+    <div className="ratings-summary">
+      <div className="average-rating-container">
+        <span className="average-rating">
+          {(
+            product.ratings.reduce((acc, cur) => acc + cur.rating, 0) /
+            product.ratings.length
+          ).toFixed(1)}
+        </span>
+        <span className="total-ratings">
+          ({product.ratings.length} ratings and reviews)
+        </span>
       </div>
+    </div>
 
-      <SimilarProductsPage />
-      <Footer />
+    {/* List Individual Reviews */}
+    <div className="reviews-list">
+      {product.ratings.map((rating) => (
+        <div className="review" key={rating._id}>
+          <div className="review-header">
+            <div className="review-rating">
+              <AiFillStar className="star-icon" />
+              <span>{rating.rating}</span>
+            </div>
+            <div className="review-title">
+              <strong>{rating.comment.split(" ")[0]}</strong>
+            </div>
+          </div>
+
+          <div className="review-meta">
+            <p className="reviewer-name">User ID: {rating.userId}</p>
+            <p className="review-time">
+              {new Date(rating.createdAt).toLocaleDateString()}
+            </p>
+            <p className="review-location">Certified Buyer</p>
+          </div>
+
+          <div className="review-comment">
+            <p>{rating.comment}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </>
+) : (
+  <p className="no-reviews">No reviews available for this product.</p>
+)}
+
+{/* Similar Products and Footer */}
+<SimilarProductsPage />
+<Footer />
     </div>
   );
 };

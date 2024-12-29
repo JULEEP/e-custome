@@ -44,7 +44,19 @@ import BankCategory from './Helpers/BankCategory';
 import BillBooksCategory from './Helpers/BillBooksCategory';
 import CardsCategory from './Helpers/Cards';
 import SinglePro from './Pages/SinglePro/SinglePro';
-
+import ProductRatings from './Pages/SinglePro/ProductRatings'
+import Canva from './Pages/Canva'
+import TemplateViewer from './Pages/getTemplates';
+import TemplateEditor from './Pages/TemplateEditor';
+import TshirtCategory from './Helpers/TshirtCategory';
+import FlexCategory from './Helpers/FlexPrint';
+import OffsetPrint from './Helpers/OffsetPrint';
+import PrintableReligiousCards from './Helpers/PrintableReligiousCards';
+import InvitationCard from './Helpers/InvitationCard';
+import PackagingPrinting from './Helpers/PackagingPrinting';
+import Bag from './Helpers/Bag';
+import Election from './Helpers/Election';
+import Advanture from './Helpers/Advanture';
 
 
 function App() {
@@ -91,7 +103,24 @@ function App() {
             <Route path="/category/banks" element={<BankCategory />} />
             <Route path="/category/bill-books" element={<BillBooksCategory />} />
             <Route path="/category/cards" element={<CardsCategory />} />
+            <Route path="/category/TshirtPrint" element={<TshirtCategory />} />
+            <Route path="/category/flexPrint" element={<FlexCategory />} />
+            <Route path="/category/OffsetPrint" element={<OffsetPrint />} />
+            <Route path="/category/PrintableReligiousCards" element={<PrintableReligiousCards />} />
+            <Route path="/category/InvitationCard" element={<InvitationCard />} />
+            <Route path="/category/PackagingPrinting" element={<PackagingPrinting />} />
+            <Route path="/category/Bag" element={<Bag />} />
+            <Route path="/category/Election" element={<Election />} />
+            <Route path="/category/Advanture" element={<Advanture />} />
             <Route path="/single-product/:id" element={<SinglePro />} />
+            <Route path="/ratings/:id" element={<ProductRatings />} />
+            <Route path="/can" element={<Canva/>} />
+            <Route path="/template" element={<TemplateViewer/>} />
+            <Route path="/templateeditor" element={<TemplateEditor/>} />
+
+
+
+
 
 
 

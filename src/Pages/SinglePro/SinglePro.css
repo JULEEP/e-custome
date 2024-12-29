@@ -201,6 +201,7 @@ button svg {
     display: block;
     width: 160px;
     margin-bottom: 20px;
+    margin-right: 20px;
   }
   
   .rate-product-btn:hover {
