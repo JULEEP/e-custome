@@ -57,6 +57,7 @@ import PackagingPrinting from './Helpers/PackagingPrinting';
 import Bag from './Helpers/Bag';
 import Election from './Helpers/Election';
 import Advanture from './Helpers/Advanture';
+import SchoolCategory from './Helpers/SchoolCategory';
 
 
 function App() {
@@ -111,6 +112,8 @@ function App() {
             <Route path="/category/packaging-printing" element={<PackagingPrinting />} />
             <Route path="/category/Bag" element={<Bag />} />
             <Route path="/category/Election" element={<Election />} />
+            <Route path="/category/School" element={<SchoolCategory />} />
+            <Route path="/category/Gram-Panchayat" element={<SchoolCategory />} />
             <Route path="/category/Advanture" element={<Advanture />} />
             <Route path="/single-product/:id" element={<SinglePro />} />
             <Route path="/ratings/:id" element={<ProductRatings />} />
