@@ -59,7 +59,7 @@ const SchoolCategory = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ marginBottom: '30px' }}>
       <Typography variant="h4" align="center" gutterBottom>
         School Products
       </Typography>
@@ -71,7 +71,7 @@ const SchoolCategory = () => {
       ) : (
         <Grid container spacing={3}>
           {products.map((product) => (
-            <Grid item xs={12} sm={6} md={3} key={product._id}>
+            <Grid item xs={6} sm={4} md={3} key={product._id}>
               <Box
                 sx={{
                   border: '1px solid #ddd',
@@ -81,6 +81,7 @@ const SchoolCategory = () => {
                   boxSizing: 'border-box',  // Ensure padding is included in width calculation
                   maxWidth: '300px', // Set a max width for the card
                   margin: 'auto', // Center the card horizontally
+                  marginBottom: '20px', // Add bottom margin to space out the cards
                 }}
               >
                 <img
@@ -93,9 +94,9 @@ const SchoolCategory = () => {
                     borderRadius: '8px',
                   }}
                 />
-                <Typography variant="h6">{product.name}</Typography>
-                <Typography variant="body2">{product.description}</Typography>
-                <Typography variant="body1">₹{product.originalPrice}</Typography>
+                <Typography variant="h6" sx={{ marginTop: '10px' }}>{product.name}</Typography>
+                <Typography variant="body2" sx={{ marginTop: '5px' }}>{product.description}</Typography>
+                <Typography variant="body1" sx={{ marginTop: '5px' }}>₹{product.originalPrice}</Typography>
                 <div>
                   {[...Array(5)].map((_, index) => (
                     <FaStar key={index} color={index < product.rating ? '#FFD700' : '#D3D3D3'} />
