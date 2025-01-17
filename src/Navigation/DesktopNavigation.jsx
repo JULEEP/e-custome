@@ -21,45 +21,36 @@ import {
 } from '@mui/material';
 import { ContextFunction } from '../Context/Context';
 import { toast } from 'react-toastify';
-import axios from 'axios'; // To make API requests
-import {
-  getCart,
-  getWishList,
-  handleLogOut,
-  handleClickOpen,
-  handleClose,
-  Transition,
-} from '../Constants/Constant';
+import axios from 'axios';
+import { getCart, getWishList, handleLogOut, Transition } from '../Constants/Constant';
 
 const DesktopNavigation = () => {
   const { cart, setCart, wishlistData, setWishlistData } = useContext(ContextFunction);
   const [openAlert, setOpenAlert] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]); // State for search results
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false); // Dropdown visibility
+  const [searchResults, setSearchResults] = useState([]);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const navigate = useNavigate();
 
   const authToken = localStorage.getItem('Authorization');
-  const setProceed = authToken !== null; // Check if user is authenticated
-  const userId = localStorage.getItem('userId'); // Get user ID for navigation
+  const setProceed = authToken !== null;
+  const userId = localStorage.getItem('userId');
 
-  // Fetch cart and wishlist data on component mount
   useEffect(() => {
     getCart(setProceed, setCart, authToken);
     getWishList(setProceed, setWishlistData, authToken);
   }, [setProceed, setCart, setWishlistData, authToken]);
 
-  // Handle search input and fetch matching products
   const handleSearchChange = async (e) => {
     setSearchQuery(e.target.value);
 
     if (e.target.value.trim()) {
       try {
-        const response = await axios.get('http://localhost:4000/api/products/getall-search', {
+        const response = await axios.get('https://admin-backend-rl94.onrender.com/api/products/getall-search', {
           params: { category: e.target.value },
         });
-        setSearchResults(response.data); // Populate search results
-        setIsDropdownVisible(true); // Show dropdown
+        setSearchResults(response.data);
+        setIsDropdownVisible(true);
       } catch (error) {
         console.error('Error fetching products:', error);
         toast.error('Something went wrong while searching.');
@@ -70,7 +61,6 @@ const DesktopNavigation = () => {
     }
   };
 
-  // Handle selecting a search result and navigating
   const handleSelectProduct = (product) => {
     setSearchQuery(product.name);
     setSearchResults([]);
@@ -83,9 +73,21 @@ const DesktopNavigation = () => {
     }
   };
 
+  const handleClickOutside = (e) => {
+    if (!e.target.closest('.search-dropdown') && !e.target.closest('.search-input')) {
+      setIsDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
-      {/* Navigation bar */}
       <nav className="nav">
         <div className="logo-search-container">
           <div className="logo">
@@ -97,21 +99,58 @@ const DesktopNavigation = () => {
             </Link>
           </div>
 
-          {/* Search bar */}
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative', width: '300px' }}>
             <input
               type="text"
               className="search-input"
               placeholder="Search..."
               value={searchQuery}
               onChange={handleSearchChange}
+              style={{
+                width: '100%',
+                padding: '10px 15px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                fontSize: '16px',
+                boxSizing: 'border-box',
+              }}
             />
 
-            {/* Search dropdown */}
             {isDropdownVisible && searchResults.length > 0 && (
-              <div className="search-dropdown">
+              <div
+                className="search-dropdown"
+                style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: '0',
+                  right: '0',
+                  width: '200%',
+                  maxHeight: '300px',
+                  backgroundColor: '#fff',
+                  border: '1px solid #ccc',
+                  borderRadius: '5px',
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                  marginTop: '5px',
+                  overflowY: 'auto',
+                  zIndex: 1000,
+                }}
+              >
                 {searchResults.map((product) => (
-                  <MenuItem key={product._id} onClick={() => handleSelectProduct(product)}>
+                  <MenuItem
+                    key={product._id}
+                    onClick={() => handleSelectProduct(product)}
+                    style={{
+                      padding: '10px 15px',
+                      fontSize: '16px',
+                      cursor: 'pointer',
+                      borderBottom: '1px solid #f0f0f0',
+                      transition: 'background-color 0.3s',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.backgroundColor = '#f0f0f0')}
+                    onMouseLeave={(e) =>
+                      (e.target.style.backgroundColor = 'transparent')
+                    }
+                  >
                     <Typography variant="body1">
                       {product.name} {product.category ? `(${product.category})` : ''}
                     </Typography>
@@ -122,7 +161,6 @@ const DesktopNavigation = () => {
           </div>
         </div>
 
-        {/* Navigation items */}
         <div className="nav-items">
           <ul className="nav-items">
             <li className="nav-links">
@@ -157,7 +195,6 @@ const DesktopNavigation = () => {
               </Tooltip>
             </li>
 
-            {/* Conditional rendering for authenticated users */}
             {setProceed ? (
               <>
                 <li className="nav-links">
@@ -167,7 +204,7 @@ const DesktopNavigation = () => {
                     </span>
                   </NavLink>
                 </li>
-                <li onClick={() => handleClickOpen(setOpenAlert)}>
+                <li onClick={() => setOpenAlert(true)}>
                   <Button
                     variant="contained"
                     className="nav-icon-span"
@@ -193,34 +230,24 @@ const DesktopNavigation = () => {
         </div>
       </nav>
 
-      {/* Logout confirmation dialog */}
       <Dialog
         open={openAlert}
         TransitionComponent={Transition}
         keepMounted
-        onClose={() => handleClose(setOpenAlert)}
-        aria-describedby="alert-dialog-slide-description"
+        onClose={() => setOpenAlert(false)}
       >
-        <DialogContent sx={{ width: { xs: 280, md: 350 }, display: 'flex', justifyContent: 'center' }}>
+        <DialogContent>
           <Typography variant="h6">Do You Want To Logout?</Typography>
         </DialogContent>
-        <DialogActions sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-          <Link to="/">
-            <Button
-              variant="contained"
-              endIcon={<FiLogOut />}
-              color="primary"
-              onClick={() => handleLogOut(setProceed, toast, navigate, setOpenAlert)}
-            >
-              Logout
-            </Button>
-          </Link>
+        <DialogActions>
           <Button
             variant="contained"
-            color="error"
-            endIcon={<AiFillCloseCircle />}
-            onClick={() => handleClose(setOpenAlert)}
+            color="primary"
+            onClick={() => handleLogOut(setProceed, toast, navigate, setOpenAlert)}
           >
+            Logout
+          </Button>
+          <Button variant="contained" color="error" onClick={() => setOpenAlert(false)}>
             Close
           </Button>
         </DialogActions>

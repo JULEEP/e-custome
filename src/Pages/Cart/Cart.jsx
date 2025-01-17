@@ -11,6 +11,7 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
+  const [variationDetails, setVariationDetails] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // Function to calculate total and subtotal
@@ -32,14 +33,15 @@ const Cart = () => {
         const response = await axios.get(`https://admin-backend-rl94.onrender.com/api/users/getcart/${userId}`);
         if (response.data.status) {
           const fetchedCart = response.data.cart;
-          setCart(fetchedCart);
+          setCart(fetchedCart.products);  // Set only products here
+          setVariationDetails(fetchedCart.variationDetails);  // Set variation details
 
           // Recalculate the totals for the initial cart data
-          const { newCartTotal, newSubTotal } = calculateTotals(fetchedCart);
+          const { newCartTotal, newSubTotal } = calculateTotals(fetchedCart.products);
           setCartTotal(newCartTotal);
           setSubTotal(newSubTotal);
         } else {
-          setCart([]);
+          setCart([]);  // If no cart, set empty cart
         }
       } catch (error) {
         console.error('Error fetching cart data:', error);
@@ -54,9 +56,9 @@ const Cart = () => {
   const handleIncrement = (productId) => {
     setCart((prevCart) => {
       const updatedCart = prevCart.map((item) =>
-        item.product === productId ? { ...item, quantity: item.quantity + 1 } : item
+        item.product._id === productId ? { ...item, quantity: item.quantity + 1 } : item
       );
-      
+
       // Recalculate the totals after the update
       const { newCartTotal, newSubTotal } = calculateTotals(updatedCart);
       setCartTotal(newCartTotal);
@@ -69,7 +71,7 @@ const Cart = () => {
   const handleDecrement = (productId) => {
     setCart((prevCart) => {
       const updatedCart = prevCart.map((item) =>
-        item.product === productId && item.quantity > 1
+        item.product._id === productId && item.quantity > 1
           ? { ...item, quantity: item.quantity - 1 }
           : item
       );
@@ -92,7 +94,7 @@ const Cart = () => {
 
       if (response.data.status) {
         setCart((prevCart) => {
-          const updatedCart = prevCart.filter((item) => item.product !== productId);
+          const updatedCart = prevCart.filter((item) => item.product._id !== productId);
 
           // Recalculate the totals after the update
           const { newCartTotal, newSubTotal } = calculateTotals(updatedCart);
@@ -131,47 +133,29 @@ const Cart = () => {
           </div>
         ) : (
           cart.map((item, index) => (
-            <div
-              key={item.product}
-              className={`cart-item ${index < cart.length - 1 ? 'with-border' : ''}`} // Add border class except for last item
-            >
+            <div key={item.product._id} className={`cart-item ${index < cart.length - 1 ? 'with-border' : ''}`}>
               {/* Product Image */}
               <div className="cart-item-image">
-                <img src={item.images[0]} alt={item.title} />
+                <img src={item.product.images[0]} alt={item.product.name} />
               </div>
               {/* Product Details */}
               <div className="cart-item-details">
-                <div className="cart-item-title">
-                  <Typography variant="h6">{item.title}</Typography>
-                </div>
-                {/* Price above quantity controls */}
-                <div className="item-price">
-                  <Typography variant="body1">₹{item.price}</Typography>
-                </div>
-                {/* Quantity controls (now under price) */}
+                <Typography variant="h6">{item.product.name}</Typography>
+                <Typography variant="body1">₹{item.price}</Typography>
+
+                {/* Quantity controls */}
                 <div className="quantity-controls">
-                  <Button
-                    variant="contained"
-                    className="quantity-button"
-                    onClick={() => handleDecrement(item.product)}
-                  >
-                    -
-                  </Button>
+                  <Button variant="contained" onClick={() => handleDecrement(item.product._id)}>-</Button>
                   <Typography variant="body1">{item.quantity}</Typography>
-                  <Button
-                    variant="contained"
-                    className="quantity-button"
-                    onClick={() => handleIncrement(item.product)}
-                  >
-                    +
-                  </Button>
+                  <Button variant="contained" onClick={() => handleIncrement(item.product._id)}>+</Button>
                 </div>
               </div>
+
               {/* Remove Button */}
               <div className="remove-button">
                 <Button
                   color="primary"
-                  onClick={() => handleRemove(item.product)}
+                  onClick={() => handleRemove(item.product._id)}
                   className="remove-btn"
                 >
                   Remove
@@ -179,6 +163,16 @@ const Cart = () => {
               </div>
             </div>
           ))
+        )}
+
+        {/* Displaying Variation Details */}
+        {variationDetails && (
+          <div className="variation-details">
+            <Typography variant="body2">Paper Name: {variationDetails.paperName}</Typography>
+            <Typography variant="body2">Paper Size: {variationDetails.paperSize}</Typography>
+            <Typography variant="body2">Price: ₹{variationDetails.price}</Typography>
+            <Typography variant="body2">Color: {variationDetails.color}</Typography>
+          </div>
         )}
 
         {/* Price Summary Section */}

@@ -18,6 +18,14 @@ const SinglePro = () => {
   const [rating, setRating] = useState(1);
   const [comment, setComment] = useState('');
   const [isRatingFormOpen, setIsRatingFormOpen] = useState(false); // State for controlling the rating form visibility
+
+  // New states for paper size, name, color, quantity, and dynamic price
+  const [paperSize, setPaperSize] = useState('');
+  const [paperName, setPaperName] = useState('');
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState('');
+  const [dynamicPrice, setDynamicPrice] = useState(0);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,38 +36,70 @@ const SinglePro = () => {
         }
         return response.json();
       })
-      .then((data) => setProduct(data))
+      .then((data) => {
+        setProduct(data);
+        // Set initial values based on product variations
+        if (data.variations && data.variations.length > 0) {
+          const defaultVariation = data.variations[0];
+          setPaperSize(defaultVariation.paperSize);
+          setPaperName(defaultVariation.paperName);
+          setColor(defaultVariation.color);
+          setQuantity(defaultVariation.quantity);
+          setDynamicPrice(defaultVariation.price); // Set dynamic price for the first variation
+        }
+      })
       .catch((err) => setError(err.message));
   }, [id]);
-
+  
+  useEffect(() => {
+    if (product && paperSize && paperName && color) {
+      const selectedVariation = product.variations.find(
+        (v) => v.paperSize === paperSize && v.paperName === paperName && v.color === color
+      );
+      if (selectedVariation) {
+        setDynamicPrice(selectedVariation.price * quantity); // Update dynamic price when variations change
+      }
+    }
+  }, [paperSize, paperName, quantity, color, product]);
+  
   const toggleAccordion = () => {
     setIsAccordionOpen(!isAccordionOpen);
   };
 
-  const addToCart = async (productId, quantity = 1) => {
+  const addToCart = async (productId, quantity = 1, variationId = null, action = "increment") => {
     try {
       const userId = localStorage.getItem("userId");
       if (!userId) {
         toast.error("User not logged in!", { position: "top-right", autoClose: 3000 });
         return;
       }
-
+  
+      const body = JSON.stringify({
+        productId,
+        quantity,
+        variationId: variationId || null,  // Make sure variationId is passed correctly
+        action,
+      });
+  
       const response = await fetch(`https://admin-backend-rl94.onrender.com/api/users/cart/${userId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId, quantity, action: "increment" }),
+        body: body,
       });
-
+  
       const data = await response.json();
       if (response.ok) {
-        toast.success(`Added to Cart: ${data.product.name}, Quantity: ${data.product.quantity}`, { position: "top-right", autoClose: 3000 });
+        toast.success(`Updated Cart: ${data.cart.products[0].product.name}, Quantity: ${data.cart.products[0].quantity}`, { position: "top-right", autoClose: 3000 });
+        console.log('Updated cart details:', data.cart);
       } else {
-        toast.error(`Failed to add to cart: ${data.message}`, { position: "top-right", autoClose: 3000 });
+        toast.error(`Failed to update cart: ${data.message}`, { position: "top-right", autoClose: 3000 });
       }
     } catch (error) {
       toast.error("Something went wrong. Please try again.", { position: "top-right", autoClose: 3000 });
     }
   };
+  
+  
 
   const addToWishlist = async () => {
     const userId = localStorage.getItem("userId");
@@ -88,12 +128,25 @@ const SinglePro = () => {
 
   const handleAddToBag = () => {
     const productId = product._id;
-    addToCart(productId);
+  
+    // Find the selected variation by the current paperSize, paperName, and color
+    const selectedVariation = product.variations.find(
+      (v) => v.paperSize === paperSize && v.paperName === paperName && v.color === color
+    );
+    
+    // If variation is found, pass its _id as the variationId
+    const variationId = selectedVariation ? selectedVariation._id : null;
+  
+    // Now call addToCart with the correct variationId
+    addToCart(productId, quantity, variationId);
   };
+  
+  
 
   const handleEditDesign = () => {
-    navigate(`/canvas`);
+    navigate(`/templateeditor/${product._id}`);  // Use product._id dynamically
   };
+  
 
   const handleUploadDesign = () => {
     setIsModalOpen(true);
@@ -181,14 +234,15 @@ const SinglePro = () => {
 
   return (
     <div>
-      <div className="single-product">
-        <div className="image-wrapper">
-          <img src={productImage} alt={product.name} />
-        </div>
-        <div className="details-section">
-          <h1>{product.name}</h1>
-          <p>{product.description}</p>
-          <p id="product-price">Price: {product.originalPrice}</p>
+    <div className="single-product">
+    <div className="image-wrapper">
+      <img src={productImage} alt={product.name} />
+    </div>
+    <div className="details-section">
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+      <p id="product-price">Price: {product.originalPrice}</p> {/* Displaying original price */}
+      <p id="dynamic-price">Total Price: {dynamicPrice}</p> {/* Dynamically calculated price */}
 
           <div className="product-details">
             <h4>Product Details</h4>
@@ -198,56 +252,61 @@ const SinglePro = () => {
             <p><strong>Status:</strong> {product.status}</p>
             <p><strong>Category:</strong> {product.category}</p>
             <p><strong>Size:</strong> {product.size}</p>
-            <p><strong>Color:</strong> {product.color}</p>
+            <p><strong>Size:</strong> {product.size}</p>
+            <p><strong>Brand:</strong> {product.brand}</p>
+            <p><strong>Material:</strong> {product.material}</p>
           </div>
 
-          <div className="return-exchange-container">
-            <div className="return-exchange-header">
-              <h4 className="gray-text">15 Days Returns & Exchange</h4>
-              <FaPlus
-                className={`plus-icon ${isAccordionOpen ? "open" : ""}`}
-                onClick={toggleAccordion}
+          {/* Dynamic Variations Section */}
+          <div className="product-variations">
+            <label>
+              Paper Size:
+              <select value={paperSize} onChange={(e) => setPaperSize(e.target.value)}>
+                {product.variations && product.variations.map((variation, index) => (
+                  <option key={index} value={variation.paperSize}>{variation.paperSize}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Paper Name:
+              <select value={paperName} onChange={(e) => setPaperName(e.target.value)}>
+                {product.variations && product.variations.map((variation, index) => (
+                  <option key={index} value={variation.paperName}>{variation.paperName}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Color:
+              <select value={color} onChange={(e) => setColor(e.target.value)}>
+                {product.variations && product.variations.map((variation, index) => (
+                  <option key={index} value={variation.color}>{variation.color}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Quantity:
+              <input
+                type="number"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+                min="1"
+                max={product.quantity}
               />
-            </div>
-            {isAccordionOpen && (
-              <div className="accordion-content">
-                <p className="return-exchange-text">
-                  Easy returns up to 15 days of delivery. Exchange available on select pincodes.
-                </p>
-              </div>
-            )}
+            </label>
           </div>
 
-          <div className="secure-info-container">
-            <div className="secure-item">
-              <FaShieldAlt className="secure-icon" />
-              <p className="secure-text">100% Secure Payment</p>
-            </div>
-            <div className="secure-item">
-              <FaUndoAlt className="secure-icon" />
-              <p className="secure-text">Easy Returns and Instant Refunds</p>
-            </div>
-            <div className="secure-item">
-              <FaCheckCircle className="secure-icon" />
-              <p className="secure-text">100% Genuine Product</p>
-            </div>
-          </div>
-
-          <h3>Product Reviews</h3>
-          <p className="verified-buyers">91% of verified buyers recommend this product</p>
-          
-          <div className="button-group">
+         <div className="button-group">
             <button onClick={handleAddToBag}>
-              <FaShoppingCart /> Add to Cart
+               Add to Cart
             </button>
             <button onClick={addToWishlist}>
-              <FaHeart /> Add to Wishlist
+              Add to Wishlist
             </button>
             <button onClick={handleEditDesign} className="edit-design-btn">
-              ✏️ Edit Your Design
+              Edit
             </button>
             <button onClick={handleUploadDesign} className="upload-design-btn">
-              📤 Upload Your Design
+            Upload Your Design
             </button>
           </div>
         </div>
@@ -265,96 +324,97 @@ const SinglePro = () => {
         </div>
       )}
 
-     {/* Modal for Rating Form */}
-{isRatingFormOpen && (
-  <div className="rating-modal-overlay">
-    <div className="rating-modal-content">
-      <h3>Submit Your Rating</h3>
-      <div className="rating-input">
-        <span className="rating-label">Rating:</span>
-        <select value={rating} onChange={(e) => setRating(Number(e.target.value))} className="rating-select">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <option key={star} value={star}>
-              {star}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="comment-input">
-        <span className="comment-label">Comment:</span>
-        <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="Leave a comment"
-          className="comment-textarea"
-        />
-      </div>
-      <button onClick={submitRating}>Submit Rating</button>
-      <button onClick={() => setIsRatingFormOpen(false)}>Cancel</button>
-    </div>
-  </div>
-)}
+      {/* Modal for Rating Form */}
+      {isRatingFormOpen && (
+        <div className="rating-modal-overlay">
+          <div className="rating-modal-content">
+            <h3>Submit Your Rating</h3>
+            <div className="rating-input">
+              <span className="rating-label">Rating:</span>
+              <select value={rating} onChange={(e) => setRating(Number(e.target.value))} className="rating-select">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <option key={star} value={star}>
+                    {star}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="comment-input">
+              <span className="comment-label">Comment:</span>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Leave a comment"
+                className="comment-textarea"
+              />
+            </div>
+            <button onClick={submitRating}>Submit Rating</button>
+            <button onClick={() => setIsRatingFormOpen(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
 
       {/* Gray Divider */}
       <hr className="gray-divider" />
 
-        <button className="rate-product-btn" onClick={handleRateProductClick}>Rate Product</button>
+      <button className="rate-product-btn" onClick={handleRateProductClick}>Rate Product</button>
 
-{/* Display Average Rating and Total Count */}
-{product.ratings && product.ratings.length > 0 ? (
-  <>
-    <div className="ratings-summary">
-      <div className="average-rating-container">
-        <span className="average-rating">
-          {(
-            product.ratings.reduce((acc, cur) => acc + cur.rating, 0) /
-            product.ratings.length
-          ).toFixed(1)}
-        </span>
-        <span className="total-ratings">
-          ({product.ratings.length} ratings and reviews)
-        </span>
-      </div>
-    </div>
-
-    {/* List Individual Reviews */}
-    <div className="reviews-list">
-      {product.ratings.map((rating) => (
-        <div className="review" key={rating._id}>
-          <div className="review-header">
-            <div className="review-rating">
-              <AiFillStar className="star-icon" />
-              <span>{rating.rating}</span>
-            </div>
-            <div className="review-title">
-              <strong>{rating.comment.split(" ")[0]}</strong>
+      {/* Display Average Rating and Total Count */}
+      {product.ratings && product.ratings.length > 0 ? (
+        <>
+          <div className="ratings-summary">
+            <div className="average-rating-container">
+              <span className="average-rating">
+                {(
+                  product.ratings.reduce((acc, cur) => acc + cur.rating, 0) /
+                  product.ratings.length
+                ).toFixed(1)}
+              </span>
+              <span className="total-ratings">
+                ({product.ratings.length} ratings and reviews)
+              </span>
             </div>
           </div>
 
-          <div className="review-meta">
-            <p className="reviewer-name">User ID: {rating.userId}</p>
-            <p className="review-time">
-              {new Date(rating.createdAt).toLocaleDateString()}
-            </p>
-            <p className="review-location">Certified Buyer</p>
-          </div>
+          {/* List Individual Reviews */}
+          <div className="reviews-list">
+            {product.ratings.map((rating) => (
+              <div className="review" key={rating._id}>
+                <div className="review-header">
+                  <div className="review-rating">
+                    <AiFillStar className="star-icon" />
+                    <span>{rating.rating}</span>
+                  </div>
+                  <div className="review-title">
+                    <strong>{rating.comment.split(" ")[0]}</strong>
+                  </div>
+                </div>
 
-          <div className="review-comment">
-            <p>{rating.comment}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  </>
-) : (
-  <p className="no-reviews">No reviews available for this product.</p>
-)}
+                <div className="review-meta">
+                  <p className="reviewer-name">User ID: {rating.userId}</p>
+                  <p className="review-time">
+                    {new Date(rating.createdAt).toLocaleDateString()}
+                  </p>
+                  <p className="review-location">Certified Buyer</p>
+                </div>
 
-{/* Similar Products and Footer */}
-<SimilarProductsPage />
-<Footer />
+                <div className="review-comment">
+                  <p>{rating.comment}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p className="no-reviews">No reviews available for this product.</p>
+      )}
+
+      {/* Similar Products and Footer */}
+      <SimilarProductsPage />
+      <Footer />
     </div>
   );
 };
 
 export default SinglePro;
+

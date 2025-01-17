@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Box, Link, Typography, Drawer, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { AiOutlineMenu } from "react-icons/ai"; // Import menu icon
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 // Categories data with subcategories
@@ -152,6 +153,200 @@ const bestCategories = [
       { name: "Table Tent Card", slug: "table-tent-card" },
     ],
   },
+    {
+      name: "Gram Panchayat",
+      slug: "Gram-Panchayat",
+      subcategories: [
+       {
+    name: "दैनिक हाजिरी नक्ष चुकारा-पत्रक (मस्टर-रोल)",
+    slug: "daily-attendance-muster-roll"
+  },
+  {
+    name: "नोटिस पेड",
+    slug: "notice-pad"
+  },
+  {
+    name: "प्रशासकीय स्वीकृति पंजी",
+    slug: "administrative-approval-register"
+  },
+  {
+    name: "बैठक उपस्थिति",
+    slug: "meeting-attendance"
+  },
+  {
+    name: "ग्राम सभा की कार्यवाही पंजी",
+    slug: "gram-sabha-proceedings-register"
+  },
+  {
+    name: "बैठकों की कार्यवाही का रजिस्टर",
+    slug: "meeting-proceedings-register"
+  },
+  {
+    name: "स्टॉक आगम-निर्गम रजिस्टर",
+    slug: "stock-inward-outward-register"
+  },
+  {
+    name: "ग्राम पंचायत रोकड़ बही",
+    slug: "gram-panchayat-cashbook"
+  },
+  {
+    name: "ग्राम पंचायत की बैठक की सूचनाओं का रजिस्टर",
+    slug: "meeting-notifications-register"
+  },
+  {
+    name: "ग्राम सभा के सदस्यों की उपस्थिति पंजी",
+    slug: "gram-sabha-members-attendance-register"
+  },
+  {
+    name: "LEDGER - खाता रजिस्टर",
+    slug: "ledger-account-register"
+  },
+  {
+    name: "संपत्ति कर एवं सफाई कर संधारण एवं वसूली पंजी",
+    slug: "property-cleaning-tax-register"
+  },
+  {
+    name: "जलकर संधारण एवं वसूली पंजी",
+    slug: "water-tax-register"
+  },
+  {
+    name: "जाति एवं निवास प्रमाण-पत्र",
+    slug: "caste-residence-certificate"
+  },
+  {
+    name: "संग्रह की गई अन्य राशियों एवं कर की रसीद",
+    slug: "other-tax-receipts"
+  },
+  {
+    name: "ग्राम पंचायत रसीद",
+    slug: "gram-panchayat-receipt"
+  },
+  {
+    name: "विवाह रजिस्टर",
+    slug: "marriage-register"
+  },
+  {
+    name: "मृत्यु सूचना रजिस्टर",
+    slug: "death-notification-register"
+  },
+  {
+    name: "जन्म सूचना रजिस्टर",
+    slug: "birth-notification-register"
+  },
+  {
+    name: "Letter Despatch Register पत्र प्रेषित-पंजी",
+    slug: "letter-despatch-register"
+  },
+  {
+    name: "Letter Receipt Register पत्र प्राप्ती-पंजी",
+    slug: "letter-receipt-register"
+  },
+  {
+    name: "मनरेगा योजना के स्वीकृत कार्य S.O.P पंजी",
+    slug: "mnrega-approved-works-register"
+  },
+  {
+    name: "कार्यालय लेटर पेड़",
+    slug: "office-letter-pad"
+  },
+  {
+    name: "नोटशीट पेड",
+    slug: "notesheet-pad"
+  },
+  {
+    name: "जन्म मृत्यु अप्राप्यत पंजी",
+    slug: "birth-death-unavailability-register"
+  },
+  {
+    name: "मनरेगा रोकड़वही पंजी",
+    slug: "mnrega-cashbook-register"
+  },
+  {
+    name: "सदाय पेड",
+    slug: "saday-pad"
+  },
+  {
+    name: "भ्रमण निरीक्षण पंजी",
+    slug: "inspection-visit-register"
+  },
+  {
+    name: "विवाह रजिस्ट्रीकरण प्रमाण-पत्र",
+    slug: "marriage-registration-certificate"
+  },
+  {
+    name: "Printed Packaging",
+    slug: "printed-packaging"
+  },
+  {
+    name: "Printed Packaging Tape",
+    slug: "printed-packaging-tape"
+  },
+  {
+    name: "Box Packaging",
+    slug: "box-packaging"
+  },
+  {
+    name: "Custom Tissue Paper",
+    slug: "custom-tissue-paper"
+  },
+  {
+    name: "Corrugated Mailer Box",
+    slug: "corrugated-mailer-box"
+  },
+  {
+    name: "Hang Tags",
+    slug: "hang-tags"
+  },
+  {
+    name: "Header Cards",
+    slug: "header-cards"
+  },
+  {
+    name: "Printed Butter Paper",
+    slug: "printed-butter-paper"
+  },
+  {
+    name: "Product Labels & Stickers",
+    slug: "product-labels-stickers"
+  },
+  {
+    name: "Thank You Card",
+    slug: "thank-you-card"
+  },
+  {
+    name: "Wrapping Paper",
+    slug: "wrapping-paper"
+  },
+  {
+    name: "Table Tent Card",
+    slug: "table-tent-card"
+  }
+      ],
+  },
+
+   {
+      name: "School",
+      slug: "School",
+      subcategories: [
+ {
+    name: "शिक्षक उपस्थिति पंजी",
+    slug: "teacher-attendance-register"
+  },
+  {
+    name: "विद्यार्थी का पूर्ण विवरण",
+    slug: "complete-student-details"
+  },
+  {
+    name: "उपस्थिति पंजी",
+    slug: "attendance-register"
+  },
+  {
+    name: "केशबुक",
+    slug: "cash-book"
+  },
+
+      ],
+  },
 ];
 
 const CategoriesMenu = () => {
@@ -175,16 +370,31 @@ const CategoriesMenu = () => {
 
   return (
     <Container maxWidth="xl" style={{ padding: "10px" }}>
-      {/* Button to open drawer on small screens */}
-      <Box sx={{ display: { xs: "flex", sm: "none" }, alignItems: "center" }}>
-      <Typography
-        variant="h6"
-        sx={{ fontWeight: "bold", cursor: "pointer" }} // Added cursor: pointer to indicate it's clickable
-        onClick={() => toggleDrawer(true)} // Open the drawer when clicking on "Menu"
-      >
-        Menu
-      </Typography>
-    </Box>    
+  {/* Button to open drawer on small screens */}
+  <Box
+  sx={{
+    display: { xs: "flex", sm: "none" },
+    alignItems: "center",
+    justifyContent: "flex-end", // Push the icon to the right
+    position: "fixed", // Ensure it stays on top
+    top: "10px", // Spacing from the top
+    right: "20px", // Spacing from the right
+    zIndex: 1000, // Ensure it is above other elements
+    backgroundColor: "#fff", // Optional: Background to make it visible
+    padding: "5px", // Padding for spacing
+    borderRadius: "50%", // Make it circular
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Optional: Shadow for aesthetics
+  }}
+>
+  <AiOutlineMenu
+    style={{
+      fontSize: "24px", // Adjust icon size
+      color: "blue", // Set icon color to blue
+      cursor: "pointer", // Show it's clickable
+    }}
+    onClick={() => toggleDrawer(true)} // Open the drawer on click
+  />
+</Box>
 
       {/* Drawer component for mobile */}
       <Drawer

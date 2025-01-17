@@ -116,7 +116,7 @@ function App() {
             <Route path="/ratings/:id" element={<ProductRatings />} />
             <Route path="/can" element={<Canva/>} />
             <Route path="/template" element={<TemplateViewer/>} />
-            <Route path="/templateeditor" element={<TemplateEditor/>} />
+            <Route path="/templateeditor/:productId" element={<TemplateEditor/>} />
 
 
 
