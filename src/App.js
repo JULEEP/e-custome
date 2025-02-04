@@ -58,6 +58,7 @@ import Bag from './Helpers/Bag';
 import Election from './Helpers/Election';
 import Advanture from './Helpers/Advanture';
 import SchoolCategory from './Helpers/SchoolCategory';
+import Template from './Pages/Template'
 
 
 function App() {
@@ -120,6 +121,8 @@ function App() {
             <Route path="/can" element={<Canva/>} />
             <Route path="/template" element={<TemplateViewer/>} />
             <Route path="/templateeditor/:productId" element={<TemplateEditor/>} />
+            <Route path="/temp" element={<Template/>} />
+
 
 
 
